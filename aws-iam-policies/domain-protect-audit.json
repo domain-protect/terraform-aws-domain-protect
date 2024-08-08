@@ -1,0 +1,32 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DomainProtect",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Action": [
+        "cloudfront:ListDistributions",
+        "organizations:ListAccounts",
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53domains:ListDomains"
+      ]
+    },
+    {
+      "Sid": "DomainProtectIPs",
+      "Effect": "Allow",
+      "Resource": "*",
+      "Action": [
+        "ec2:DescribeAddresses",
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeRegions",
+        "ecs:DescribeTasks",
+        "ecs:ListClusters",
+        "ecs:ListTasks",
+        "globalaccelerator:ListAccelerators"
+      ]
+    }
+  ]
+}
