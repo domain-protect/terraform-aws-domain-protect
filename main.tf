@@ -171,7 +171,7 @@ module "cloudwatch-event" {
   lambda_function_alias_names = module.lambda.lambda_function_alias_names
   schedule                    = var.reports_schedule
   takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.update_schedule : var.update_schedule_nonprod
+  update_schedule             = var.update_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -185,7 +185,7 @@ module "resources-event" {
   lambda_function_alias_names = module.lambda-resources[0].lambda_function_alias_names
   schedule                    = var.reports_schedule
   takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -196,9 +196,9 @@ module "accounts-event" {
   lambda_function_arns        = module.lambda-accounts.lambda_function_arns
   lambda_function_names       = module.lambda-accounts.lambda_function_names
   lambda_function_alias_names = module.lambda-accounts.lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  schedule                    = var.scan_schedule
   takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -253,9 +253,9 @@ module "cloudflare-event" {
   lambda_function_arns        = module.lambda-cloudflare[0].lambda_function_arns
   lambda_function_names       = module.lambda-cloudflare[0].lambda_function_names
   lambda_function_alias_names = module.lambda-cloudflare[0].lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  schedule                    = var.scan_schedule
   takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -389,9 +389,9 @@ module "accounts-event-ips" {
   lambda_function_arns        = module.lambda-accounts-ips[0].lambda_function_arns
   lambda_function_names       = module.lambda-accounts-ips[0].lambda_function_names
   lambda_function_alias_names = module.lambda-accounts-ips[0].lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.ip_scan_schedule : var.ip_scan_schedule_nonprod
+  schedule                    = var.ip_scan_schedule
   takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.ip_scan_schedule : var.ip_scan_schedule_nonprod
+  update_schedule             = var.ip_scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }

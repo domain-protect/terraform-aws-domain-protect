@@ -38,28 +38,13 @@ variable "scan_schedule" {
   default     = "60 minutes"
 }
 
-variable "scan_schedule_nonprod" {
-  description = "schedule for running domain-protect scans in non-prod, reduced to save costs, e.g. 12 hours"
-  default     = "24 hours"
-}
-
 variable "update_schedule" {
   description = "schedule for running domain-protect update function, e.g. 60 minutes"
   default     = "3 hours"
 }
 
-variable "update_schedule_nonprod" {
-  description = "schedule for running domain-protect update function in non-prod, e.g. 12 hours"
-  default     = "24 hours"
-}
-
 variable "ip_scan_schedule" {
   description = "schedule for IP address scanning used in A record checks"
-  default     = "24 hours"
-}
-
-variable "ip_scan_schedule_nonprod" {
-  description = "schedule for IP address scans in non-prod, reduced to save costs, e.g. 24 hours"
   default     = "24 hours"
 }
 
