@@ -34,13 +34,13 @@ variable "reports_schedule" {
 }
 
 variable "scan_schedule" {
-  description = "schedule for running domain-protect scans, e.g. 60 minutes, does not affect frequency of regular Slack reports"
-  default     = "60 minutes"
+  description = "schedule for running domain-protect scans, e.g. 24 hours"
+  default     = "24 hours"
 }
 
 variable "update_schedule" {
-  description = "schedule for running domain-protect update function, e.g. 60 minutes"
-  default     = "3 hours"
+  description = "schedule for running domain-protect update function, e.g. 24 hours"
+  default     = "24 hours"
 }
 
 variable "ip_scan_schedule" {
