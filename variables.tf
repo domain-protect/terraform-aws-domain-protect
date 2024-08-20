@@ -61,7 +61,7 @@ variable "lambdas" {
 
 variable "takeover" {
   description = "Create supported resource types to prevent malicious subdomain takeover"
-  default     = true
+  default     = false
 }
 
 variable "update_lambdas" {
