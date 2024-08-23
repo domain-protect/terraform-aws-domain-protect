@@ -36,6 +36,7 @@ module "lambda_slack" {
   slack_new_emoji    = var.slack_new_emoji
   slack_username     = var.slack_username
   environment        = local.env
+  vpc_config         = var.vpc_config
 }
 
 module "lambda" {
@@ -57,6 +58,7 @@ module "lambda" {
   allowed_regions          = var.allowed_regions
   ip_time_limit            = var.ip_time_limit
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
 
 module "lambda_accounts" {
@@ -115,6 +117,7 @@ module "lambda_scan" {
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
   production_environment   = local.production_environment
+  vpc_config               = var.vpc_config
 }
 
 module "lambda_takeover" {
@@ -131,6 +134,7 @@ module "lambda_takeover" {
   sns_topic_arn     = module.sns.sns_topic_arn
   dlq_sns_topic_arn = module.sns_dead_letter_queue.sns_topic_arn
   environment       = local.env
+  vpc_config        = var.vpc_config
 }
 
 module "takeover_role" {
@@ -160,6 +164,7 @@ module "lambda_resources" {
   sns_topic_arn     = module.sns.sns_topic_arn
   dlq_sns_topic_arn = module.sns_dead_letter_queue.sns_topic_arn
   environment       = local.env
+  vpc_config        = var.vpc_config
 }
 
 module "resources_role" {
@@ -262,6 +267,7 @@ module "lambda_cloudflare" {
   hackerone                = var.hackerone
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
 
 module "cloudflare_event" {
@@ -373,6 +379,7 @@ module "lambda_scan_ips" {
   hackerone                = var.hackerone
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
 
 module "accounts_role_ips" {
@@ -408,6 +415,7 @@ module "lambda_accounts_ips" {
   dlq_sns_topic_arn        = module.sns_dead_letter_queue.sns_topic_arn
   state_machine_arn        = module.step_function_ips[0].state_machine_arn
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
 
 module "accounts_event_ips" {
@@ -441,4 +449,5 @@ module "lamdba_stats" {
   security_audit_role_name = var.security_audit_role_name
   external_id              = var.external_id
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
