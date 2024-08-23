@@ -4,6 +4,22 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![OWASP Maturity](https://img.shields.io/badge/owasp-incubator%20project-53AAE5.svg)
 
+## Unreleased
+
+This is a new terraform module registry created to eventually publish this module on the terraform and opentofu registries. It's not ready for production usage yet.
+
+For now, please use the original [domain-protect/domain-protect](https://github.com/domain-protect/domain-protect) repo while this one matures.
+
+If using the new module is desired, it can be done by referencing this git repository directly. Please create issues if any problems arise.
+
+```hcl
+module "domain_protect" {
+  source = "git::https://github.com/domain-protect/terraform-aws-domain-protect.git?ref=main"
+
+  # arguments
+}
+```
+
 ## Prevent subdomain takeover ...
 ![Alt text](docs/images/slack-webhook-notifications.png?raw=true "Domain Protect architecture")
 
