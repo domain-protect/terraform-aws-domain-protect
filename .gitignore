@@ -30,3 +30,5 @@ htmlcov
 
 #Testing
 .env
+
+*.swp
