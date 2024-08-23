@@ -28,8 +28,8 @@ module "lambda_slack" {
   kms_arn            = module.kms.kms_arn
   sns_topic_arn      = module.sns.sns_topic_arn
   dlq_sns_topic_arn  = module.sns_dead_letter_queue.sns_topic_arn
-  slack_channels     = local.env == "dev" ? var.slack_channels_dev : var.slack_channels
-  slack_webhook_urls = local.env == "dev" && length(var.slack_webhook_urls_dev) > 0 ? var.slack_webhook_urls_dev : var.slack_webhook_urls
+  slack_channels     = var.slack_channels
+  slack_webhook_urls = var.slack_webhook_urls
   slack_webhook_type = var.slack_webhook_type
   slack_emoji        = var.slack_emoji
   slack_fix_emoji    = var.slack_fix_emoji
@@ -118,7 +118,7 @@ module "lambda_scan" {
 
 module "lambda_takeover" {
   #checkov:skip=CKV_AWS_274:role is ElasticBeanstalk admin, not full Administrator Access
-  count  = local.takeover ? 1 : 0
+  count  = var.takeover ? 1 : 0
   source = "./terraform-modules/lambda-takeover"
 
   runtime           = var.runtime
@@ -133,21 +133,21 @@ module "lambda_takeover" {
 }
 
 module "takeover_role" {
-  count  = local.takeover ? 1 : 0
+  count  = var.takeover ? 1 : 0
   source = "./terraform-modules/iam"
 
   project                  = var.project
   region                   = var.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
-  takeover                 = local.takeover
+  takeover                 = var.takeover
   policy                   = "takeover"
   permissions_boundary_arn = var.permissions_boundary_arn
   environment              = local.env
 }
 
 module "lambda_resources" {
-  count  = local.takeover ? 1 : 0
+  count  = var.takeover ? 1 : 0
   source = "./terraform-modules/lambda-resources"
 
   lambdas           = ["resources"]
@@ -162,7 +162,7 @@ module "lambda_resources" {
 }
 
 module "resources_role" {
-  count  = local.takeover ? 1 : 0
+  count  = var.takeover ? 1 : 0
   source = "./terraform-modules/iam"
 
   project                  = var.project
@@ -182,14 +182,14 @@ module "cloudwatch_event" {
   lambda_function_names       = module.lambda.lambda_function_names
   lambda_function_alias_names = module.lambda.lambda_function_alias_names
   schedule                    = var.reports_schedule
-  takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.update_schedule : var.update_schedule_nonprod
+  takeover                    = var.takeover
+  update_schedule             = var.update_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
 
 module "resources_event" {
-  count  = local.takeover ? 1 : 0
+  count  = var.takeover ? 1 : 0
   source = "./terraform-modules/cloudwatch"
 
   project                     = var.project
@@ -197,8 +197,8 @@ module "resources_event" {
   lambda_function_names       = module.lambda_resources[0].lambda_function_names
   lambda_function_alias_names = module.lambda_resources[0].lambda_function_alias_names
   schedule                    = var.reports_schedule
-  takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  takeover                    = var.takeover
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -210,9 +210,9 @@ module "accounts_event" {
   lambda_function_arns        = module.lambda_accounts.lambda_function_arns
   lambda_function_names       = module.lambda_accounts.lambda_function_names
   lambda_function_alias_names = module.lambda_accounts.lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
-  takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  schedule                    = var.scan_schedule
+  takeover                    = var.takeover
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -271,9 +271,9 @@ module "cloudflare_event" {
   lambda_function_arns        = module.lambda_cloudflare[0].lambda_function_arns
   lambda_function_names       = module.lambda_cloudflare[0].lambda_function_names
   lambda_function_alias_names = module.lambda_cloudflare[0].lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
-  takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.scan_schedule : var.scan_schedule_nonprod
+  schedule                    = var.scan_schedule
+  takeover                    = var.takeover
+  update_schedule             = var.scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
@@ -417,9 +417,9 @@ module "accounts_event_ips" {
   lambda_function_arns        = module.lambda_accounts_ips[0].lambda_function_arns
   lambda_function_names       = module.lambda_accounts_ips[0].lambda_function_names
   lambda_function_alias_names = module.lambda_accounts_ips[0].lambda_function_alias_names
-  schedule                    = local.env == local.production_environment ? var.ip_scan_schedule : var.ip_scan_schedule_nonprod
-  takeover                    = local.takeover
-  update_schedule             = local.env == local.production_environment ? var.ip_scan_schedule : var.ip_scan_schedule_nonprod
+  schedule                    = var.ip_scan_schedule
+  takeover                    = var.takeover
+  update_schedule             = var.ip_scan_schedule
   update_lambdas              = var.update_lambdas
   environment                 = local.env
 }
