@@ -30,7 +30,7 @@ variable "role_name" {
 
 variable "permissions_boundary_arn" {
   description = "permissions boundary ARN"
-  default     = ""
+  default     = null
 }
 
 variable "environment" {
