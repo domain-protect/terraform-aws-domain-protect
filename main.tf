@@ -76,6 +76,7 @@ module "lambda_accounts" {
   dlq_sns_topic_arn        = module.sns_dead_letter_queue.sns_topic_arn
   state_machine_arn        = module.step_function.state_machine_arn
   environment              = local.env
+  vpc_config               = var.vpc_config
 }
 
 module "accounts_role" {
