@@ -1,5 +1,5 @@
 boto3==1.26.142
-cloudflare==2.8.15
+cloudflare==2.20.0
 dnspython==2.6.1
 requests==2.32.2
 regex==2023.10.3
