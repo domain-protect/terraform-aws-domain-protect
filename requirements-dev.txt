@@ -3,7 +3,7 @@ cloudflare==2.8.15
 dnspython==2.6.1
 requests==2.32.2
 regex==2023.12.25
-black==24.3.0
+black==24.8.0
 prospector==1.10.3
 pytest==7.1.2
 pytest-cov==3.0.0
