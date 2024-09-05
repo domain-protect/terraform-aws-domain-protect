@@ -3,6 +3,7 @@
 [![Python 3.x](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ![OWASP Maturity](https://img.shields.io/badge/owasp-incubator%20project-53AAE5.svg)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/domain-protect/terraform-aws-domain-protect/badge)](https://scorecard.dev/viewer/?uri=github.com/domain-protect/terraform-aws-domain-protect)
 
 ## Unreleased
 
