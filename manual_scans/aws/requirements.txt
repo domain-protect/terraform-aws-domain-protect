@@ -1,4 +1,4 @@
-boto3==1.35.13
+boto3==1.35.14
 dnspython==2.6.1
 requests==2.32.3
 regex==2024.7.24
