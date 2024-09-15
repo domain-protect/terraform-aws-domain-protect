@@ -1,0 +1,32 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:best-practices",
+    ":separateMultipleMajorReleases",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)",
+    ":enablePreCommit",
+    "customManagers:dockerfileVersions",
+    "customManagers:githubActionsVersions",
+    "customManagers:makefileVersions",
+    "customManagers:tfvarsVersions",
+    "security:openssf-scorecard",
+  ],
+  labels: [
+    "dependencies",
+    "{{datasource}}",
+    "{{updateType}}"
+  ],
+  vulnerabilityAlerts: {
+    enabled: true,
+    assignees: [],
+    labels: ["security"]
+  },
+  packageRules: [
+    // For all public actions, renovate them once a week and group them together
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+    },
+  ]
+}
