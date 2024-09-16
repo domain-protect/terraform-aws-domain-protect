@@ -125,7 +125,7 @@ module "lambda_takeover" {
   platform          = var.platform
   memory_size       = var.memory_size_slack
   project           = var.project
-  lambda_role_arn   = module.takeover_role[*].lambda_role_arn[0]
+  lambda_role_arn   = one(module.takeover_role[*].lambda_role_arn)
   kms_arn           = module.kms.kms_arn
   sns_topic_arn     = module.sns.sns_topic_arn
   dlq_sns_topic_arn = module.sns_dead_letter_queue.sns_topic_arn
@@ -154,7 +154,7 @@ module "lambda_resources" {
   runtime           = var.runtime
   memory_size       = var.memory_size_slack
   project           = var.project
-  lambda_role_arn   = module.resources_role[*].lambda_role_arn[0]
+  lambda_role_arn   = one(module.resources_role[*].lambda_role_arn)
   kms_arn           = module.kms.kms_arn
   sns_topic_arn     = module.sns.sns_topic_arn
   dlq_sns_topic_arn = module.sns_dead_letter_queue.sns_topic_arn
