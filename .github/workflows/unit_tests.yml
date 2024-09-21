@@ -16,8 +16,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5
         with:
-          python-version: "3.12"
+          python-version-file: '.python-version'
           cache: 'pip' # caching pip dependencies
+
       - run : pip install -r requirements-dev.txt
 
       - name: Linting and formatting
