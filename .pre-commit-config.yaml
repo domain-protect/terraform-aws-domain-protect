@@ -4,7 +4,7 @@ default_language_version:
 exclude: ^build/
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.6.0
     hooks:
     -   id: check-docstring-first
     -   id: check-executables-have-shebangs
@@ -16,25 +16,25 @@ repos:
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v2.31.0
+    rev: v3.17.0
     hooks:
     -   id: pyupgrade
         args: [--py36-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.1.0
+    rev: v3.1.0
     hooks:
     -   id: add-trailing-comma
         args: [--py36-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/asottile/reorder_python_imports
-    rev: v2.6.0
+    rev: v3.13.0
     hooks:
     -   id: reorder-python-imports
         args: [--py3-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/psf/black
-    rev: 24.3.0
+    rev: 24.8.0
     hooks:
     -   id: black
         args: [--line-length=120]
@@ -53,7 +53,7 @@ repos:
         exclude: .\.tf | ^\.github/
         additional_dependencies: ["setuptools"]
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.77.0
+    rev: v1.96.1
     hooks:
     -   id: terraform_fmt
     -   id: terraform_checkov

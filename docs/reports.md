@@ -1,6 +1,6 @@
 # Reports
 
-Domain protect generates the following regular reports, in addition to notifications for new and fixed vulnerabilities.  Each report is generated and sent to the SNS topic as a JSON object, which is then picked up by the [notify lambda](../terraform-modules/lambda-slack/code/notify/notify.py) and sent to Slack.
+Domain protect generates the following regular reports, in addition to notifications for new and fixed vulnerabilities.  Each report is generated and sent to the SNS topic as a JSON object, which is then picked up by the [notify lambda](../modules/lambda-slack/code/notify/notify.py) and sent to Slack.
 
 ## Current Vulnerabilities (Daily)
 This daily report sends a message to Slack listing the currently known vulnerable domains that require fixes.  To change the frequency of this report from the default 24 hours, use the `reports_schedule` Terraform variable

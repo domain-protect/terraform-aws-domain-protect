@@ -41,37 +41,19 @@ variable "reports_schedule" {
 }
 
 variable "scan_schedule" {
-  description = "schedule for running domain-protect scans, e.g. 60 minutes, does not affect frequency of regular Slack reports"
-  default     = "60 minutes"
-  type        = string
-}
-
-variable "scan_schedule_nonprod" {
-  description = "schedule for running domain-protect scans in non-prod, reduced to save costs, e.g. 12 hours"
+  description = "schedule for running domain-protect scans, e.g. 24 hours"
   default     = "24 hours"
   type        = string
 }
 
 variable "update_schedule" {
-  description = "schedule for running domain-protect update function, e.g. 60 minutes"
-  default     = "3 hours"
-  type        = string
-}
-
-variable "update_schedule_nonprod" {
-  description = "schedule for running domain-protect update function in non-prod, e.g. 12 hours"
+  description = "schedule for running domain-protect update function, e.g. 24 hours"
   default     = "24 hours"
   type        = string
 }
 
 variable "ip_scan_schedule" {
   description = "schedule for IP address scanning used in A record checks"
-  default     = "24 hours"
-  type        = string
-}
-
-variable "ip_scan_schedule_nonprod" {
-  description = "schedule for IP address scans in non-prod, reduced to save costs, e.g. 24 hours"
   default     = "24 hours"
   type        = string
 }
@@ -90,7 +72,7 @@ variable "lambdas" {
 
 variable "takeover" {
   description = "Create supported resource types to prevent malicious subdomain takeover"
-  default     = true
+  default     = false
   type        = bool
 }
 
@@ -147,20 +129,8 @@ variable "slack_channels" {
   type        = list(any)
 }
 
-variable "slack_channels_dev" {
-  description = "List of Slack Channels to use for testing purposes with dev environment - enter in tfvars file"
-  default     = []
-  type        = list(any)
-}
-
 variable "slack_webhook_urls" {
   description = "List of Slack webhook URLs, in the same order as the slack_channels list - enter in tfvars file"
-  default     = []
-  type        = list(any)
-}
-
-variable "slack_webhook_urls_dev" {
-  description = "List of Slack app webhook URLs for dev environments in the same order as the slack_channels list - enter in tfvars file"
   default     = []
   type        = list(any)
 }
