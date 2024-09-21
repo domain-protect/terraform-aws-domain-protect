@@ -34,22 +34,22 @@ output "lambda_scan" {
 }
 
 output "lambda_takeover" {
-  value       = local.takeover ? module.lambda_takeover : []
+  value       = var.takeover ? module.lambda_takeover : []
   description = "Outputs of module.lambda_takeover"
 }
 
 output "takeover_role" {
-  value       = local.takeover ? module.takeover_role : []
+  value       = var.takeover ? module.takeover_role : []
   description = "Outputs of module.takeover_role"
 }
 
 output "lambda_resources" {
-  value       = local.takeover ? module.lambda_resources : []
+  value       = var.takeover ? module.lambda_resources : []
   description = "Outputs of module.lambda_resources"
 }
 
 output "resources_role" {
-  value       = local.takeover ? module.resources_role : []
+  value       = var.takeover ? module.resources_role : []
   description = "Outputs of module.resources_role"
 }
 
@@ -59,7 +59,7 @@ output "cloudwatch_event" {
 }
 
 output "resources_event" {
-  value       = local.takeover ? module.resources_event : []
+  value       = var.takeover ? module.resources_event : []
   description = "Outputs of module.resources_event"
 }
 
