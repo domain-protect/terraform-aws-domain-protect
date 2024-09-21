@@ -11,7 +11,7 @@ Before starting ensure [requirements](requirements.md) are met
 * uses OpenID Connect - no IAM user with long-lived access keys
 * update to latest version of Domain Protect any time by running pipeline
 
-Follow detailed instructions in separate [Domain Protect Deploy](https://github.com/domain-protect/domain-protect-deploy) repository with GitHub Actions deployment workflow
+Follow detailed instructions in separate [Domain Protect Deploy](https://github.com/domain-protect/terraform-aws-domain-protect-deploy) repository with GitHub Actions deployment workflow
 
 ## Atlantis
 
@@ -35,7 +35,7 @@ For example, update:
 
 ```terraform
 module "kms" {
-  source  = "./terraform-modules/kms"
+  source  = "./modules/kms"
   project = var.project
   region  = var.region
 }
@@ -45,7 +45,7 @@ to
 
 ```terraform
 module "kms" {
-  source  =  "git::https://github.com/domain-protect/domain-protect.git//terraform-modules/kms"
+  source  =  "git::https://github.com/domain-protect/terraform-aws-domain-protect.git//modules/kms"
   project = var.project
   region  = var.region
 }

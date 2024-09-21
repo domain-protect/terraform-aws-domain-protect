@@ -1,5 +1,5 @@
 module "kms" {
-  source = "./terraform-modules/kms"
+  source = "./modules/kms"
 
   project     = var.project
   region      = var.region
@@ -7,7 +7,7 @@ module "kms" {
 }
 
 module "lambda_role" {
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -18,7 +18,7 @@ module "lambda_role" {
 }
 
 module "lambda_slack" {
-  source = "./terraform-modules/lambda-slack"
+  source = "./modules/lambda-slack"
 
   runtime            = var.runtime
   platform           = var.platform
@@ -39,7 +39,7 @@ module "lambda_slack" {
 }
 
 module "lambda" {
-  source = "./terraform-modules/lambda"
+  source = "./modules/lambda"
 
   lambdas                  = var.lambdas
   runtime                  = var.runtime
@@ -60,7 +60,7 @@ module "lambda" {
 }
 
 module "lambda_accounts" {
-  source = "./terraform-modules/lambda-accounts"
+  source = "./modules/lambda-accounts"
 
   lambdas                  = ["accounts"]
   runtime                  = var.runtime
@@ -79,7 +79,7 @@ module "lambda_accounts" {
 }
 
 module "accounts_role" {
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -92,7 +92,7 @@ module "accounts_role" {
 }
 
 module "lambda_scan" {
-  source = "./terraform-modules/lambda-scan"
+  source = "./modules/lambda-scan"
 
   lambdas                  = ["scan"]
   runtime                  = var.runtime
@@ -119,7 +119,7 @@ module "lambda_scan" {
 module "lambda_takeover" {
   #checkov:skip=CKV_AWS_274:role is ElasticBeanstalk admin, not full Administrator Access
   count  = local.takeover ? 1 : 0
-  source = "./terraform-modules/lambda-takeover"
+  source = "./modules/lambda-takeover"
 
   runtime           = var.runtime
   platform          = var.platform
@@ -134,7 +134,7 @@ module "lambda_takeover" {
 
 module "takeover_role" {
   count  = local.takeover ? 1 : 0
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -148,7 +148,7 @@ module "takeover_role" {
 
 module "lambda_resources" {
   count  = local.takeover ? 1 : 0
-  source = "./terraform-modules/lambda-resources"
+  source = "./modules/lambda-resources"
 
   lambdas           = ["resources"]
   runtime           = var.runtime
@@ -163,7 +163,7 @@ module "lambda_resources" {
 
 module "resources_role" {
   count  = local.takeover ? 1 : 0
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -175,7 +175,7 @@ module "resources_role" {
 }
 
 module "cloudwatch_event" {
-  source = "./terraform-modules/cloudwatch"
+  source = "./modules/cloudwatch"
 
   project                     = var.project
   lambda_function_arns        = module.lambda.lambda_function_arns
@@ -190,7 +190,7 @@ module "cloudwatch_event" {
 
 module "resources_event" {
   count  = local.takeover ? 1 : 0
-  source = "./terraform-modules/cloudwatch"
+  source = "./modules/cloudwatch"
 
   project                     = var.project
   lambda_function_arns        = module.lambda_resources[0].lambda_function_arns
@@ -204,7 +204,7 @@ module "resources_event" {
 }
 
 module "accounts_event" {
-  source = "./terraform-modules/cloudwatch"
+  source = "./modules/cloudwatch"
 
   project                     = var.project
   lambda_function_arns        = module.lambda_accounts.lambda_function_arns
@@ -218,7 +218,7 @@ module "accounts_event" {
 }
 
 module "sns" {
-  source = "./terraform-modules/sns"
+  source = "./modules/sns"
 
   project     = var.project
   region      = var.region
@@ -227,7 +227,7 @@ module "sns" {
 }
 
 module "sns_dead_letter_queue" {
-  source = "./terraform-modules/sns"
+  source = "./modules/sns"
 
   project           = var.project
   region            = var.region
@@ -238,7 +238,7 @@ module "sns_dead_letter_queue" {
 
 module "lambda_cloudflare" {
   count  = var.cloudflare ? 1 : 0
-  source = "./terraform-modules/lambda-cloudflare"
+  source = "./modules/lambda-cloudflare"
 
   lambdas                  = var.cloudflare_lambdas
   runtime                  = var.runtime
@@ -265,7 +265,7 @@ module "lambda_cloudflare" {
 
 module "cloudflare_event" {
   count  = var.cloudflare ? 1 : 0
-  source = "./terraform-modules/cloudwatch"
+  source = "./modules/cloudwatch"
 
   project                     = var.project
   lambda_function_arns        = module.lambda_cloudflare[0].lambda_function_arns
@@ -279,7 +279,7 @@ module "cloudflare_event" {
 }
 
 module "dynamodb" {
-  source  = "./terraform-modules/dynamodb"
+  source  = "./modules/dynamodb"
   project = var.project
 
   kms_arn     = module.kms.kms_arn
@@ -289,7 +289,7 @@ module "dynamodb" {
 }
 
 module "step_function_role" {
-  source  = "./terraform-modules/iam"
+  source  = "./modules/iam"
   project = var.project
 
   region                   = var.region
@@ -302,7 +302,7 @@ module "step_function_role" {
 }
 
 module "step_function" {
-  source  = "./terraform-modules/step-function"
+  source  = "./modules/step-function"
   project = var.project
 
   lambda_arn  = module.lambda_scan.lambda_function_arns["scan"]
@@ -313,7 +313,7 @@ module "step_function" {
 
 module "dynamodb_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/dynamodb-ips"
+  source = "./modules/dynamodb-ips"
 
   project     = var.project
   kms_arn     = module.kms.kms_arn
@@ -322,7 +322,7 @@ module "dynamodb_ips" {
 
 module "step_function_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/step-function"
+  source = "./modules/step-function"
 
   project     = var.project
   purpose     = "ips"
@@ -334,7 +334,7 @@ module "step_function_ips" {
 
 module "lambda_role_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -348,7 +348,7 @@ module "lambda_role_ips" {
 
 module "lambda_scan_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/lambda-scan-ips"
+  source = "./modules/lambda-scan-ips"
 
   lambdas                  = ["scan-ips"]
   runtime                  = var.runtime
@@ -376,7 +376,7 @@ module "lambda_scan_ips" {
 
 module "accounts_role_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/iam"
+  source = "./modules/iam"
 
   project                  = var.project
   region                   = var.region
@@ -391,7 +391,7 @@ module "accounts_role_ips" {
 
 module "lambda_accounts_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/lambda-accounts"
+  source = "./modules/lambda-accounts"
 
   lambdas                  = ["accounts-ips"]
   runtime                  = var.runtime
@@ -411,7 +411,7 @@ module "lambda_accounts_ips" {
 
 module "accounts_event_ips" {
   count  = var.ip_address ? 1 : 0
-  source = "./terraform-modules/cloudwatch"
+  source = "./modules/cloudwatch"
 
   project                     = var.project
   lambda_function_arns        = module.lambda_accounts_ips[0].lambda_function_arns
@@ -425,7 +425,7 @@ module "accounts_event_ips" {
 }
 
 module "lamdba_stats" {
-  source = "./terraform-modules/lambda-stats"
+  source = "./modules/lambda-stats"
 
   runtime                  = var.runtime
   platform                 = var.platform
