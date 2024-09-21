@@ -20,7 +20,7 @@ module "lambda_role" {
 module "lambda_slack" {
   source = "./modules/lambda-slack"
 
-  runtime            = var.runtime
+  runtime            = local.runtime
   platform           = var.platform
   memory_size        = var.memory_size_slack
   project            = var.project
@@ -42,7 +42,7 @@ module "lambda" {
   source = "./modules/lambda"
 
   lambdas                  = var.lambdas
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -63,7 +63,7 @@ module "lambda_accounts" {
   source = "./modules/lambda-accounts"
 
   lambdas                  = ["accounts"]
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -95,7 +95,7 @@ module "lambda_scan" {
   source = "./modules/lambda-scan"
 
   lambdas                  = ["scan"]
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -121,7 +121,7 @@ module "lambda_takeover" {
   count  = var.takeover ? 1 : 0
   source = "./modules/lambda-takeover"
 
-  runtime           = var.runtime
+  runtime           = local.runtime
   platform          = var.platform
   memory_size       = var.memory_size_slack
   project           = var.project
@@ -151,7 +151,7 @@ module "lambda_resources" {
   source = "./modules/lambda-resources"
 
   lambdas           = ["resources"]
-  runtime           = var.runtime
+  runtime           = local.runtime
   memory_size       = var.memory_size_slack
   project           = var.project
   lambda_role_arn   = one(module.resources_role[*].lambda_role_arn)
@@ -241,7 +241,7 @@ module "lambda_cloudflare" {
   source = "./modules/lambda-cloudflare"
 
   lambdas                  = var.cloudflare_lambdas
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -351,7 +351,7 @@ module "lambda_scan_ips" {
   source = "./modules/lambda-scan-ips"
 
   lambdas                  = ["scan-ips"]
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -394,7 +394,7 @@ module "lambda_accounts_ips" {
   source = "./modules/lambda-accounts"
 
   lambdas                  = ["accounts-ips"]
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
@@ -427,7 +427,7 @@ module "accounts_event_ips" {
 module "lamdba_stats" {
   source = "./modules/lambda-stats"
 
-  runtime                  = var.runtime
+  runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
