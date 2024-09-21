@@ -102,7 +102,7 @@ variable "production_workspace" {
 
 variable "runtime" {
   description = "Lambda language runtime"
-  default     = "python3.11"
+  default     = "python3.12"
   type        = string
 }
 
