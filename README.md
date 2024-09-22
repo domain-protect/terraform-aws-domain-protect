@@ -139,7 +139,7 @@ No resources.
 | <a name="input_bugcrowd_state"></a> [bugcrowd\_state](#input\_bugcrowd\_state) | State in which issue is created, e.g. new, triaged, unresolved, resolved | `string` | `"unresolved"` | no |
 | <a name="input_cf_api_key"></a> [cf\_api\_key](#input\_cf\_api\_key) | Cloudflare API token | `string` | `""` | no |
 | <a name="input_cloudflare"></a> [cloudflare](#input\_cloudflare) | Set to true to enable CloudFlare | `bool` | `false` | no |
-| <a name="input_cloudflare_lambdas"></a> [cloudflare\_lambdas](#input\_cloudflare\_lambdas) | list of names of Lambda files in the lambda-cloudflare/code folder | `list(any)` | <pre>[<br>  "cloudflare-scan"<br>]</pre> | no |
+| <a name="input_cloudflare_lambdas"></a> [cloudflare\_lambdas](#input\_cloudflare\_lambdas) | list of names of Lambda files in the lambda-cloudflare/code folder | `list(any)` | <pre>[<br/>  "cloudflare-scan"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment deploying to, defaults to terraform.workspace - optionally enter in tfvars file | `string` | `""` | no |
 | <a name="input_external_id"></a> [external\_id](#input\_external\_id) | external ID for security audit role to be defined in tvars file. Leave empty if not configured | `string` | `""` | no |
 | <a name="input_hackerone"></a> [hackerone](#input\_hackerone) | Set to enabled for HackerOne integration | `string` | `"disabled"` | no |
@@ -147,7 +147,7 @@ No resources.
 | <a name="input_ip_address"></a> [ip\_address](#input\_ip\_address) | Set to true to enable A record checks using IP address scans | `bool` | `false` | no |
 | <a name="input_ip_scan_schedule"></a> [ip\_scan\_schedule](#input\_ip\_scan\_schedule) | schedule for IP address scanning used in A record checks | `string` | `"24 hours"` | no |
 | <a name="input_ip_time_limit"></a> [ip\_time\_limit](#input\_ip\_time\_limit) | maximum time in hours since IP last detected, before considering IP as no longer belonging to organisation | `string` | `"48"` | no |
-| <a name="input_lambdas"></a> [lambdas](#input\_lambdas) | list of names of Lambda files in the lambda/code folder | `list(any)` | <pre>[<br>  "current",<br>  "update"<br>]</pre> | no |
+| <a name="input_lambdas"></a> [lambdas](#input\_lambdas) | list of names of Lambda files in the lambda/code folder | `list(any)` | <pre>[<br/>  "current",<br/>  "update"<br/>]</pre> | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Memory allocation for scanning Lambda functions | `number` | `128` | no |
 | <a name="input_memory_size_slack"></a> [memory\_size\_slack](#input\_memory\_size\_slack) | Memory allocation for Slack Lambda functions | `number` | `128` | no |
 | <a name="input_org_primary_account"></a> [org\_primary\_account](#input\_org\_primary\_account) | The AWS account number of the organization primary account | `string` | `""` | no |
@@ -171,9 +171,9 @@ No resources.
 | <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(any)` | `[]` | no |
 | <a name="input_stats_schedule"></a> [stats\_schedule](#input\_stats\_schedule) | Cron schedule for the stats message | `string` | `"cron(0 9 1 * ? *)"` | no |
 | <a name="input_takeover"></a> [takeover](#input\_takeover) | Create supported resource types to prevent malicious subdomain takeover | `bool` | `false` | no |
-| <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br>  "update"<br>]</pre> | no |
+| <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br/>  "update"<br/>]</pre> | no |
 | <a name="input_update_schedule"></a> [update\_schedule](#input\_update\_schedule) | schedule for running domain-protect update function, e.g. 24 hours | `string` | `"24 hours"` | no |
-| <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | Provide this to allow your function to access your VPC (if both 'subnet\_ids' and 'security\_group\_ids' are empty then<br>  vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | <pre>object({<br>    security_group_ids = list(string)<br>    subnet_ids         = list(string)<br>  })</pre> | `null` | no |
+| <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | Provide this to allow your function to access your VPC (if both 'subnet\_ids' and 'security\_group\_ids' are empty then<br/>  vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | <pre>object({<br/>    security_group_ids = list(string)<br/>    subnet_ids         = list(string)<br/>  })</pre> | `null` | no |
 | <a name="input_wcu"></a> [wcu](#input\_wcu) | DynamoDB Write Capacity Units for vulnerability database | `number` | `2` | no |
 
 ## Outputs
