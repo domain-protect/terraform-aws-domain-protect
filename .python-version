@@ -1,1 +1,2 @@
+# This file is read by the terraform if var.runtime is unset
 3.11
