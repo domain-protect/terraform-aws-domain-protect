@@ -3,7 +3,7 @@
 *.tfstate.backup
 *.tfvars
 .terraform/
-.terraform*
+.terraform.lock*
 
 #Lambda
 build/*

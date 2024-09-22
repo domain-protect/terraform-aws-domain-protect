@@ -60,3 +60,7 @@ repos:
         args:
           - --args=--config-file=__GIT_WORKING_DIR__/.config/sast_terraform_checkov_json.yml
         exclude: .\.py | ^\.github/
+    -   id: terraform_docs
+        args:
+          - "--args=--config=.terraform-docs.yml"
+          - "--args=--lockfile=false"
