@@ -64,6 +64,14 @@ resource "aws_lambda_function" "lambda" {
   tracing_config {
     mode = "Active"
   }
+
+  dynamic "vpc_config" {
+    for_each = var.vpc_config != null ? [var.vpc_config] : []
+    content {
+      security_group_ids = vpc_config.value.security_group_ids
+      subnet_ids         = vpc_config.value.subnet_ids
+    }
+  }
 }
 
 resource "aws_lambda_alias" "lambda" {
