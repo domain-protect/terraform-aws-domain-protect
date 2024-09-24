@@ -9,30 +9,17 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/domain-protect/terraform-aws-domain-protect/badge)](https://scorecard.dev/viewer/?uri=github.com/domain-protect/terraform-aws-domain-protect)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/9420/badge)](https://www.bestpractices.dev/projects/9420)
 
-## Unreleased
-
-This is a new terraform module registry created to eventually publish this module on the terraform and opentofu registries. It's not ready for production usage yet.
-
-For now, please use the original [domain-protect/domain-protect](https://github.com/domain-protect/domain-protect) repo while this one matures.
-
-If using the new module is desired, it can be done by referencing this git repository directly. Please create issues if any problems arise.
-
-```hcl
-module "domain_protect" {
-  source = "git::https://github.com/domain-protect/terraform-aws-domain-protect.git?ref=main"
-
-  # arguments
-}
-```
+Published as a public [Terraform registry module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
 ## Prevent subdomain takeover ...
-![Alt text](docs/images/slack-webhook-notifications.png?raw=true "Domain Protect architecture")
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/images/slack-webhook-notifications.png" /></a>
 
 ## ... with serverless cloud infrastructure
-![Alt text](docs/images/domain-protect.png?raw=true "Domain Protect architecture")
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/images/domain-protect.png" /></a>
 
 ## OWASP Global AppSec Dublin - talk and demo
-[![Global AppSec Dublin 2023](docs/images/global-appsec-dublin.png)](https://youtu.be/fLrRLmKZTvE)
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/images/global-appsec-dublin.png" /></a>
+Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
 ## Features
 * scan Amazon Route53 across an AWS Organization for domain records vulnerable to takeover
