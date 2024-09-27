@@ -184,6 +184,7 @@
         "logs:DeleteRetentionPolicy",
         "logs:DescribeLogGroups",
         "logs:DisassociateKmsKey",
+        "logs:ListTagsForResource",
         "logs:ListTagsLogGroup",
         "logs:PutRetentionPolicy",
         "logs:TagLogGroup",
@@ -191,7 +192,7 @@
       ],
       "Resource": [
         "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group::log-stream:",
-        "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group:/aws/vendedlogs/states/*:log-stream:"
+        "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group:/aws/vendedlogs/states/*"
       ]
     }
   ]
