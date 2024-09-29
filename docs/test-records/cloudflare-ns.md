@@ -5,5 +5,3 @@
 ![Alt text](images/cloudflare-ns.png?raw=true "Example DNS record")
 
 * remove the DNS record and takeover Elastic Beanstalk environment as soon as possible to minimise costs
-
-[Back to Manual Tests](../manual-tests.md)

@@ -9,5 +9,3 @@
 |Type|Name|Content|Proxy Status|TTL|
 |----|----|-------|------------|---|
 |CNAME|vulnerable-eb|klsuit789xh.eu-west-2.elasticbeanstalk.com|DNS only|Auto|
-
-[Back to Manual Tests](../manual-tests.md)

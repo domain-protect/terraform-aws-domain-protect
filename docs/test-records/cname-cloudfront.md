@@ -5,5 +5,3 @@
 * Delete the origin S3 bucket manually using the console
 
 ![Alt text](images/cname-cloudfront.png?raw=true "CloudFront Distribution")
-
-[Back to Manual Tests](../manual-tests.md)

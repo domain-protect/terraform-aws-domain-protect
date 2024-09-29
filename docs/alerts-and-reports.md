@@ -1,22 +1,22 @@
 # Alerts and reports
 <kbd>
-  <img src="images/new.png" width="600">
+  <img src="assets/images/new.png" width="600">
 </kbd>
 
 <kbd>
-  <img src="images/slack-ns.png" width="500">
+  <img src="assets/images/slack-ns.png" width="500">
 </kbd>
 
 <kbd>
-  <img src="images/fixed.png" width="400">
+  <img src="assets/images/fixed.png" width="400">
 </kbd>
 
 <kbd>
-  <img src="images/takeover-notification.png" width="500">
+  <img src="assets/images/takeover-notification.png" width="500">
 </kbd>
 
 <kbd>
-  <img src="images/resources-notification.png" width="500">
+  <img src="assets/images/resources-notification.png" width="500">
 </kbd>
 
 |Information                  |Notification type|Default schedule |
@@ -44,5 +44,3 @@
 ## customise notification schedules
 * update the relevant Terraform variable in your pipeline or tfvars file
 * apply Terraform
-
-[back to README](../README.md)

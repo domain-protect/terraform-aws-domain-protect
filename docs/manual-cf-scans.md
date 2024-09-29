@@ -39,24 +39,22 @@ $ export CF_API_KEY='00000000000000000000000000000000'
 ```
 
 ## subdomain NS delegations
-<img src="assets/imagescf-ns.png" width="400">
+<img src="assets/images/cf/cf-ns.png" width="400">
 
 ```
 python manual_scans/cloudflare/cf-ns.py
 ```
 
 ## subdomains pointing to missing storage buckets
-<img src="assets/imagescf-storage.png" width="400">
+<img src="assets/images/cf/cf-storage.png" width="400">
 
 ```
 python manual_scans/cloudflare/cf-storage.py
 ```
 
 ## vulnerable CNAMEs
-<img src="assets/imagescf-cname.png" width="400">
+<img src="assets/images/cf/cf-cname.png" width="400">
 
 ```
 python manual_scans/cloudflare/cf-cname.py
 ```
-
-[back to README](../../README.md)

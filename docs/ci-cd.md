@@ -8,5 +8,3 @@
 ### Deployment
 
 * GitHub Actions pipeline in separate [Domain Protect Deploy](https://github.com/domain-protect/terraform-aws-domain-protect-deploy) repository
-
-[back to README](../README.md)

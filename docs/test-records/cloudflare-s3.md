@@ -9,5 +9,3 @@
 |Type|Name|Content|Proxy Status|TTL|
 |----|----|-------|------------|---|
 |CNAME|vulnerable-cname|vulnerable-cname.thehappycloud.co|DNS only|Auto|
-
-[Back to Manual Tests](../manual-tests.md)

@@ -5,5 +5,3 @@
 * create A record pointing to IP address in Route53
 
 <img src="images/a-eip.png" width="300">
-
-[Back to Manual Tests](../manual-tests.md)

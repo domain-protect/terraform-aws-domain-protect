@@ -30,5 +30,3 @@ In order to deploy resources from this repo successfully, it is necessary to mee
 
 * A separate scanning Lambda function is started for every AWS account in the organisation
 * If you have over 1,000 AWS accounts, request an increase to the Lambda default concurrent execution limit
-
-[back to README](../README.md)

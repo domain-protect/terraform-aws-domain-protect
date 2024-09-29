@@ -3,7 +3,7 @@
 Before starting ensure [requirements](requirements.md) are met
 ## GitHub Actions (recommended)
 
-<img src="images/pipeline.png">
+<img src="assets/images/pipeline.png">
 
 * deploy Domain Protect in your AWS Organization
 * no need to clone or fork Domain Protect
@@ -111,5 +111,3 @@ Make sure to also update `production_environment` to match the `environment` var
 * add an extra channel to your slack_channels variable list
 * add an extra webhook URL or repeat the same webhook URL to your `slack_webhook_urls` variable list
 * apply Terraform
-
-[back to README](../README.md)
