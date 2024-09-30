@@ -11,9 +11,9 @@ to help organisations improve their security and stay ahead of threats
 * if a researcher submits a similar finding after Domain Protect, their submission can be marked as a Duplicate
 * reduces payouts to Bug Bounty researchers
 
-<img src="images/hackerone-report.png" width="600">
+<img src="assets/images/hackerone-report.png" width="600">
 
-<img src="images/hackerone-notification.png" width="500">
+<img src="assets/images/hackerone-notification.png" width="500">
 
 ## When are HackerOne issues created?
 * to avoid duplicate issues, only your production environment will be integrated with HackerOne
@@ -29,22 +29,22 @@ production_environment = "prd"
 * Log in to HackerOne as an org admin, select Organization Settings, API Tokens
 * Press Create API token
 
-<img src="images/hackerone-api-tokens.png" width="600">
+<img src="assets/images/hackerone-api-tokens.png" width="600">
 
 * Enter `domain-protect` as the identifier (or alternative if configured in `project` Terraform variable)
 * Select your HackerOne Bug Bounty program, e.g. `OWASP Sandbox 2 H1B`
 * select Standard permissions
 
-<img src="images/hackerone-new-api-token.png" width="600">
+<img src="assets/images/hackerone-new-api-token.png" width="600">
 
 * press Create API Token
 
-<img src="images/hackerone-api-token-value.png" width="600">
+<img src="assets/images/hackerone-api-token-value.png" width="600">
 
 * copy the API token and store securely
 * press I have stored the API token
 
-<img src="images/hackerone-token-created.png" width="600">
+<img src="assets/images/hackerone-token-created.png" width="600">
 
 * set Terraform variables in your CI/CD pipeline or tfvars file, e.g.
 
@@ -55,7 +55,7 @@ hackerone_api_token = "xxxxxxx-xxxxxxx-xxxxxxx-xxxxxxx"
 * apply Terraform
 
 ## HackerOne emoji in Slack
-* Create a custom emoji in Slack using the [HackerOne image](../docs/slack/hackerone.png)
+* Create a custom emoji in Slack using the [HackerOne image](docs/assets/slack/hackerone.png)
 * Name the emoji `:hackerone:`
 
 ## Manual tasks in HackerOne
@@ -64,5 +64,3 @@ You still need to do the following tasks manually using the HackerOne console:
 * only do this if Domain Protect issue was submitted first
 * link to the Domain Protect issue as the duplicate reference
 * after vulnerability is fixed, change status to `Resolved (Closed)`
-
-[back to README](../README.md)

@@ -10,11 +10,11 @@
 * if a researcher submits a similar finding after Domain Protect, their submission can be marked as a Duplicate
 * reduces payouts to Bug Bounty researchers
 
-<img src="images/bugcrowd-issue.png" width="600">
+<img src="assets/images/bugcrowd-issue.png" width="600">
 
-<img src="images/bugcrowd-vulnerability.png" width="500">
+<img src="assets/images/bugcrowd-vulnerability.png" width="500">
 
-<img src="images/bugcrowd-comment.png" width="500">
+<img src="assets/images/bugcrowd-comment.png" width="500">
 
 ## When are Bugcrowd issues created?
 * to avoid duplicate issues, only your production environment will be integrated with Bugcrowd
@@ -40,7 +40,7 @@ bugcrowd_email   = "domain-protect@company.com"
 * apply Terraform
 
 ## Bugcrowd emoji in Slack
-* Create a custom emoji in Slack using the [Bugcrowd image](../docs/slack/bugcrowd.png)
+* Create a custom emoji in Slack using the [Bugcrowd image](docs/assets/slack/bugcrowd.png)
 * Name the emoji `:bugcrowd:`
 
 ## Manual tasks in Bugcrowd
@@ -49,5 +49,3 @@ You still need to do the following tasks manually using the Bugcrowd console:
 * only do this if the Domain Protect issue was submitted first
 * link to the Domain Protect issue as the duplicate reference
 * after vulnerability is fixed, change status to `resolved`
-
-[back to README](../README.md)

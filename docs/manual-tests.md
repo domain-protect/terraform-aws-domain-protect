@@ -36,5 +36,3 @@
 | [Bugcrowd](bugcrowd.md)| X | X |
 
 * select links above for details on enabling or disabling optional features
-
-[back to README](../README.md)

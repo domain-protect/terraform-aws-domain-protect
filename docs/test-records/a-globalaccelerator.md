@@ -5,5 +5,3 @@
 * create A record pointing to both IP addresses in Route53
 
 <img src="images/a-globalaccelerator.png" width="300">
-
-[Back to Manual Tests](../manual-tests.md)

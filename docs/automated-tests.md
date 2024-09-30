@@ -39,7 +39,7 @@ With the above steps complete simply run the command `pytest unittest` from the 
 * Go to the testing tab on the left menu and from there you can run all the tests using the "Run Tests" button at the top
 
 <kbd>
-  <img src="images/test-view.png" width="600" alt="Current resources example">
+  <img src="assets/images/test-view.png" width="600" alt="Current resources example">
 </kbd>
 
 ## General Rules

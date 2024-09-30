@@ -14,11 +14,11 @@
 * details at [Cloudflare manual scans](manual_scans/cloudflare/README.md)
 
 ## Notifications from scheduled lambda function scans
-![Alt text](images/cloudflare-slack.png?raw=true "Cloudflare Slack alert")
+![Alt text](assets/images/cloudflare-slack.png?raw=true "Cloudflare Slack alert")
 * receive alerts by Slack or email
 
 ## Automated takeover
-<img src="images/cloudflare-takeover.png" width="600">
+<img src="assets/images/cloudflare-takeover.png" width="600">
 
 Supported resource types detailed in [takeover](TAKEOVER.md):
 * S3 buckets
@@ -34,14 +34,12 @@ Supported resource types detailed in [takeover](TAKEOVER.md):
 * go to My Profile, API Tokens, Create Token
 * at API Tokens, Create Token
 * at Create Custom Token press Get Started
-![Alt text](images/cloudflare-api-token.png?raw=true "Cloudflare API token creation")
+![Alt text](assets/images/cloudflare-api-token.png?raw=true "Cloudflare API token creation")
 * give the API token a suitable name, e.g. domain-protect
 * at permissions, choose Zone, DNS, read
 * at Zone Resources, include all zones
 * press Continue to summary
-![Alt text](images/cloudflare-api-token-summary.png?raw=true "Cloudflare API token creation")
+![Alt text](assets/images/cloudflare-api-token-summary.png?raw=true "Cloudflare API token creation")
 * press Create Token
 * copy token and save securely
 * set token as environment variable `cf_api_key = "xxxxxx"` in tfvars file or CI/CD pipeline
-
-[back to README](../README.md)

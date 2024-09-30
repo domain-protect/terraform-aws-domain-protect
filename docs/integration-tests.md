@@ -53,5 +53,4 @@ We are using the moto python module for mocking out AWS, and setting these up us
 Then in the test you require the mock you can use the function name (e.g. `moto_route53`) as the parameter.  You can then use the mock as if it was the boto3 library to create the resources you need for testing, which will be created in a mocked out aws account.
 
 
-[back to Automated Tests](automated-tests.md)<br>
-[back to README](../README.md)
+see also [Automated Tests](automated-tests.md)

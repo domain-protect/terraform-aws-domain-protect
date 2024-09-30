@@ -5,5 +5,3 @@
 * Delete the hosted zone
 
 ![Alt text](images/ns-domain.png?raw=true "Example DNS registration")
-
-[Back to Manual Tests](../manual-tests.md)

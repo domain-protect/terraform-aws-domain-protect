@@ -1,0 +1,95 @@
+site_name: OWASP Domain Protect AWS
+site_description: Terraform module for OWASP Domain Protect on AWS
+site_author: Paul Schwarzenberger
+site_url: https://domainprotect.cloud
+repo_name: domain-protect/terraform-aws-domain-protect
+repo_url: https://github.com/domain-protect/terraform-aws-domain-protect
+edit_uri: edit/main/docs/
+use_directory_urls: true
+theme:
+  name: material
+  logo: assets/slack/domain-protect-icon.svg
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+    - scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - pymdownx.snippets
+    - navigation.footer
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+
+extra:
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/domain-protect/terraform-aws-domain-protect
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/paulschwarzen
+
+nav:
+  - Home: index.md
+  - Manual AWS scans: manual-aws-scans.md
+  - Manual Cloudflare scans: manual-cf-scans.md
+  - Architecture: architecture.md
+  - Database: database.md
+  - Reports: reports.md
+  - Automated takeover: automated-takeover.md
+  - Cloudflare: cloudflare.md
+  - Bugcrowd: bugcrowd.md
+  - HackerOne: hackerone.md
+  - Vulneratbility types: vulnerability-types.md
+  - Vulnerable A records (IP addresses): a-records.md
+  - Requirements: requirements.md
+  - Installation: installation.md
+  - Slack Webhooks: slack-webhook.md
+  - AWS IAM policies: aws-iam-policies.md
+  - CI/CD: ci-cd.md
+  - Development: development.md
+  - Code Standards: code-standards.md
+  - Automated Tests: automated-tests.md
+  - Manual Tests: manual-tests.md
+  - Individual Manual Tests:
+    - A record Elastic IP / EC2: test-records/a-eip.md
+    - A record Global Accelerator: test-records/a-globalaccelerator.md
+    - Alias CloudFront S3: test-records/alias-cloudfront.md
+    - Alias Elastic Beanstalk: test-records/alias-eb.md
+    - Alias S3: test-records/alias-s3.md
+    - CNAME Azure: test-records/cname-azure.md
+    - CNAME CloudFront S3: test-records/cname-cloudfront.md
+    - CNAME Elastic Beanstalk: test-records/cname-eb.md
+    - CNAME Google: test-records/cname-google.md
+    - CNAME S3: test-records/cname-s3.md
+    - NS Subdomain: test-records/ns-subdomain.md
+    - NS Domain: test-records/ns-domain.md
+    - CloudFlare Azure: test-records/cloudflare-azure.md
+    - Cloudflare CNAME: test-records/cloudflare-cname.md
+    - Cloudflare Elastic Beanstalk: test-records/cloudflare-eb.md
+    - CloudFlare NS: test-records/cloudflare-ns.md
+    - Cloudflare S3: test-records/cloudflare-s3.md
+    - A records (IP addresses): a-records.md
+    - Takeover: automated-takeover.md
+    - Cloudflare: cloudflare.md
+    - Bugcrowd: bugcrowd.md
+  - Security: security.md
+  - Conference Talks and Blog Posts: talks.md
+
+plugins:
+  - social

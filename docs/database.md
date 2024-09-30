@@ -1,7 +1,7 @@
 # Database
 
 <kbd>
-  <img src="images/database.png">
+  <img src="assets/images/database.png">
 </kbd>
 
 * Vulnerability Database uses DynamoDB
@@ -11,5 +11,3 @@
 * If a vulnerability is fixed or taken over, it adds fixed date to the database item
 * DynamoDB table has provisioned capacity with default values of 3 RCU and 2 WCU
 * RCU and WCU values can be changed using Terraform variables
-
-[back to README](../README.md)

@@ -6,6 +6,4 @@
 * Create an Alias record manually via the console as below
 * Delete the origin S3 bucket manually using the console
 
-![Alt text](images/alias-cloudfront.png?raw=true "CloudFront Distribution")
-
-[Back to Manual Tests](../manual-tests.md)
+![Alt text](/images/alias-cloudfront.png?raw=true "CloudFront Distribution")

@@ -4,20 +4,20 @@
 * automated takeover with resources created in security account
 
 <kbd>
-  <img src="images/takeover.png" width="500">
+  <img src="assets/images/takeover.png" width="500">
 </kbd>
 
 ## Slack messages
 * notification of takeover success or failure:
 
 <kbd>
-  <img src="images/takeover-notification.png" width="500">
+  <img src="assets/images/takeover-notification.png" width="500">
 </kbd>
 
 * daily report of resources in security account:
 
 <kbd>
-  <img src="images/resources-notification.png" width="500">
+  <img src="assets/images/resources-notification.png" width="500">
 </kbd>
 
 ## supported resource types
@@ -102,5 +102,3 @@ Ensure AWS Organization Service Control Policies applied to security account all
 ## S3 Block Public Access
 * S3 Block Public Access must not be turned on at the account level in the security account
 * takeover S3 buckets need to be public for correct operation
-
-[back to README](../README.md)

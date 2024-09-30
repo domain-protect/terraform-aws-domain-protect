@@ -3,5 +3,3 @@
 * example record for testing CNAME pointing to missing S3 bucket
 
 <img src="images/cname-s3.png" width="300">
-
-[Back to Manual Tests](../manual-tests.md)

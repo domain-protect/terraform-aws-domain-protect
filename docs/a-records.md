@@ -8,9 +8,9 @@
   * Global Accelerator IP addresses
 * automated takeover not supported
 
-<img src="images/a-record-vulnerable.png" width="400">
+<img src="assets/images/a-record-vulnerable.png" width="400">
 
-<img src="images/a-record-fixed.png" width="400">
+<img src="assets/images/a-record-fixed.png" width="400">
 
 ## How an A record becomes vulnerable
 A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
@@ -26,13 +26,13 @@ A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
 * decision flow designed to minimise false positives
 * only detects certain types of A record vulnerabilities
 
-![Alt text](images/a-record-decision-tree.png?raw=true "A Record decision tree")
+![Alt text](assets/images/a-record-decision-tree.png?raw=true "A Record decision tree")
 
 ## Domain Protect IP address database
 * DynamoDB database table for IP addresses in Organization
 * separate from vulnerability DynamoDB table
 
-![Alt text](images/ip-database.png?raw=true "IP Address database")
+![Alt text](assets/images/ip-database.png?raw=true "IP Address database")
 
 ## Record IP address as OK
 The A record check may create false positive alerts.
@@ -43,7 +43,7 @@ If A record points to legitimate IP address, e.g. in a service provider's AWS ac
 * create Account field with text starting `IP OK`
 * item must be manually removed when resource is decommissioned
 
-<img src="images/ip-exception.png" width="400">
+<img src="assets/images/ip-exception.png" width="400">
 
 ## Enabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:
@@ -96,5 +96,3 @@ Optional Terraform variables can be entered in your CI/CD pipeline or tfvars fil
 * `ip_scan_schedule` can be reduced from `24 hours` for improved security at greater cost
 * `ip_time_limit` can be reduced from `48` hours for improved security but higher risk of false positives
 * `allowed_regions` can be limited to those allowed by Service Control Policies, to reduce Lambda execution time and cost
-
-[back to README](../README.md)

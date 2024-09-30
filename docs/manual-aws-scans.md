@@ -38,7 +38,7 @@ $ export PYTHONPATH="${PYTHONPATH}:/Users/paul/src/github.com/domain-protect/ter
 python manual_scans/aws/aws_alias_cloudfront_s3.py
 ```
 
-![Alt text](assets/imagesaws-cloudfront-s3-alias.png?raw=true "CloudFront Alias with missing S3 origin")
+![Alt text](assets/images/aws/aws-cloudfront-s3-alias.png?raw=true "CloudFront Alias with missing S3 origin")
 
 ## CloudFront CNAME with missing S3 origin
 
@@ -46,7 +46,7 @@ python manual_scans/aws/aws_alias_cloudfront_s3.py
 python manual_scans/aws/aws_cname_cloudfront_s3.py
 ```
 
-![Alt text](assets/imagesaws-cloudfront-s3-cname.png?raw=true "CloudFront CNAME with missing S3 origin")
+![Alt text](assets/images/aws/aws-cloudfront-s3-cname.png?raw=true "CloudFront CNAME with missing S3 origin")
 
 ## ElasticBeanstalk Alias
 
@@ -54,7 +54,7 @@ python manual_scans/aws/aws_cname_cloudfront_s3.py
 python manual_scans/aws/aws-alias-eb.py
 ```
 
-![Alt text](assets/imagesaws-eb-alias.png?raw=true "Detect vulnerable S3 Aliases")
+![Alt text](assets/images/aws/aws-eb-alias.png?raw=true "Detect vulnerable S3 Aliases")
 
 ## ElasticBeanstalk CNAMES
 
@@ -62,7 +62,7 @@ python manual_scans/aws/aws-alias-eb.py
 python manual_scans/aws/aws-cname-eb.py
 ```
 
-![Alt text](assets/imagesaws-eb-cnames.png?raw=true "Detect vulnerable ElasticBeanstalk CNAMEs")
+![Alt text](assets/images/aws/aws-eb-cnames.png?raw=true "Detect vulnerable ElasticBeanstalk CNAMEs")
 
 ## S3 Alias
 
@@ -70,7 +70,7 @@ python manual_scans/aws/aws-cname-eb.py
 python manual_scans/aws/aws_alias_s3.py
 ```
 
-![Alt text](assets/imagesaws-s3-alias.png?raw=true "Detect vulnerable S3 Aliases")
+![Alt text](assets/images/aws/aws-s3-alias.png?raw=true "Detect vulnerable S3 Aliases")
 
 ## S3 CNAMES
 
@@ -78,7 +78,7 @@ python manual_scans/aws/aws_alias_s3.py
 python manual_scans/aws/aws-cname-s3.py
 ```
 
-![Alt text](assets/imagesaws-s3-cnames.png?raw=true "Detect vulnerable S3 CNAMEs")
+![Alt text](assets/images/aws/aws-s3-cnames.png?raw=true "Detect vulnerable S3 CNAMEs")
 
 ## registered domains with missing hosted zone
 
@@ -86,7 +86,7 @@ python manual_scans/aws/aws-cname-s3.py
 python manual_scans/aws/aws-ns-domain.py
 ```
 
-![Alt text](assets/imagesaws-ns-domain.png?raw=true "Detect vulnerable subdomains")
+![Alt text](assets/images/aws/aws-ns-domain.png?raw=true "Detect vulnerable subdomains")
 
 ## subdomain NS delegations
 
@@ -94,7 +94,7 @@ python manual_scans/aws/aws-ns-domain.py
 python manual_scans/aws/aws-ns-subdomain.py
 ```
 
-![Alt text](assets/imagesaws-ns-subdomain.png?raw=true "Detect vulnerable subdomains")
+![Alt text](assets/images/aws/aws-ns-subdomain.png?raw=true "Detect vulnerable subdomains")
 
 ## assume role from another AWS account
 * log in to the AWS console in the audit account
@@ -117,8 +117,6 @@ export AWS_SESSION_TOKEN=...
 sudo pip3 install dnspython
 python3 manual_scans/aws/aws-ns-domain.py
 ```
-
-[back to README](../../README.md)
 
 ## acknowledgement
 * NS subdomain takeover detection based on [NSDetect](https://github.com/shivsahni/NSDetect)
