@@ -1,5 +1,6 @@
 # domain-protect Cloudflare manual scans
 scans Cloudflare to detect:
+
 * Subdomain NS delegations vulnerable to takeover
 * Subdomains pointing to missing storage buckets
 * Vulnerable CNAME records
@@ -46,14 +47,14 @@ python manual_scans/cloudflare/cf-ns.py
 ```
 
 ## subdomains pointing to missing storage buckets
-<img src="assets/images/cf/cf-storage.png" width="400">
+![Alt text](assets/images/cf/cf-storage.png?raw=true "Vulnerable CloudFlare storage")
 
 ```
 python manual_scans/cloudflare/cf-storage.py
 ```
 
 ## vulnerable CNAMEs
-<img src="assets/images/cf/cf-cname.png" width="400">
+![Alt text](assets/images/cf/cf-cname.png?raw=true "Vulnerable CloudFlare CNAME")
 
 ```
 python manual_scans/cloudflare/cf-cname.py

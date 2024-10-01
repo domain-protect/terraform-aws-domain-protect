@@ -10,10 +10,12 @@
 Published as a public [Terraform registry module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
 
-## Prevent subdomain takeover ...
+Prevent subdomain takeover ...
+
 ![Alt text](assets/images/slack-webhook-notifications.png?raw=true "Domain Protect architecture")
 
-## ... with serverless cloud infrastructure
+ ... with serverless cloud infrastructure
+
 ![Alt text](assets/images/domain-protect.png?raw=true "Domain Protect architecture")
 
 ## OWASP Global AppSec Dublin - talk and demo

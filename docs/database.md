@@ -1,8 +1,6 @@
 # Database
 
-<kbd>
-  <img src="assets/images/database.png">
-</kbd>
+![Alt text](assets/images/database.png?raw=true "Domain Protect database")
 
 * Vulnerability Database uses DynamoDB
 * Lambda function `domain-protect-scan-prd` queries database to see if a vulnerability is already known

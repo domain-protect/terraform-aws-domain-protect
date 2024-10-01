@@ -3,22 +3,16 @@
 * take over vulnerable subdomains yourself before attackers and bug bounty researchers
 * automated takeover with resources created in security account
 
-<kbd>
-  <img src="assets/images/takeover.png" width="500">
-</kbd>
+![Alt text](assets/images/takeover.png?raw=true "Friendly takeover")
 
 ## Slack messages
 * notification of takeover success or failure:
 
-<kbd>
-  <img src="assets/images/takeover-notification.png" width="500">
-</kbd>
+![Alt text](assets/images/takeover-notification.png?raw=true "Slack notification")
 
 * daily report of resources in security account:
 
-<kbd>
-  <img src="assets/images/resources-notification.png" width="500">
-</kbd>
+![Alt text](assets/images/resources-notification.png?raw=true "Resources report")
 
 ## supported resource types
 * Elastic Beanstalk environments
@@ -88,6 +82,7 @@ Example takeover event flow:
 
 ## Adding takeover feature to existing deployment
 If you have previously deployed a detection only environment:
+
 * add the `cloudfront:ListDistributions` permission to the [audit policy](../aws-iam-policies/domain-protect-audit.json) in every account
 * update line 59 of the [domain-protect-deploy policy](../aws-iam-policies/domain-protect-deploy.json) in security account
 * ensure your production Terraform workspace is `prd`
@@ -96,6 +91,7 @@ If you have previously deployed a detection only environment:
 
 ## Service Control Policies
 Ensure AWS Organization Service Control Policies applied to security account allow:
+
 * creation of takeover resources, i.e. S3 buckets and Elastic Beanstalk environments
 * all regions used by any other AWS account in the Organization
 
