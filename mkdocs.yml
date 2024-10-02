@@ -88,7 +88,6 @@ nav:
     - Takeover: automated-takeover.md
     - Cloudflare: cloudflare.md
     - Bugcrowd: bugcrowd.md
-  - Security: security.md
   - Conference Talks and Blog Posts: talks.md
 
 plugins:

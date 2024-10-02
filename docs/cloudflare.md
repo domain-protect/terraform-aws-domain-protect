@@ -15,12 +15,14 @@
 
 ## Notifications from scheduled lambda function scans
 ![Alt text](assets/images/cloudflare-slack.png?raw=true "Cloudflare Slack alert")
+
 * receive alerts by Slack or email
 
 ## Automated takeover
-<img src="assets/images/cloudflare-takeover.png" width="600">
+![Alt text](assets/images/cloudflare-takeover.png?raw=true "Cloudflare Takeover")
 
 Supported resource types detailed in [takeover](TAKEOVER.md):
+
 * S3 buckets
 * Elastic Beanstalk environments
 

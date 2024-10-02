@@ -40,7 +40,7 @@ $ export CF_API_KEY='00000000000000000000000000000000'
 ```
 
 ## subdomain NS delegations
-<img src="assets/images/cf/cf-ns.png" width="400">
+![Alt text](assets/images/cf/cf-ns.png?raw=true "CloudFlare NS record scan")
 
 ```
 python manual_scans/cloudflare/cf-ns.py
