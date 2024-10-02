@@ -1,5 +1,6 @@
 # Automated takeover
 *optional feature turned on by default in production*
+
 * take over vulnerable subdomains yourself before attackers and bug bounty researchers
 * automated takeover with resources created in security account
 
@@ -29,6 +30,7 @@
 
 ## Deleting takeover resources
 To minimise costs these tasks should be done as quickly as possible:
+
 * fix the vulnerability by correcting DNS
 * in the case of S3, empty the S3 bucket manually via the console
 * delete the CloudFormation stack manually via the console
@@ -43,6 +45,7 @@ To minimise costs these tasks should be done as quickly as possible:
 
 ## automated takeover components
 Automated takeover components:
+
 * takeover Lambda - takes over vulnerable domains by creating resources
 * resources Lambda - reports on takeover resources in security account
 

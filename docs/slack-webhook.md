@@ -11,34 +11,34 @@ If using a Slack app, to ensure correct formatting set Terraform variable `slack
 
 * in your Slack client menu panel, select More, Apps, App Directory, Build
 
-<img src="assets/images/slack-create-app.png" width="400">
+![Alt text](assets/images/slack-create-app.png?raw=true "Create Slack app")
 
 * press Create an app
 * choose From scratch
 * name App `Domain Protect`
 * choose Slack Workspace for your organisation
 
-<img src="assets/images/slack-name-workspace.png" width="400">
+![Alt text](assets/images/slack-name-workspace.png?raw=true "Slack app name and workspace")
 
 * press Create App
 * select Incoming Webhooks
 
-<img src="assets/images/slack-activate-webhook.png" width="400">
+![Alt text](assets/images/slack-activate-webhook.png?raw=true "Activate Slack webhook")
 
 * move slider to On
 * press Add New Webhook to Workspace
 
-<img src="assets/images/slack-allow-access.png" width="400">
+![Alt text](assets/images/slack-allow-access.png?raw=true "Allow Slack access")
 
 * select channel
 * press Allow
 
-<img src="assets/images/slack-webhook-url.png" width="400">
+![Alt text](assets/images/slack-webhook-url.png?raw=true "Slack webhook URL")
 
 * copy webhook URL to a safe location
 * you'll see Domain Protect in Your Apps
 
-<img src="assets/images/slack-your-apps.png" width="400">
+![Alt text](assets/images/slack-your-apps.png?raw=true "Your Slack apps")
 
 * select the Domain Protect app
 * scroll down to Display Information
@@ -46,7 +46,7 @@ If using a Slack app, to ensure correct formatting set Terraform variable `slack
 * add the Domain Protect Slack [App Icon](./assets/slack/domain-protect-icon.png) from this repository
 * for background color enter `#2c2d30`
 
-<img src="assets/images/slack-app-display.png" width="400">
+![Alt text](assets/images/slack-app-display.png?raw=true "Slack app display information")
 
 * save changes
 
@@ -55,11 +55,11 @@ If using a Slack app, to ensure correct formatting set Terraform variable `slack
 * each channel needs its own app and webhook URL
 * app names do not have to be unique
 
-<img src="assets/images/slack-extra-channel.png" width="400">
+![Alt text](assets/images/slack-extra-channel.png?raw=true "Extra Slack channel")
 
 * all apps can be seen in Your Apps
 
-<img src="assets/images/slack-your-apps-2.png" width="400">
+![Alt text](assets/images/slack-your-apps-2.png?raw=true "Your Slack apps")
 
 ## Legacy Slack webhook (not recommended)
 

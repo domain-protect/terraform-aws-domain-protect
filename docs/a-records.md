@@ -8,9 +8,9 @@
   * Global Accelerator IP addresses
 * automated takeover not supported
 
-<img src="assets/images/a-record-vulnerable.png" width="400">
+![Alt text](assets/images/a-record-vulnerable.png?raw=true "Vulnerable A Record")
 
-<img src="assets/images/a-record-fixed.png" width="400">
+![Alt text](assets/images/a-record-fixed.png?raw=true "Fixed A Record")
 
 ## How an A record becomes vulnerable
 A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
@@ -43,7 +43,7 @@ If A record points to legitimate IP address, e.g. in a service provider's AWS ac
 * create Account field with text starting `IP OK`
 * item must be manually removed when resource is decommissioned
 
-<img src="assets/images/ip-exception.png" width="400">
+![Alt text](assets/images/ip-exception.png?raw=true "IP Address exception")
 
 ## Enabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:
