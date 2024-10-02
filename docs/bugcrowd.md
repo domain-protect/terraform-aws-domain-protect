@@ -10,11 +10,11 @@
 * if a researcher submits a similar finding after Domain Protect, their submission can be marked as a Duplicate
 * reduces payouts to Bug Bounty researchers
 
-<img src="assets/images/bugcrowd-issue.png" width="600">
+![Alt text](assets/images/bugcrowd-issue.png?raw=true "Bugcrowd issue")
 
-<img src="assets/images/bugcrowd-vulnerability.png" width="500">
+![Alt text](assets/images/bugcrowd-vulnerability.png?raw=true "Bugcrowd vulnerability")
 
-<img src="assets/images/bugcrowd-comment.png" width="500">
+![Alt text](assets/images/bugcrowd-comment.png?raw=true "Bugcrowd comment")
 
 ## When are Bugcrowd issues created?
 * to avoid duplicate issues, only your production environment will be integrated with Bugcrowd
@@ -45,6 +45,7 @@ bugcrowd_email   = "domain-protect@company.com"
 
 ## Manual tasks in Bugcrowd
 You still need to do the following tasks manually using the Bugcrowd console:
+
 * mark issues submitted by researchers as duplicates
 * only do this if the Domain Protect issue was submitted first
 * link to the Domain Protect issue as the duplicate reference
