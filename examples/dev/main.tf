@@ -10,7 +10,7 @@ module "domain_protect" {
   external_id         = var.external_id
   hackerone           = "enabled"
   ip_address          = true
-  ip_time_limit       = 0.1 # 6 minutes 
+  ip_time_limit       = 0.1 # 6 minutes
   org_primary_account = var.org_primary_account
   rcu                 = 1
   slack_channels      = ["devsecops-dev"]
