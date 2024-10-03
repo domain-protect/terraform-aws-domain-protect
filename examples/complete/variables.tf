@@ -1,29 +1,25 @@
-variable "scan_schedule" {
-  description = "schedule for running domain-protect scans, e.g. 24 hours"
-  default     = "24 hours"
-  type        = string
+variable "cf_api_key" {
+  description = "Cloudflare API token"
 }
 
-variable "update_schedule" {
-  description = "schedule for running domain-protect update function, e.g. 24 hours"
-  default     = "24 hours"
-  type        = string
+variable "external_id" {
+  description = "external ID for security audit role to be defined in tvars file. Leave empty if not configured"
 }
 
-variable "ip_scan_schedule" {
-  description = "schedule for IP address scanning used in A record checks"
-  default     = "24 hours"
-  type        = string
+variable "hackerone_api_token" {
+  description = "HackerOne API token"
 }
 
-variable "takeover" {
-  description = "Create supported resource types to prevent malicious subdomain takeover"
-  default     = false
-  type        = bool
+variable "org_primary_account" {
+  description = "The AWS account number of the organization primary account"
+}
+
+variable "slack_webhook_urls" {
+  description = "List of Slack webhook URLs, in the same order as the slack_channels list - enter in tfvars file"
 }
 
 variable "tags" {
-  description = "Tags to apply to resources"
+  description = "Default tags to apply to all resources"
   type        = map(string)
   default     = {}
 }
