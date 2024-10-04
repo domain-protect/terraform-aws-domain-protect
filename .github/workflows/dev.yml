@@ -26,6 +26,9 @@ jobs:
     name: Terraform plan & apply dev
     environment: 'dev'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./examples/dev
 
     permissions:
       id-token: write
@@ -33,13 +36,16 @@ jobs:
       pull-requests: write
       checks: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Terraform setup
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
-      - name: checkout
-        uses: actions/checkout@v4
+      - name: Terraform format
+        run: terraform fmt -check -recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
