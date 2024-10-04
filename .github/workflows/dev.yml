@@ -1,0 +1,77 @@
+name: Deploy Domain Protect Development
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**/*.py"
+      - "**/*.tf"
+      - "**/*.txt"
+      - ".github/workflows/dev.yml"
+    branches:
+      - main
+
+env:
+  TERRAFORM_VERSION: "1.7.3"
+  PYTHON_VERSION: "3.11"
+  TF_VAR_org_primary_account: ${{ secrets.ORG_PRIMARY_ACCOUNT }}
+  TF_VAR_slack_webhook_urls: ${{ secrets.SLACK_WEBHOOK_URLS }}
+  TF_VAR_external_id: ${{ secrets.EXTERNAL_ID }}
+  TF_VAR_cf_api_key: ${{ secrets.CF_API_KEY }}
+  TF_VAR_hackerone_api_token: ${{ secrets.HACKERONE_API_TOKEN }}
+  TF_VAR_region: ${{ secrets.AWS_REGION }}
+  TF_CLI_ARGS_init: "-backend-config=\"bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}\" -backend-config=\"key=${{ secrets.TERRAFORM_STATE_KEY }}\" -backend-config=\"region=${{ secrets.TERRAFORM_STATE_REGION }}\""
+
+jobs:
+  terraform_plan_apply_dev:
+    name: Terraform plan & apply dev
+    environment: 'dev'
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - name: Terraform setup
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install virtualenv
+        run: pip install virtualenv
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN}}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: set Terraform dev workspace
+        run: |
+          terraform init
+          terraform workspace list > list.txt
+          if grep "dev" list.txt
+          then
+            terraform workspace select dev
+          else
+            echo "creating dev terraform workspace"
+            terraform workspace new dev
+          fi
+
+      - name: terraform plan dev
+        run: terraform plan -out tfplan
+
+      - name: terraform apply dev
+        run: terraform apply -auto-approve tfplan
