@@ -13,10 +13,10 @@ Published as a public [Terraform registry module](https://registry.terraform.io/
 <a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/slack-webhook-notifications.png" /></a>
 
 ## ... with serverless cloud infrastructure
-<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/imagesdomain-protect.png" /></a>
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/domain-protect.png" /></a>
 
 ## OWASP Global AppSec Dublin - talk and demo
-<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/imagesglobal-appsec-dublin.png" /></a>
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/global-appsec-dublin.png" /></a>
 Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
 ## Features
