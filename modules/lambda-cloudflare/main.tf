@@ -4,7 +4,11 @@ resource "null_resource" "install_python_dependencies" {
   }
 
   provisioner "local-exec" {
-    command = "${path.root}/scripts/lambda-build/create-package-for-each.sh"
+    interpreter = ["/bin/sh", "-c"]
+    command     = <<-EOT
+      chmod +x ${path.root}/scripts/lambda-build/create-package-for-each.sh
+      ${path.root}/scripts/lambda-build/create-package-for-each.sh
+    EOT
 
     environment = {
       source_code_path = "${path.root}/lambda_code"
