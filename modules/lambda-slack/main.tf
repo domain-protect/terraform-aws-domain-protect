@@ -1,8 +1,8 @@
 data "archive_file" "lambda_zip" {
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
-  source_dir  = "${path.cwd}/build/lambda_dist_pkg_notify"
-  output_path = "${path.cwd}/build/notify.zip"
+  source_dir  = "${path.root}/build/lambda_dist_pkg_notify"
+  output_path = "${path.root}/build/notify.zip"
 }
 
 resource "null_resource" "install_python_dependencies" {
@@ -11,15 +11,15 @@ resource "null_resource" "install_python_dependencies" {
   }
 
   provisioner "local-exec" {
-    command = "${path.cwd}/scripts/lambda-build/create-package.sh"
+    command = "${path.root}/scripts/lambda-build/create-package.sh"
 
     environment = {
-      source_code_path = "${path.cwd}/lambda_code"
+      source_code_path = "${path.root}/lambda_code"
       function_name    = "notify"
       path_module      = path.module
       runtime          = var.runtime
       platform         = var.platform
-      path_cwd         = path.cwd
+      path_cwd         = path.root
     }
   }
 }
@@ -30,7 +30,7 @@ resource "aws_lambda_function" "lambda" {
   # checkov:skip=CKV_AWS_272: code-signing not validated to avoid need for signing profile
 
   count            = length(var.slack_channels)
-  filename         = "${path.cwd}/build/notify.zip"
+  filename         = "${path.root}/build/notify.zip"
   function_name    = "${var.project}-slack-${element(var.slack_channels, count.index)}-${var.environment}"
   description      = "${var.project} Lambda function posting to ${element(var.slack_channels, count.index)} Slack channel"
   role             = var.lambda_role_arn

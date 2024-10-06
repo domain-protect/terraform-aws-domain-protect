@@ -126,13 +126,13 @@ variable "memory_size_slack" {
 variable "slack_channels" {
   description = "List of Slack Channels - enter in tfvars file"
   default     = []
-  type        = list(any)
+  type        = list(string)
 }
 
 variable "slack_webhook_urls" {
   description = "List of Slack webhook URLs, in the same order as the slack_channels list - enter in tfvars file"
   default     = []
-  type        = list(any)
+  type        = list(string)
 }
 
 variable "slack_webhook_type" {

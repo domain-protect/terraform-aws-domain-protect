@@ -4,14 +4,14 @@ resource "null_resource" "install_python_dependencies" {
   }
 
   provisioner "local-exec" {
-    command = "${path.cwd}/scripts/lambda-build/create-package-for-each.sh"
+    command = "${path.root}/scripts/lambda-build/create-package-for-each.sh"
 
     environment = {
-      source_code_path = "${path.cwd}/lambda_code"
+      source_code_path = "${path.root}/lambda_code"
       function_names   = join(":", [for l in var.lambdas : replace(l, "-", "_")])
       runtime          = var.runtime
       platform         = var.platform
-      path_cwd         = path.cwd
+      path_cwd         = path.root
     }
   }
 }
@@ -21,8 +21,8 @@ data "archive_file" "lambda_zip" {
 
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
-  source_dir  = "${path.cwd}/build/lambda_dist_pkg_${each.value}"
-  output_path = "${path.cwd}/build/${each.value}.zip"
+  source_dir  = "${path.root}/build/lambda_dist_pkg_${each.value}"
+  output_path = "${path.root}/build/${each.value}.zip"
 }
 
 resource "aws_lambda_function" "lambda" {
@@ -32,7 +32,7 @@ resource "aws_lambda_function" "lambda" {
 
   for_each = toset(var.lambdas)
 
-  filename         = "${path.cwd}/build/${replace(each.value, "-", "_")}.zip"
+  filename         = "${path.root}/build/${replace(each.value, "-", "_")}.zip"
   function_name    = "${var.project}-${replace(each.value, "_", "-")}-${var.environment}"
   description      = "${var.project} ${replace(each.value, "_", "-")} Lambda function"
   role             = var.lambda_role_arn
