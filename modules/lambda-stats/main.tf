@@ -1,8 +1,8 @@
 data "archive_file" "lambda_zip" {
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
-  source_dir  = "${abspath(path.root)}/build/lambda_dist_pkg_stats"
-  output_path = "${abspath(path.root)}/build/stats.zip"
+  source_dir  = "${local.rel_path_root}/build/lambda_dist_pkg_stats"
+  output_path = "${local.rel_path_root}/build/stats.zip"
 }
 
 resource "null_resource" "install_python_dependencies" {
@@ -13,16 +13,16 @@ resource "null_resource" "install_python_dependencies" {
   provisioner "local-exec" {
     interpreter = ["/bin/sh", "-c"]
     command     = <<-EOT
-      chmod +x ${abspath(path.root)}/scripts/lambda-build/create-package.sh
-      ${abspath(path.root)}/scripts/lambda-build/create-package.sh
+      chmod +x ${local.rel_path_root}/scripts/lambda-build/create-package.sh
+      ${local.rel_path_root}/scripts/lambda-build/create-package.sh
     EOT
 
     environment = {
-      source_code_path = "${abspath(path.root)}/lambda_code"
+      source_code_path = "${local.rel_path_root}/lambda_code"
       function_name    = "stats"
       runtime          = var.runtime
       platform         = var.platform
-      path_cwd         = path.root
+      path_cwd         = local.rel_path_root
     }
   }
 }
@@ -32,7 +32,7 @@ resource "aws_lambda_function" "lambda" {
   # checkov:skip=CKV_AWS_117: not configured inside VPC as no handling of confidential data
   # checkov:skip=CKV_AWS_272: code-signing not validated to avoid need for signing profile
 
-  filename         = "${abspath(path.root)}/build/stats.zip"
+  filename         = "${local.rel_path_root}/build/stats.zip"
   function_name    = "${var.project}-stats-${var.environment}"
   description      = "${var.project} Lambda function posting stats to SNS"
   role             = var.lambda_role_arn

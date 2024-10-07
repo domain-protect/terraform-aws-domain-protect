@@ -6,16 +6,16 @@ resource "null_resource" "install_python_dependencies" {
   provisioner "local-exec" {
     interpreter = ["/bin/sh", "-c"]
     command     = <<-EOT
-      chmod +x ${abspath(path.root)}/scripts/lambda-build/create-package-for-each.sh
-      ${abspath(path.root)}/scripts/lambda-build/create-package-for-each.sh
+      chmod +x ${local.rel_path_root}/scripts/lambda-build/create-package-for-each.sh
+      ${local.rel_path_root}/scripts/lambda-build/create-package-for-each.sh
     EOT
 
     environment = {
-      source_code_path = "${abspath(path.root)}/lambda_code"
+      source_code_path = "${local.rel_path_root}/lambda_code"
       function_names   = join(":", [for l in var.lambdas : replace(l, "-", "_")])
       runtime          = var.runtime
       platform         = var.platform
-      path_cwd         = path.root
+      path_cwd         = local.rel_path_root
     }
   }
 }
@@ -25,8 +25,8 @@ data "archive_file" "lambda_zip" {
 
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
-  source_dir  = "${abspath(path.root)}/build/lambda_dist_pkg_${each.value}"
-  output_path = "${abspath(path.root)}/build/${each.value}.zip"
+  source_dir  = "${local.rel_path_root}/build/lambda_dist_pkg_${each.value}"
+  output_path = "${local.rel_path_root}/build/${each.value}.zip"
 }
 
 resource "aws_lambda_function" "lambda" {
@@ -37,7 +37,7 @@ resource "aws_lambda_function" "lambda" {
 
   for_each = toset(var.lambdas)
 
-  filename         = "${abspath(path.root)}/build/${replace(each.value, "-", "_")}.zip"
+  filename         = "${local.rel_path_root}/build/${replace(each.value, "-", "_")}.zip"
   function_name    = "${var.project}-${each.value}-${var.environment}"
   description      = "${var.project} ${each.value} Lambda function"
   role             = var.lambda_role_arn
