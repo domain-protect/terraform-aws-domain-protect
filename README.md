@@ -127,13 +127,13 @@ No resources.
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | Lambda language runtime. Defaults to the `.python-version` in repo and can be overridden. | `string` | `""` | no |
 | <a name="input_scan_schedule"></a> [scan\_schedule](#input\_scan\_schedule) | schedule for running domain-protect scans, e.g. 24 hours | `string` | `"24 hours"` | no |
 | <a name="input_security_audit_role_name"></a> [security\_audit\_role\_name](#input\_security\_audit\_role\_name) | security audit role name which needs to be the same in all AWS accounts | `string` | `"domain-protect-audit"` | no |
-| <a name="input_slack_channels"></a> [slack\_channels](#input\_slack\_channels) | List of Slack Channels - enter in tfvars file | `list(any)` | `[]` | no |
+| <a name="input_slack_channels"></a> [slack\_channels](#input\_slack\_channels) | List of Slack Channels - enter in tfvars file | `list(string)` | `[]` | no |
 | <a name="input_slack_emoji"></a> [slack\_emoji](#input\_slack\_emoji) | Slack emoji | `string` | `":warning:"` | no |
 | <a name="input_slack_fix_emoji"></a> [slack\_fix\_emoji](#input\_slack\_fix\_emoji) | Slack fix emoji | `string` | `":white_check_mark:"` | no |
 | <a name="input_slack_new_emoji"></a> [slack\_new\_emoji](#input\_slack\_new\_emoji) | Slack emoji for new vulnerability | `string` | `":octagonal_sign:"` | no |
 | <a name="input_slack_username"></a> [slack\_username](#input\_slack\_username) | Slack username appearing in the from field in the Slack message | `string` | `"Domain Protect"` | no |
 | <a name="input_slack_webhook_type"></a> [slack\_webhook\_type](#input\_slack\_webhook\_type) | Slack webhook type, can be legacy or app | `string` | `"legacy"` | no |
-| <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(any)` | `[]` | no |
+| <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(string)` | `[]` | no |
 | <a name="input_stats_schedule"></a> [stats\_schedule](#input\_stats\_schedule) | Cron schedule for the stats message | `string` | `"cron(0 9 1 * ? *)"` | no |
 | <a name="input_takeover"></a> [takeover](#input\_takeover) | Create supported resource types to prevent malicious subdomain takeover | `bool` | `false` | no |
 | <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br/>  "update"<br/>]</pre> | no |
