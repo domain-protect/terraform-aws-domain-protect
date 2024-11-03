@@ -1,8 +1,6 @@
 from unittest.mock import call
-from unittest.mock import Mock
 from unittest.mock import patch
 
-import pytest
 import requests
 from common import setup_cloudfront_distribution_with_origin_url
 from common import setup_hosted_zone_with_cname
