@@ -12,3 +12,5 @@ def vulnerability_detected_in_time_period(domain, seconds):
         sleep(5)
         print(f"{seconds} seconds remaining")
         seconds -= 5
+
+    return False
