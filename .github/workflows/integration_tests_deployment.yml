@@ -17,10 +17,11 @@ on:
 
 env:
   ENVIRONMENT: ${{ inputs.Environment }}
+  PROJECT: domain-protect
 
 jobs:
   integration_tests_deployment:
-    name: Integration tests ${{ inputs.Environment }} deployment
+    name: Integration tests deployment ${{ inputs.Environment }}
     environment: ${{ inputs.Environment }}
     runs-on: ubuntu-latest
     permissions:
