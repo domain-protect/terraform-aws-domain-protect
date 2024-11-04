@@ -1,14 +1,34 @@
-name: Integration Tests
+name: Integration Tests Deployment
 on:
-  push:
+  workflow_call:
+    inputs:
+      Environment:
+        type: string
+        required: true
+  workflow_dispatch:
+    inputs:
+      Environment:
+        type: choice
+        description: Choose Environment
+        default: dev
+        options:
+          - dev
+          - prd
+
+env:
+  ENVIRONMENT: ${{ inputs.Environment }}
 
 jobs:
-  integration_tests:
-    name: Integration Test
+  integration_tests_deployment:
+    name: Integration tests ${{ inputs.Environment }} deployment
+    environment: ${{ inputs.Environment }}
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
+      contents: read
       checks: write # Required for Publish Test Results
       pull-requests: write # Required for Publish Test Results
+
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
@@ -24,12 +44,12 @@ jobs:
 
       - name: test
         run: |
-          pytest --cov=manual_scans --cov=utils --cov-branch --cov-fail-under=19 --junitxml=test_reports/junit-integration.xml integration_tests
+          pytest -v integration_tests/deployment
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@82082dac68ad6a19d980f8ce817e108b9f496c2a # v2
         if: always()
         with:
           files: "test_reports/junit-integration.xml"
-          check_name: "Integration Test Results"
-          comment_title: "Integration Test Results"
+          check_name: "Integration Test Results - Deployment"
+          comment_title: "Integration Test Results - Deployment"
