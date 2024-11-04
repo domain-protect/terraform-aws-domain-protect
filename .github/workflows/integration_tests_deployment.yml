@@ -16,8 +16,14 @@ on:
           - prd
 
 env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
   ENVIRONMENT: ${{ inputs.Environment }}
+  TEST_ROLE_EXTERNAL_ID: ${{ secrets.TEST_ROLE_EXTERNAL_ID }}
   PROJECT: domain-protect
+  ROUTE53_ACCOUNT: ${{ secrets.ROUTE53_ACCOUNT }}
+  TEST_ROLE_NAME: ${{ secrets.TEST_ROLE_NAME }}
+  ZONE_NAME: ${{ secrets.ZONE_NAME }}
+  ZONE_ID: ${{ secrets.ZONE_ID }}
 
 jobs:
   integration_tests_deployment:
