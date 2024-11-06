@@ -2,12 +2,12 @@ name: Integration Tests Deployment
 on:
   workflow_call:
     inputs:
-      Environment:
+      environment:
         type: string
         required: true
   workflow_dispatch:
     inputs:
-      Environment:
+      environment:
         type: choice
         description: Choose Environment
         default: dev
@@ -16,8 +16,8 @@ on:
           - prd
 
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  ENVIRONMENT: ${{ inputs.Environment }}
+  AWS_REGION: "eu-west-1"
+  ENVIRONMENT: ${{ inputs.environment }}
   TEST_ROLE_EXTERNAL_ID: ${{ secrets.TEST_ROLE_EXTERNAL_ID }}
   PROJECT: domain-protect
   ROUTE53_ACCOUNT: ${{ secrets.ROUTE53_ACCOUNT }}
@@ -27,8 +27,8 @@ env:
 
 jobs:
   integration_tests_deployment:
-    name: Integration tests deployment ${{ inputs.Environment }}
-    environment: ${{ inputs.Environment }}
+    name: Integration tests deployment ${{ inputs.environment }}
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -53,7 +53,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_INTEGRATION_TEST_ROLE}}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: "eu-west-1"
 
       - name: test
         run: |
