@@ -8,6 +8,7 @@ from integration_tests.deployment.aws.utils.dynamodb import vulnerability_detect
 from integration_tests.deployment.aws.utils.general import random_string
 from integration_tests.deployment.aws.utils.route53 import create_record_set
 from integration_tests.deployment.aws.utils.route53 import delete_record_set
+from integration_tests.deployment.aws.utils.route53 import get_zone_id
 from utils.utils_db import db_get_unfixed_vulnerability_found_date_time
 
 
@@ -55,13 +56,13 @@ def vulnerability_reported_fixed_in_time_period(update_lambda_name, domain, seco
     return False
 
 
-def test_vulnerabilities_detected():
+def test_aws_vulnerabilities_detected():
     project = os.environ["PROJECT"]
     environment = os.environ["ENVIRONMENT"]
     route53_account = os.environ["ROUTE53_ACCOUNT"]
     zone_name = os.environ["ZONE_NAME"]
-    zone_id = os.environ["ZONE_ID"]
 
+    zone_id = get_zone_id(route53_account, zone_name)
     accounts_lambda_name = f"{project}-accounts-{environment}"
     update_lambda_name = f"{project}-update-{environment}"
     cname_suffix = random_string()

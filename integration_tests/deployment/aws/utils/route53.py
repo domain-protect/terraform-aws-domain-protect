@@ -13,7 +13,7 @@ def create_record_set(route53_account, zone_id, record_name, record_type, record
                     "ResourceRecordSet": {
                         "Name": record_name,
                         "Type": record_type,
-                        "TTL": 300,
+                        "TTL": 60,
                         "ResourceRecords": [
                             {"Value": record_value},
                         ],
@@ -37,7 +37,7 @@ def delete_record_set(route53_account, zone_id, record_name, record_type, record
                     "ResourceRecordSet": {
                         "Name": record_name,
                         "Type": record_type,
-                        "TTL": 300,
+                        "TTL": 60,
                         "ResourceRecords": [
                             {"Value": record_value},
                         ],
@@ -47,3 +47,11 @@ def delete_record_set(route53_account, zone_id, record_name, record_type, record
         },
     )
     return response
+
+
+def get_zone_id(route53_account, zone_name):
+    boto3_session = assume_test_role(route53_account)
+    client = boto3_session.client(service_name="route53")
+    response = client.list_hosted_zones_by_name(DNSName=zone_name)
+    hosted_zone_id = response["HostedZones"][0]["Id"]
+    return hosted_zone_id.split("/")[-1]
