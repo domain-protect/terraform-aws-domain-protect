@@ -1,0 +1,68 @@
+name: Integration Tests Deployment
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Choose Environment
+        default: dev
+        options:
+          - dev
+          - prd
+
+env:
+  AWS_REGION: "eu-west-1"
+  PROJECT: domain-protect
+  ENVIRONMENT: ${{ inputs.environment }}
+  TEST_ROLE_EXTERNAL_ID: ${{ secrets.TEST_ROLE_EXTERNAL_ID }}
+  ROUTE53_ACCOUNT: ${{ secrets.ROUTE53_ACCOUNT }}
+  TEST_ROLE_NAME: ${{ secrets.TEST_ROLE_NAME }}
+  ZONE_NAME: ${{ secrets.ZONE_NAME }}
+
+jobs:
+  integration_tests_deployment:
+    name: Integration tests deployment ${{ inputs.environment }}
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      checks: write # Required for Publish Test Results
+      pull-requests: write # Required for Publish Test Results
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5
+        with:
+          python-version-file: '.python-version'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.txt
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_INTEGRATION_TEST_ROLE}}
+          aws-region: "eu-west-1"
+
+      - name: test
+        run: |
+          pytest -v --junitxml=test_reports/junit-integration.xml integration_tests/deployment
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@82082dac68ad6a19d980f8ce817e108b9f496c2a # v2
+        if: always()
+        with:
+          files: "test_reports/junit-integration.xml"
+          check_name: "Integration Test Results - Deployment"
+          comment_title: "Integration Test Results - Deployment"

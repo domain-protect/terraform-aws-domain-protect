@@ -81,3 +81,11 @@ jobs:
 
       - name: terraform apply dev
         run: terraform apply -auto-approve tfplan
+
+  integration_tests_deployment_dev:
+    name: Integration Tests Deployment Development
+    uses: ./.github/workflows/integration_tests_deployment.yml
+    needs: terraform_plan_apply_dev
+    secrets: inherit
+    with:
+      Environment: 'dev'
