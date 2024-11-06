@@ -26,8 +26,8 @@ env:
 
 jobs:
   integration_tests_deployment:
-    name: Integration tests deployment ${{ inputs.environment }}
-    environment: ${{ inputs.environment }}
+    name: Integration tests deployment $ENVIRONMENT
+    environment: $ENVIRONMENT
     runs-on: ubuntu-latest
     permissions:
       id-token: write
