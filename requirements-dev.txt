@@ -4,7 +4,7 @@ dnspython==2.6.1
 requests==2.32.3
 regex==2024.9.11
 black==24.8.0
-prospector==1.10.3
+prospector==1.12.1
 pytest==8.3.3
 pytest-cov==5.0.0
 assertpy==1.1
