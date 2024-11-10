@@ -7,8 +7,6 @@ on:
       - "**/*.tf"
       - "**/*.txt"
       - ".github/workflows/dev.yml"
-    branches:
-      - main
 
 env:
   TERRAFORM_VERSION: "1.7.3"
