@@ -12,7 +12,6 @@ on:
 
 env:
   TERRAFORM_VERSION: "1.7.3"
-  PYTHON_VERSION: "3.11"
   TF_VAR_org_primary_account: ${{ secrets.ORG_PRIMARY_ACCOUNT }}
   TF_VAR_slack_webhook_urls: ${{ secrets.SLACK_WEBHOOK_URLS }}
   TF_VAR_external_id: ${{ secrets.EXTERNAL_ID }}
@@ -49,8 +48,6 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
