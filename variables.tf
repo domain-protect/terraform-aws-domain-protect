@@ -12,7 +12,6 @@ variable "region" {
 
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
-  default     = ""
   type        = string
 }
 

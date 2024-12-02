@@ -19,7 +19,8 @@ Prevent subdomain takeover ...
 ![Alt text](assets/images/domain-protect.png?raw=true "Domain Protect architecture")
 
 ## OWASP Global AppSec Dublin - talk and demo
-[![Global AppSec Dublin 2023](assets/images/global-appsec-dublin.png)](https://youtu.be/fLrRLmKZTvE)
+<a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/global-appsec-dublin.png" /></a>
+Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
 ## Features
 * scan Amazon Route53 across an AWS Organization for domain records vulnerable to takeover
@@ -30,8 +31,13 @@ Prevent subdomain takeover ...
 * [manual scans](manual_scans/aws/README.md) of cloud accounts with no installation
 
 ## Installation
-* the simplest way to install is to use the separate [Domain Protect Deploy](https://github.com/domain-protect/domain-protect-deploy) repository with GitHub Actions deployment workflow
-* for other methods see [Installation](docs/installation.md)
+* Domain Protect is packaged as a [public Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
+* Ensure [requirements](/docs/requirements.md) are met
+* See [Installation](docs/installation.md) for details on how to install
+
+## Migration
+
+See [migration](/docs/migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
 ## Collaboration
 We welcome collaborators! Please see the [OWASP Domain Protect website](https://owasp.org/www-project-domain-protect/) for more details.
@@ -50,6 +56,7 @@ We welcome collaborators! Please see the [OWASP Domain Protect website](https://
 [Vulnerable A records (IP addresses)](a-records.md) *optional feature*<br>
 [Requirements](requirements.md)<br>
 [Installation](installation.md)<br>
+[Migration](migration.md)<br>
 [Slack Webhooks](slack-webhook.md)<br>
 [AWS IAM policies](aws-iam-policies.md)<br>
 [CI/CD](ci-cd.md)<br>
