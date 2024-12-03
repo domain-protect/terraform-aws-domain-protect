@@ -1,101 +1,50 @@
 # Installation
 
 Before starting ensure [requirements](requirements.md) are met
-## GitHub Actions (recommended)
 
-<img src="assets/images/pipeline.png">
+## Initial installation
 
-* deploy Domain Protect in your AWS Organization
-* no need to clone or fork Domain Protect
-* internal / private deployment repository to protect sensitive information
-* uses OpenID Connect - no IAM user with long-lived access keys
-* update to latest version of Domain Protect any time by running pipeline
+* Include the following code snippet to your code
 
-Follow detailed instructions in separate [Domain Protect Deploy](https://github.com/domain-protect/terraform-aws-domain-protect-deploy) repository with GitHub Actions deployment workflow
-
-## Atlantis
-
-Per [official documentation](https://www.runatlantis.io/), Atlantis is an application for automating Terraform via pull requests
-
-* For atlantis to work, you can simply create a new stack (folder) in your environment with the name `domain-protect`. You will then make the necessary changes to the `atlantis.yaml` file, so atlantis knows where all the terraform code is from.
-
-Example changes to `atlantis.yaml`:
-
-```yaml
-- name: domain-protect-security-audit
-  dir: security/domain-protect
-  workspace: security-audit
-  workflow: security-audit
-  terraform_version: 1.3.1
 ```
+module "domain_protect" {
+  source  = "domain-protect/domain-protect/aws"
+  version = "1.0.0"
 
-* In the `domain-protect` folder, you can copy the content of `main.tf` file from this repo. For each of the module, make sure you change the source to this repo so you can reuse the module here
-
-For example, update:
-
-```terraform
-module "kms" {
-  source  = "./modules/kms"
-  project = var.project
-  region  = var.region
+  environment              = "dev"
+  org_primary_account      = "123456789012"
+  security_audit_role_name = "DomainProtectAudit"
+  slack_channels           = ["security-alerts-dev"]
+  slack_webhook_urls       = ["https://hooks.slack.com/services/XXX/XXX/XXX"]
 }
 ```
+* Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
+* Create variable values based on the example below in `terraform.tfvars` or as variables in your CI/CD pipeline
+* The Slack webhook URL is sensitive and should be protected, e.g. as a CI/CD pipeline secret
 
-to
+| VARIABLE                        | EXAMPLE VALUE / COMMENT                               |
+| ------------------------------- | ------------------------------------------------------|
+| environment                     | "dev" (not needed if Terraform workspace used)        |
+| org_primary_account             | "123456789012"                                          |
+| security_audit_role_name        | "DomainProtectAudit" (not needed if "domain-protect-audit" used)|
+| slack_channels                  | ["security-alerts-dev"]                               |
+| slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
 
-```terraform
-module "kms" {
-  source  =  "git::https://github.com/domain-protect/terraform-aws-domain-protect.git//modules/kms"
-  project = var.project
-  region  = var.region
-}
-```
+* Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
+* see the [examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
-Also, because of the way the lambda code modules are set up, you will need to copy the contents of `scripts/lambda-build`, `build` and `lambda_code` folders with the same path to your `domain-protect` folder. In the end, you will have a structure like this:
+## Multiple environments
+Domain Protect is designed so that multiple environments can be deployed, e.g. `dev` and `prd`.
 
-* domain-protect
-  * main.tf
-  * variables.tf
-  * terraform.tfvars
-  * build
-  * lambda_code
-  * scripts
-    * lambda-build
-      * create-package-for-each.sh
-      * create-package.sh
+It's important that only one environment, e.g. `prd` can perform active takeover, to avoid conflicts between environments.
 
-Finally, make sure you the scripts in `scripts/lambda-build` are executable before committing to your repo by running `chmod +x`
+* ensure you only set the variable `takeover = true` for a single environment, e.g. `prd`
 
-The downside of this approach is changes to `build`, `lambda_code`, or `scripts` folders from source folder have to be synced manually to local folder
+Make sure to also update `production_environment` to match the `environment` variable when deploying to production.
 
-This is only one of the many ways to deploy with atlantis. You should tailor to your environment. Please reach out to us to brainstorm on your deployment workflow.
+## Terraform workspaces
 
-## Manual installation (not recommended)
-
-* replace the Terraform state S3 bucket fields in the command below as appropriate
-* for local testing, duplicate `terraform.tfvars.example`, rename without the `.example` suffix
-* enter details appropriate to your organization and save
-* alternatively enter Terraform variables within your CI/CD pipeline
-* deploy development environment for detection only
-* default scan schedule for dev environment is 12 hours
-
-```bash
-terraform init -backend-config=bucket=TERRAFORM_STATE_BUCKET -backend-config=key=TERRAFORM_STATE_KEY -backend-config=region=TERRAFORM_STATE_REGION
-terraform workspace new dev
-terraform plan
-terraform apply
-```
-
-* deploy production environment for detection and automated takeover
-* default scan schedule for `prd` environment is 60 minutes
-
-```bash
-terraform workspace new prd
-terraform plan
-terraform apply
-```
-
-### Overriding workspace/environment name
+By default Domain Protect uses the value of the Terraform workspace, e.g. `dev` `prd` as the environment name
 
 If you're using external tooling or systems where `terraform.workspace` works differently, you can override the value by setting the `environment` variable.
 
@@ -103,8 +52,6 @@ If you're using external tooling or systems where `terraform.workspace` works di
 # terraform.tfvars
 environment="prod" # used instead of terraform.workspace
 ```
-
-Make sure to also update `production_environment` to match the `environment` variable when deploying to production.
 
 ## Adding notifications to extra Slack channels
 

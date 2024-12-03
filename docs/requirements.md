@@ -1,12 +1,12 @@
 # Requirements
 
-In order to deploy resources from this repo successfully, it is necessary to meet the requirements below, as the terraform code we provide will not create them
+In order to deploy Domain Protect successfully, it is necessary to meet the requirements below, as the terraform module will not create them
 
 * Slack App or legacy Slack webhook, see [Slack Webhook](slack-webhook.md) for details
 * Security audit account within AWS Organizations
 * Security audit read-only role with an identical name in every AWS account of the Organization
 * Storage bucket for Terraform state file
-* OIDC role (preferred) or IAM user with [deploy policy](../aws-iam-policies/domain-protect-deploy.json) assigned, for CI/CD deployment
+* OIDC role with [deploy policy](../aws-iam-policies/domain-protect-deploy.json) assigned, for CI/CD deployment
 
 ## Security audit role in every AWS account
 
