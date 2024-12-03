@@ -30,7 +30,7 @@ module "domain_protect" {
 | slack_channels                  | ["security-alerts-dev"]                               |
 | slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
 
-* Add extra variables if desired as detailed in [Module imputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
+* Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
 * see the [Examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
 ## Multiple environments
