@@ -31,7 +31,7 @@ module "domain_protect" {
 | slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
 
 * Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
-* see the [Examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
+* see the [examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
 ## Multiple environments
 Domain Protect is designed so that multiple environments can be deployed, e.g. `dev` and `prd`.
