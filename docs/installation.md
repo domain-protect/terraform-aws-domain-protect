@@ -11,11 +11,11 @@ module "domain_protect" {
   source  = "domain-protect/domain-protect/aws"
   version = "1.0.0"
 
-  environment              = var.environment
-  org_primary_account      = var.org_primary_account
-  security_audit_role_name = var.security_audit_role_name
-  slack_channels           = var.slack_channels
-  slack_webhook_urls       = var.slack_webhook_urls
+  environment              = "dev"
+  org_primary_account      = "123456789012"
+  security_audit_role_name = "DomainProtectAudit"
+  slack_channels           = ["security-alerts-dev"]
+  slack_webhook_urls       = ["https://hooks.slack.com/services/XXX/XXX/XXX"]
 }
 ```
 * Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
@@ -25,8 +25,8 @@ module "domain_protect" {
 | VARIABLE                        | EXAMPLE VALUE / COMMENT                               |
 | ------------------------------- | ------------------------------------------------------|
 | environment                     | "dev" (not needed if Terraform workspace used)        |
-| org_primary_account             | "012345678901"                                          |
-| security_audit_role_name        | "dp-audit" (not needed if "domain-protect-audit" used)|
+| org_primary_account             | "123456789012"                                          |
+| security_audit_role_name        | "DomainProtectAudit" (not needed if "domain-protect-audit" used)|
 | slack_channels                  | ["security-alerts-dev"]                               |
 | slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
 
