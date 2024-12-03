@@ -120,7 +120,7 @@ No resources.
 | <a name="input_lambdas"></a> [lambdas](#input\_lambdas) | list of names of Lambda files in the lambda/code folder | `list(any)` | <pre>[<br/>  "current",<br/>  "update"<br/>]</pre> | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Memory allocation for scanning Lambda functions | `number` | `128` | no |
 | <a name="input_memory_size_slack"></a> [memory\_size\_slack](#input\_memory\_size\_slack) | Memory allocation for Slack Lambda functions | `number` | `128` | no |
-| <a name="input_org_primary_account"></a> [org\_primary\_account](#input\_org\_primary\_account) | The AWS account number of the organization primary account | `string` | `""` | no |
+| <a name="input_org_primary_account"></a> [org\_primary\_account](#input\_org\_primary\_account) | The AWS account number of the organization primary account | `string` | n/a | yes |
 | <a name="input_permissions_boundary_arn"></a> [permissions\_boundary\_arn](#input\_permissions\_boundary\_arn) | permissions boundary ARN to attach to every IAM role | `string` | `null` | no |
 | <a name="input_platform"></a> [platform](#input\_platform) | Python platform used for install of Regex and other libraries | `string` | `"manylinux2014_x86_64"` | no |
 | <a name="input_production_environment"></a> [production\_environment](#input\_production\_environment) | Name of production environment - takeover is only turned on in this environment | `string` | `""` | no |

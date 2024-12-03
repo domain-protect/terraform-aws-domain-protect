@@ -19,19 +19,19 @@ module "domain_protect" {
 }
 ```
 * Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
-* Create variable values based on the example below in `terraform.tfvars` or as GitHub Actions environment variables
-* The Slack webhook URL is sensitive and should be protected, e.g. as a GitHub Actions secret
+* Create variable values based on the example below in `terraform.tfvars` or as variables in your CI/CD pipeline
+* The Slack webhook URL is sensitive and should be protected, e.g. as a CI/CD pipeline secret
 
 | VARIABLE                        | EXAMPLE VALUE / COMMENT                               |
 | ------------------------------- | ------------------------------------------------------|
 | environment                     | "dev" (not needed if Terraform workspace used)        |
-| org_primary_account             | "012345678901"                                          |  
+| org_primary_account             | "012345678901"                                          |
 | security_audit_role_name        | "dp-audit" (not needed if "domain-protect-audit" used)|
 | slack_channels                  | ["security-alerts-dev"]                               |
-| slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      | 
+| slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
 
 * Add extra variables if desired as detailed in [Module imputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
-* see the [Examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files 
+* see the [Examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
 ## Multiple environments
 Domain Protect is designed so that multiple environments can be deployed, e.g. `dev` and `prd`.
