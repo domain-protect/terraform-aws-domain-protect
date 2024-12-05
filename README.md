@@ -29,12 +29,12 @@ Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
 ## Installation
 * Domain Protect is packaged as a [public Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
-* Ensure [requirements](/docs/requirements.md) are met
+* Ensure [requirements](docs/requirements.md) are met
 * See [Installation](docs/installation.md) for details on how to install
 
 ## Migration
 
-See [migration](/docs/migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
+See [migration](docs/migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
 ## Collaboration
 > 📢 We welcome contributions! Please see the [OWASP Domain Protect website](https://owasp.org/www-project-domain-protect/) for more details.

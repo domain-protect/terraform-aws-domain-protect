@@ -59,6 +59,7 @@ nav:
   - Vulnerable A records (IP addresses): a-records.md
   - Requirements: requirements.md
   - Installation: installation.md
+  - Migration: migration.md
   - Slack Webhooks: slack-webhook.md
   - AWS IAM policies: aws-iam-policies.md
   - CI/CD: ci-cd.md

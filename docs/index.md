@@ -24,20 +24,20 @@ Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
 ## Features
 * scan Amazon Route53 across an AWS Organization for domain records vulnerable to takeover
-* scan [Cloudflare](docs/cloudflare.md) for vulnerable DNS records
+* scan [Cloudflare](cloudflare.md) for vulnerable DNS records
 * take over vulnerable subdomains yourself before attackers and bug bounty researchers
-* automatically create known issues in [Bugcrowd](docs/bugcrowd.md) or [HackerOne](docs/hackerone.md)
+* automatically create known issues in [Bugcrowd](bugcrowd.md) or [HackerOne](hackerone.md)
 * vulnerable domains in Google Cloud DNS can be detected by [Domain Protect for GCP](https://github.com/ovotech/domain-protect-gcp)
-* [manual scans](manual_scans/aws/README.md) of cloud accounts with no installation
+* [manual scans](manual-aws-scans.md) of cloud accounts with no installation
 
 ## Installation
 * Domain Protect is packaged as a [public Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
-* Ensure [requirements](/docs/requirements.md) are met
-* See [Installation](docs/installation.md) for details on how to install
+* Ensure [requirements](requirements.md) are met
+* See [Installation](installation.md) for details on how to install
 
 ## Migration
 
-See [migration](/docs/migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
+See [migration](migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
 ## Collaboration
 We welcome collaborators! Please see the [OWASP Domain Protect website](https://owasp.org/www-project-domain-protect/) for more details.
