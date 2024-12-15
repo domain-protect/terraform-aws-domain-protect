@@ -23,6 +23,9 @@ env:
   ROUTE53_ACCOUNT: ${{ secrets.ROUTE53_ACCOUNT }}
   TEST_ROLE_NAME: ${{ secrets.TEST_ROLE_NAME }}
   ZONE_NAME: ${{ secrets.ZONE_NAME }}
+  CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+  CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+  CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
 
 jobs:
   integration_tests_deployment:
@@ -47,7 +50,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements-dev.txt
+          pip install -r requirements-tests.txt
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
