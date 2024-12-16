@@ -1,4 +1,4 @@
-# Alerts and reports
+# Alerts
 <kbd>
   <img src="assets/images/new.png" width="600">
 </kbd>
