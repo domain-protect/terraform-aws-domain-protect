@@ -4,7 +4,23 @@
 
 Domain protect uses `pytest` to run unit tests against the code, and will fail the build if any tests fail.  All integration tests live under the `integration_tests` folder in the root of the solution.
 
-Integration tests test a single flow through the application, involving multiple units interacting, mocking out external dependencies.  This ensures flows through the application provide the correct results when the units work together.
+Integration tests test a single flow through the application, involving multiple units interacting.  This ensures flows through the application provide the correct results when the units work together.
+
+## Integration Tests - Manual Scans
+
+Integration tests for manual scans have been set up using Mocks to simulate the responses from AWS or CloudFlare. They can therefore easily be run locally.
+
+## Integration Tests - Deployment
+
+Deployment integration tests are set up without using Mocks, as follows:
+
+* plan and apply Terraform within an AWS Account in a test AWS Organization
+* create deliberately vulnerable DNS records in AWS
+* create deliberately vulnerable DNS records in CloudFlare
+* trigger the appropriate Domain Protect Lambda functions
+* ensure that the vulnerabilities are detected in the specified timeframe, by querying DynamoDB
+* delete the vulnerable DNS records
+* ensure the vulnerabilities are marked as fixed within the database.
 
 ## Running tests locally
 

@@ -4,7 +4,7 @@ Before starting ensure [requirements](requirements.md) are met
 
 ## Initial installation
 
-* Include the following code snippet to your code
+* Include a code snippet in your code based on the example below:
 
 ```
 module "domain_protect" {
@@ -13,24 +13,16 @@ module "domain_protect" {
 
   environment              = "dev"
   org_primary_account      = "123456789012"
-  security_audit_role_name = "DomainProtectAudit"
   slack_channels           = ["security-alerts-dev"]
   slack_webhook_urls       = ["https://hooks.slack.com/services/XXX/XXX/XXX"]
 }
 ```
 * Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
-* Create variable values based on the example below in `terraform.tfvars` or as variables in your CI/CD pipeline
+* Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
 * The Slack webhook URL is sensitive and should be protected, e.g. as a CI/CD pipeline secret
 
-| VARIABLE                        | EXAMPLE VALUE / COMMENT                               |
-| ------------------------------- | ------------------------------------------------------|
-| environment                     | "dev" (not needed if Terraform workspace used)        |
-| org_primary_account             | "123456789012"                                          |
-| security_audit_role_name        | "DomainProtectAudit" (not needed if "domain-protect-audit" used)|
-| slack_channels                  | ["security-alerts-dev"]                               |
-| slack_webhook_urls              | ["https://hooks.slack.com/services/XXX/XXX/XXX"]      |
+## Examples
 
-* Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
 * see the [examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
 ## Multiple environments
