@@ -48,14 +48,15 @@ nav:
   - Home: index.md
   - Architecture: architecture.md
   - Features:
-    - Database: database.md
-    - Reports: reports.md
+    - Vulnerability types: vulnerability-types.md
     - Automated takeover: automated-takeover.md
     - Cloudflare: cloudflare.md
     - Bugcrowd: bugcrowd.md
     - HackerOne: hackerone.md
-    - Vulneratbility types: vulnerability-types.md
     - Vulnerable A records (IP addresses): a-records.md
+    - Database: database.md
+    - Alerts: alerts.md
+    - Reports: reports.md
   - Installation:
     - Requirements: requirements.md
     - Installation: installation.md
@@ -66,11 +67,12 @@ nav:
   - Manual scans:
     - Manual AWS scans: manual-aws-scans.md
     - Manual Cloudflare scans: manual-cf-scans.md
-  - Development:
+  - Development and Testing:
     - Development: development.md
     - Code Standards: code-standards.md
     - Automated Tests: automated-tests.md
     - Manual Tests: manual-tests.md
+    - Integration Tests: integration-tests.md
     - Individual Manual Tests:
       - A record Elastic IP / EC2: test-records/a-eip.md
       - A record Global Accelerator: test-records/a-globalaccelerator.md
@@ -89,11 +91,6 @@ nav:
       - Cloudflare Elastic Beanstalk: test-records/cloudflare-eb.md
       - CloudFlare NS: test-records/cloudflare-ns.md
       - Cloudflare S3: test-records/cloudflare-s3.md
-      - A records (IP addresses): a-records.md
-      - Takeover: automated-takeover.md
-      - Cloudflare: cloudflare.md
-      - Bugcrowd: bugcrowd.md
-      - HackerOne: hackerone.md
   - Conference Talks and Blog Posts: talks.md
 
 plugins:
