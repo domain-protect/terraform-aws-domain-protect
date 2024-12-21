@@ -6,16 +6,19 @@ module "domain_protect" {
   allowed_regions     = "['eu-west-1', 'eu-west-2', 'us-east-1']"
   cf_api_key          = var.cf_api_key
   cloudflare          = true
-  environment         = "dev"
+  environment         = "prd"
   external_id         = var.external_id
-  hackerone           = "disabled"
+  hackerone           = "enabled"
   ip_address          = true
+  ip_scan_schedule    = "10 minutes"
   ip_time_limit       = 0.1 # 6 minutes
   org_primary_account = var.org_primary_account
   rcu                 = 1
-  slack_channels      = ["devsecops-dev"]
+  scan_schedule       = "10 minutes"
+  slack_channels      = ["devsecops"]
   slack_webhook_type  = "app"
   slack_webhook_urls  = var.slack_webhook_urls
-  takeover            = false
+  takeover            = true
+  update_schedule     = "10 minutes"
   wcu                 = 1
 }
