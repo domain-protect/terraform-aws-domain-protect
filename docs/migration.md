@@ -21,7 +21,7 @@ Phased option preserving databases and avoiding downtime:
 
 * Upgrade Domain Protect using your existing deployment methodology from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to version `0.5.1` and your current variables
 * This is pinned to use version `0.5.1` of the Terraform module
-* Create a new repository for your deployment(s), calling the Terraform module directly, which should result in no changes other than the usual Lambda rebuild
+* Create a new repository for your deployment(s), calling the Terraform module directly, which should result in no changes other than the usual Lambda rebuilds
 * See the [examples folder](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) in this repository for example Terraform
 * Update the Terraform module version to the latest version, this will require some adjustment of Terraform variables:
 

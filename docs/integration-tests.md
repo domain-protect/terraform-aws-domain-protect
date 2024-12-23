@@ -24,7 +24,9 @@ Deployment integration tests are set up without using Mocks, as follows:
 
 ## Running tests locally
 
-See [Automated Tests](automated-tests.md) for details on how to set up the tests locally.
+See [Automated Tests](automated-tests.md) for details on how to set up manual scan tests locally.
+
+See the Integration Tests Deployment [README](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/integration_tests/deployment) for instructions on testing and developing end-to-end tests locally.
 
 ## Creating new integration tests
 
