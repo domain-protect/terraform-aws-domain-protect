@@ -1,7 +1,7 @@
 module "domain_protect" {
   source = "../../"
   # source  = "domain-protect/domain-protect/aws"
-  # version = "0.5.1"
+  # version = "1.0.0"
 
   allowed_regions     = "['eu-west-1', 'eu-west-2', 'us-east-1']"
   cf_api_key          = var.cf_api_key
