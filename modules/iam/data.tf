@@ -5,7 +5,7 @@ data "aws_iam_policy" "default" {
     "AdministratorAccess-AWSElasticBeanstalk",
     "AWSCloudFormationFullAccess",
     "AmazonS3FullAccess",
-    "AmazonVPCFullAccess", 
+    "AmazonVPCFullAccess",
   ]) : toset([])
   name = each.value
 }
