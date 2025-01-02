@@ -1,8 +1,18 @@
 resource "aws_iam_role" "lambda" {
   name                 = "${var.project}-${var.takeover ? "takeover" : var.role_name == "policyname" ? var.policy : var.role_name}-${var.environment}"
   assume_role_policy   = templatefile("${path.module}/templates/${var.assume_role_policy}_role.json.tpl", { project = var.project })
-  managed_policy_arns  = var.takeover ? ["arn:aws:iam::aws:policy/AmazonVPCFullAccess", "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk", "arn:aws:iam::aws:policy/AmazonS3FullAccess", "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess"] : []
   permissions_boundary = var.permissions_boundary_arn
+}
+
+resource "aws_iam_role_policy_attachment" "default" {
+  for_each = var.takeover ? toset([
+    "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk",
+    "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess",
+    "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+    "arn:aws:iam::aws:policy/AmazonVPCFullAccess", 
+  ]) : toset([])
+  role       = aws_iam_role.lambda.name
+  policy_arn = each.value
 }
 
 resource "aws_iam_role_policy" "lambda" {
