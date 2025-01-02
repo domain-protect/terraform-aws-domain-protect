@@ -5,8 +5,8 @@ variable "project" {
 }
 
 variable "region" {
-  description = "AWS region to deploy Lambda functions"
-  default     = "eu-west-1"
+  description = "AWS region to deploy Lambda functions. This variable will be deprecated in the future."
+  default     = ""
   type        = string
 }
 
