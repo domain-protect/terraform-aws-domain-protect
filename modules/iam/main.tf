@@ -5,7 +5,7 @@ resource "aws_iam_role" "lambda" {
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
-  for_each = var.takeover ? toset(data.aws_iam_policy.default.*.arn) : toset([])
+  for_each   = var.takeover ? toset(data.aws_iam_policy.default.*.arn) : toset([])
   role       = aws_iam_role.lambda.name
   policy_arn = each.value
 }
