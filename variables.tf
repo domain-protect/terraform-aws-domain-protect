@@ -100,7 +100,7 @@ variable "production_workspace" {
 }
 
 variable "runtime" {
-  description = "Lambda language runtime. Defaults to the `.python-version` in repo and can be overridden."
+  description = "Lambda language runtime. Defaults to the `python-version` in repo and can be overridden."
   default     = ""
   type        = string
 }
