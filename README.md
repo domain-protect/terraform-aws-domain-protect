@@ -45,7 +45,6 @@ module "domain_protect" {
   environment              = "prd"
   security_audit_role_name = "domain-protect-audit"
   takeover                 = false
-  wcu                      = 1
   slack_channels           = ["security-alerts"]
   slack_webhook_urls       = ["https://hooks.slack.com/services/XXXXXXX/YYYYYYYYYYY"]
 }
