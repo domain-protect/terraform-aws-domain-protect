@@ -32,6 +32,24 @@ Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 * Ensure [requirements](docs/requirements.md) are met
 * See [Installation](docs/installation.md) for details on how to install
 
+Here is a basic example with slack integration
+
+```hcl
+module "domain_protect" {
+  source  = "domain-protect/domain-protect/aws"
+  # It is recommended to pin every module to a specific version
+  # version = "x.x.x"
+
+  ip_address               = true
+  org_primary_account      = "123456789012"
+  environment              = "prd"
+  security_audit_role_name = "domain-protect-audit"
+  takeover                 = false
+  slack_channels           = ["security-alerts"]
+  slack_webhook_urls       = ["https://hooks.slack.com/services/XXXXXXX/YYYYYYYYYYY"]
+}
+```
+
 ## Migration
 
 See [migration](docs/migration.md) for a guide to migrating from the [original Domain Protect repository](https://github.com/domain-protect/domain-protect) to the [Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
