@@ -58,7 +58,9 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | > 5.12.0 |
 
 ## Modules
 
@@ -96,7 +98,9 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_region.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
 
@@ -127,7 +131,7 @@ No resources.
 | <a name="input_production_workspace"></a> [production\_workspace](#input\_production\_workspace) | Deprecated, use production\_environment. Will be removed in a future release | `string` | `"prd"` | no |
 | <a name="input_project"></a> [project](#input\_project) | abbreviation for the project, forms first part of resource names | `string` | `"domain-protect"` | no |
 | <a name="input_rcu"></a> [rcu](#input\_rcu) | DynamoDB Read Capacity Units for vulnerability database | `number` | `3` | no |
-| <a name="input_region"></a> [region](#input\_region) | AWS region to deploy Lambda functions | `string` | `"eu-west-1"` | no |
+| <a name="input_region"></a> [region](#input\_region) | AWS region to deploy Lambda functions. This variable will be deprecated in the future. | `string` | `""` | no |
 | <a name="input_reports_schedule"></a> [reports\_schedule](#input\_reports\_schedule) | schedule for running reports, e.g. 24 hours. Irrespective of setting, you will be immediately notified of new vulnerabilities | `string` | `"24 hours"` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | Lambda language runtime. Defaults to the `python-version` in repo and can be overridden. | `string` | `""` | no |
 | <a name="input_scan_schedule"></a> [scan\_schedule](#input\_scan\_schedule) | schedule for running domain-protect scans, e.g. 24 hours | `string` | `"24 hours"` | no |
