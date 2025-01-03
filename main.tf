@@ -141,7 +141,6 @@ module "takeover_role" {
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
-  takeover                 = var.takeover
   policy                   = "takeover"
   permissions_boundary_arn = var.permissions_boundary_arn
   environment              = local.env
@@ -294,8 +293,8 @@ module "step_function_role" {
 
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
-  policy                   = "state"
-  assume_role_policy       = "state"
+  policy                   = "states"
+  assume_role_policy       = "states"
   permissions_boundary_arn = var.permissions_boundary_arn
   environment              = local.env
 }

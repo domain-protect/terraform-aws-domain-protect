@@ -17,8 +17,8 @@ variable "policy" {
   default     = "lambda"
 }
 
-variable "managed_policy_names" {
-  description = "Managed policy names to attach to the IAM role"
+variable "takeover_managed_policy_names" {
+  description = "Managed policy names to attach to the IAM role for takeover"
   default = [
     "AdministratorAccess-AWSElasticBeanstalk",
     "AWSCloudFormationFullAccess",
