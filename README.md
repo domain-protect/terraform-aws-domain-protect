@@ -9,28 +9,6 @@
 
 Published as a public [Terraform registry module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 
-## Example
-
-Here is a basic example with slack integration
-
-```hcl
-module "domain_protect" {
-  source  = "domain-protect/domain-protect/aws"
-  # It is recommended to pin every module to a specific version
-  # version = "x.x.x"
-
-  region                   = "us-east-1"
-  ip_address               = true
-  org_primary_account      = "123456789012" # root account
-  environment              = "prd"
-  security_audit_role_name = "domain-protect-audit"
-  takeover                 = false
-  wcu                      = 1
-  slack_channels           = ["security-alerts"]
-  slack_webhook_urls       = ["https://hooks.slack.com/services/"]
-}
-```
-
 ## Prevent subdomain takeover ...
 <a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/slack-webhook-notifications.png" /></a>
 
@@ -53,6 +31,25 @@ Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 * Domain Protect is packaged as a [public Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 * Ensure [requirements](docs/requirements.md) are met
 * See [Installation](docs/installation.md) for details on how to install
+
+Here is a basic example with slack integration
+
+```hcl
+module "domain_protect" {
+  source  = "domain-protect/domain-protect/aws"
+  # It is recommended to pin every module to a specific version
+  # version = "x.x.x"
+
+  ip_address               = true
+  org_primary_account      = "123456789012"
+  environment              = "prd"
+  security_audit_role_name = "domain-protect-audit"
+  takeover                 = false
+  wcu                      = 1
+  slack_channels           = ["security-alerts"]
+  slack_webhook_urls       = ["https://hooks.slack.com/services/XXXXXXX/YYYYYYYYYYY"]
+}
+```
 
 ## Migration
 
