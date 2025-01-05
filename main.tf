@@ -362,7 +362,7 @@ module "lambda_scan_ips" {
   lambdas                  = ["scan-ips"]
   runtime                  = local.runtime
   platform                 = var.platform
-  memory_size              = var.memory_size
+  memory_size              = var.memory_size_ip
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
   external_id              = var.external_id

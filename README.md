@@ -141,6 +141,7 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_ip_time_limit"></a> [ip\_time\_limit](#input\_ip\_time\_limit) | maximum time in hours since IP last detected, before considering IP as no longer belonging to organisation | `string` | `"48"` | no |
 | <a name="input_lambdas"></a> [lambdas](#input\_lambdas) | list of names of Lambda files in the lambda/code folder | `list(any)` | <pre>[<br/>  "current",<br/>  "update"<br/>]</pre> | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Memory allocation for scanning Lambda functions | `number` | `128` | no |
+| <a name="input_memory_size_ip"></a> [memory\_size\_ip](#input\_memory\_size\_ip) | Memory allocation for scan IP Lambda functions | `number` | `256` | no |
 | <a name="input_memory_size_slack"></a> [memory\_size\_slack](#input\_memory\_size\_slack) | Memory allocation for Slack Lambda functions | `number` | `128` | no |
 | <a name="input_org_primary_account"></a> [org\_primary\_account](#input\_org\_primary\_account) | The AWS account number of the organization primary account | `string` | n/a | yes |
 | <a name="input_permissions_boundary_arn"></a> [permissions\_boundary\_arn](#input\_permissions\_boundary\_arn) | permissions boundary ARN to attach to every IAM role | `string` | `null` | no |
