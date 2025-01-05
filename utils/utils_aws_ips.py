@@ -43,12 +43,10 @@ def get_all_regions(account_id, account_name):
 
 
 def get_regions(account_id, account_name):
-    regions = get_all_regions(account_id, account_name)
+    if allowed_regions != ["all"]:
+        return allowed_regions
 
-    if allowed_regions not in [["all"], []]:
-        regions = allowed_regions
-
-    return regions
+    return get_all_regions(account_id, account_name)
 
 
 def get_eip_addresses(account_id, account_name, region):
