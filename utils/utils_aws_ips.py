@@ -33,6 +33,7 @@ def get_all_regions(account_id, account_name):
                 "ERROR: Lambda execution role requires ec2:DescribeRegions permission in %a account",
                 account_name,
             )
+            return []
 
     except exceptions.ClientError as e:
         print(e.response["Error"]["Code"])
@@ -42,12 +43,10 @@ def get_all_regions(account_id, account_name):
 
 
 def get_regions(account_id, account_name):
+    regions = get_all_regions(account_id, account_name)
 
-    if allowed_regions != ["all"]:
+    if allowed_regions not in [["all"], []]:
         regions = allowed_regions
-
-    else:
-        regions = get_all_regions(account_id, account_name)
 
     return regions
 
@@ -80,6 +79,7 @@ def get_eip_addresses(account_id, account_name, region):
                 region,
                 account_name,
             )
+            return []
 
     except (AttributeError, Exception):
         logging.error("ERROR: unable to assume role in %r for %a account", region, account_name)
@@ -112,6 +112,7 @@ def get_ec2_addresses(account_id, account_name, region):
                 "ERROR: Lambda execution role requires ec2:DescribeInstances permission in %a account",
                 account_name,
             )
+            return []
 
     except (AttributeError, Exception):
         logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
@@ -143,6 +144,7 @@ def get_accelerator_addresses(account_id, account_name):
                 "ERROR: Lambda execution role requires globalaccelerator:ListAccelerators permission in %a account for us-west-2 region",
                 account_name,
             )
+            return []
 
     except (AttributeError, Exception):
         logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
