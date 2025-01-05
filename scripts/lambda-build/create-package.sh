@@ -31,15 +31,6 @@ if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
   echo "From: requirements.txt file exists..."
   pip install -r "$FILE"
-
-  # Install regex package...
-  pip install --platform $platform \
-    --target $path_cwd/build/env_$function_name/lib/$runtime/site-packages \
-    --implementation cp \
-    --python-version ${runtime:6} \
-    --only-binary=:all: --upgrade \
-    regex
-
 else
   echo "Error: requirements.txt does not exist!"
 fi
