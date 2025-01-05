@@ -19,8 +19,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
-          python-version-file: '.python-version'
-          cache: 'pip' # caching pip dependencies
+          python-version-file: 'python-version'
+          cache: 'pip'
 
       - run: pip install -r requirements-dev.txt
 

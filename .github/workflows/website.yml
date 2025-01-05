@@ -26,8 +26,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
         with:
-          python-version-file: '.python-version'
-          cache: 'pip' # caching pip dependencies
+          python-version-file: 'python-version'
+          cache: 'pip'
 
       - name: Set up build cache
         uses: actions/cache/restore@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4

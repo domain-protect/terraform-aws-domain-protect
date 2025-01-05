@@ -151,7 +151,7 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_rcu"></a> [rcu](#input\_rcu) | DynamoDB Read Capacity Units for vulnerability database | `number` | `3` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region to deploy Lambda functions. This variable will be deprecated in the future. | `string` | `""` | no |
 | <a name="input_reports_schedule"></a> [reports\_schedule](#input\_reports\_schedule) | schedule for running reports, e.g. 24 hours. Irrespective of setting, you will be immediately notified of new vulnerabilities | `string` | `"24 hours"` | no |
-| <a name="input_runtime"></a> [runtime](#input\_runtime) | Lambda language runtime. Defaults to the `.python-version` in repo and can be overridden. | `string` | `""` | no |
+| <a name="input_runtime"></a> [runtime](#input\_runtime) | Lambda language runtime. Defaults to the `python-version` in repo and can be overridden. | `string` | `""` | no |
 | <a name="input_scan_schedule"></a> [scan\_schedule](#input\_scan\_schedule) | schedule for running domain-protect scans, e.g. 24 hours | `string` | `"24 hours"` | no |
 | <a name="input_security_audit_role_name"></a> [security\_audit\_role\_name](#input\_security\_audit\_role\_name) | security audit role name which needs to be the same in all AWS accounts | `string` | `"domain-protect-audit"` | no |
 | <a name="input_slack_channels"></a> [slack\_channels](#input\_slack\_channels) | List of Slack Channels - enter in tfvars file | `list(string)` | `[]` | no |
