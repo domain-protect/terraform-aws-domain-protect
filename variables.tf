@@ -117,6 +117,12 @@ variable "memory_size" {
   type        = number
 }
 
+variable "memory_size_ip" {
+  description = "Memory allocation for scan IP Lambda functions"
+  default     = 256
+  type        = number
+}
+
 variable "memory_size_slack" {
   description = "Memory allocation for Slack Lambda functions"
   default     = 128
