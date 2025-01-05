@@ -41,11 +41,33 @@
     {
       "Effect": "Allow",
       "Action": [
+          "iam:ListPolicies"
+      ],
+      "Resource": "*"
+    },
+    {
+        "Effect": "Allow",
+        "Action": [
+            "iam:AttachRolePolicy",
+            "iam:DetachRolePolicy",
+            "iam:GetPolicy",
+            "iam:GetPolicyVersion"
+        ],
+        "Resource": [
+            "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
+            "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess",
+            "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk",
+            "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+        ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "iam:AttachRolePolicy",
         "iam:CreateRole",
         "iam:CreateServiceLinkedRole",
         "iam:DeleteRole",
-	"iam:DeleteRolePermissionsBoundary",
+	      "iam:DeleteRolePermissionsBoundary",
         "iam:DeleteServiceLinkedRole",
         "iam:DetachRolePolicy",
         "iam:DeleteRolePolicy",
@@ -54,7 +76,7 @@
         "iam:ListAttachedRolePolicies",
         "iam:ListInstanceProfilesForRole",
         "iam:ListRolePolicies",
-	"iam:PutRolePermissionsBoundary",
+	      "iam:PutRolePermissionsBoundary",
         "iam:PutRolePolicy",
         "iam:PassRole"
       ],
