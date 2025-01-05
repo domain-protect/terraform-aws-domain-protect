@@ -1,9 +1,13 @@
+import re
 import warnings
 
 import boto3
-import regex
 import requests
 import urllib3
+
+# Compile once
+BUCKET_URL_ENDPOINT = re.compile(r"^.+\.s3\.([a-z0-9-]+\.)?amazonaws\.com$")
+BUCKET_WEBSITE_ENDPOINT = re.compile(r"^.+\.s3-website[-.]([a-z0-9-]+\.)?amazonaws\.com$")
 
 
 def list_hosted_zones_manual_scan():
@@ -63,12 +67,12 @@ def get_cloudfront_origin_url(domain_name):
 
 def is_s3_bucket_url(url):
     # bucket.s3.amazonaws.com or bucket.s3.region.amazonaws.com
-    return url is not None and regex.match(r"^.+\.s3.([a-z0-9-]+\.)?amazonaws.com$", url) is not None
+    return url and BUCKET_URL_ENDPOINT.match(url)
 
 
 def is_s3_website_endpoint_url(url):
     # bucket.s3-website-region.amazonaws.com
-    return url is not None and regex.match(r"^.+\.s3-website[-\.]([a-z0-9-]+\.)?amazonaws.com$", url) is not None
+    return url and BUCKET_WEBSITE_ENDPOINT.match(url)
 
 
 def vulnerable_cloudfront_s3_manual(domain_name):
