@@ -79,6 +79,7 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | > 5.12.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | > 3.1.0 |
 
 ## Modules
 
@@ -93,18 +94,19 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="module_dynamodb"></a> [dynamodb](#module\_dynamodb) | ./modules/dynamodb | n/a |
 | <a name="module_dynamodb_ips"></a> [dynamodb\_ips](#module\_dynamodb\_ips) | ./modules/dynamodb-ips | n/a |
 | <a name="module_kms"></a> [kms](#module\_kms) | ./modules/kms | n/a |
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | ./modules/lambda | n/a |
 | <a name="module_lambda_accounts"></a> [lambda\_accounts](#module\_lambda\_accounts) | ./modules/lambda-accounts | n/a |
-| <a name="module_lambda_accounts_ips"></a> [lambda\_accounts\_ips](#module\_lambda\_accounts\_ips) | ./modules/lambda-accounts | n/a |
-| <a name="module_lambda_cloudflare"></a> [lambda\_cloudflare](#module\_lambda\_cloudflare) | ./modules/lambda-cloudflare | n/a |
+| <a name="module_lambda_accounts_ips"></a> [lambda\_accounts\_ips](#module\_lambda\_accounts\_ips) | ./modules/lambda | n/a |
+| <a name="module_lambda_cloudflare"></a> [lambda\_cloudflare](#module\_lambda\_cloudflare) | ./modules/lambda | n/a |
+| <a name="module_lambda_current"></a> [lambda\_current](#module\_lambda\_current) | ./modules/lambda | n/a |
 | <a name="module_lambda_resources"></a> [lambda\_resources](#module\_lambda\_resources) | ./modules/lambda-resources | n/a |
 | <a name="module_lambda_role"></a> [lambda\_role](#module\_lambda\_role) | ./modules/iam | n/a |
 | <a name="module_lambda_role_ips"></a> [lambda\_role\_ips](#module\_lambda\_role\_ips) | ./modules/iam | n/a |
 | <a name="module_lambda_scan"></a> [lambda\_scan](#module\_lambda\_scan) | ./modules/lambda-scan | n/a |
-| <a name="module_lambda_scan_ips"></a> [lambda\_scan\_ips](#module\_lambda\_scan\_ips) | ./modules/lambda-scan-ips | n/a |
+| <a name="module_lambda_scan_ips"></a> [lambda\_scan\_ips](#module\_lambda\_scan\_ips) | ./modules/lambda | n/a |
 | <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda-slack | n/a |
 | <a name="module_lambda_takeover"></a> [lambda\_takeover](#module\_lambda\_takeover) | ./modules/lambda-takeover | n/a |
-| <a name="module_lamdba_stats"></a> [lamdba\_stats](#module\_lamdba\_stats) | ./modules/lambda-stats | n/a |
+| <a name="module_lambda_update"></a> [lambda\_update](#module\_lambda\_update) | ./modules/lambda | n/a |
+| <a name="module_lamdba_stats"></a> [lamdba\_stats](#module\_lamdba\_stats) | ./modules/lambda | n/a |
 | <a name="module_resources_event"></a> [resources\_event](#module\_resources\_event) | ./modules/cloudwatch | n/a |
 | <a name="module_resources_role"></a> [resources\_role](#module\_resources\_role) | ./modules/iam | n/a |
 | <a name="module_sns"></a> [sns](#module\_sns) | ./modules/sns | n/a |
@@ -118,6 +120,10 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_event_rule.first_day_of_month](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
+| [aws_cloudwatch_event_target.run_lambda_on_first](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
+| [aws_lambda_permission.allow_cloudwatch_to_call_stats](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [random_string.suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [aws_region.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
@@ -131,7 +137,6 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_bugcrowd_state"></a> [bugcrowd\_state](#input\_bugcrowd\_state) | State in which issue is created, e.g. new, triaged, unresolved, resolved | `string` | `"unresolved"` | no |
 | <a name="input_cf_api_key"></a> [cf\_api\_key](#input\_cf\_api\_key) | Cloudflare API token | `string` | `""` | no |
 | <a name="input_cloudflare"></a> [cloudflare](#input\_cloudflare) | Set to true to enable CloudFlare | `bool` | `false` | no |
-| <a name="input_cloudflare_lambdas"></a> [cloudflare\_lambdas](#input\_cloudflare\_lambdas) | list of names of Lambda files in the lambda-cloudflare/code folder | `list(any)` | <pre>[<br/>  "cloudflare-scan"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment deploying to, defaults to terraform.workspace - optionally enter in tfvars file | `string` | `""` | no |
 | <a name="input_external_id"></a> [external\_id](#input\_external\_id) | external ID for security audit role to be defined in tvars file. Leave empty if not configured | `string` | `""` | no |
 | <a name="input_hackerone"></a> [hackerone](#input\_hackerone) | Set to enabled for HackerOne integration | `string` | `"disabled"` | no |
@@ -139,7 +144,6 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_ip_address"></a> [ip\_address](#input\_ip\_address) | Set to true to enable A record checks using IP address scans | `bool` | `false` | no |
 | <a name="input_ip_scan_schedule"></a> [ip\_scan\_schedule](#input\_ip\_scan\_schedule) | schedule for IP address scanning used in A record checks | `string` | `"24 hours"` | no |
 | <a name="input_ip_time_limit"></a> [ip\_time\_limit](#input\_ip\_time\_limit) | maximum time in hours since IP last detected, before considering IP as no longer belonging to organisation | `string` | `"48"` | no |
-| <a name="input_lambdas"></a> [lambdas](#input\_lambdas) | list of names of Lambda files in the lambda/code folder | `list(any)` | <pre>[<br/>  "current",<br/>  "update"<br/>]</pre> | no |
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Memory allocation for scanning Lambda functions | `number` | `128` | no |
 | <a name="input_memory_size_ip"></a> [memory\_size\_ip](#input\_memory\_size\_ip) | Memory allocation for scan IP Lambda functions | `number` | `256` | no |
 | <a name="input_memory_size_slack"></a> [memory\_size\_slack](#input\_memory\_size\_slack) | Memory allocation for Slack Lambda functions | `number` | `128` | no |
@@ -164,7 +168,6 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(string)` | `[]` | no |
 | <a name="input_stats_schedule"></a> [stats\_schedule](#input\_stats\_schedule) | Cron schedule for the stats message | `string` | `"cron(0 9 1 * ? *)"` | no |
 | <a name="input_takeover"></a> [takeover](#input\_takeover) | Create supported resource types to prevent malicious subdomain takeover | `bool` | `false` | no |
-| <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br/>  "update"<br/>]</pre> | no |
 | <a name="input_update_schedule"></a> [update\_schedule](#input\_update\_schedule) | schedule for running domain-protect update function, e.g. 24 hours | `string` | `"24 hours"` | no |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | Provide this to allow your function to access your VPC (if both 'subnet\_ids' and 'security\_group\_ids' are empty then<br/>  vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | <pre>object({<br/>    security_group_ids = list(string)<br/>    subnet_ids         = list(string)<br/>  })</pre> | `null` | no |
 | <a name="input_wcu"></a> [wcu](#input\_wcu) | DynamoDB Write Capacity Units for vulnerability database | `number` | `2` | no |

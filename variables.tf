@@ -63,22 +63,10 @@ variable "stats_schedule" {
   type        = string
 }
 
-variable "lambdas" {
-  description = "list of names of Lambda files in the lambda/code folder"
-  default     = ["current", "update"]
-  type        = list(any)
-}
-
 variable "takeover" {
   description = "Create supported resource types to prevent malicious subdomain takeover"
   default     = false
   type        = bool
-}
-
-variable "update_lambdas" {
-  description = "list of Cloudflare Lambda functions updating vulnerability status"
-  default     = ["update"]
-  type        = list(any)
 }
 
 variable "environment" {
@@ -219,12 +207,6 @@ variable "cf_api_key" {
   default     = ""
   type        = string
   sensitive   = true
-}
-
-variable "cloudflare_lambdas" {
-  description = "list of names of Lambda files in the lambda-cloudflare/code folder"
-  default     = ["cloudflare-scan"]
-  type        = list(any)
 }
 
 variable "rcu" {
