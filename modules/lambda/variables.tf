@@ -1,17 +1,11 @@
 variable "project" {}
-variable "security_audit_role_name" {}
-variable "external_id" {}
-variable "org_primary_account" {}
 variable "lambda_role_arn" {}
 variable "kms_arn" {}
-variable "lambdas" {}
 variable "runtime" {}
 variable "platform" {}
 variable "memory_size" {}
 variable "sns_topic_arn" {}
 variable "dlq_sns_topic_arn" {}
-variable "allowed_regions" {}
-variable "ip_time_limit" {}
 
 variable "vpc_config" {
   type = object({
@@ -30,10 +24,20 @@ variable "timeout" {
   default     = 900
 }
 
-variable "state_machine_arn" {
-  default = ""
-}
-
 variable "environment" {
   type = string
+}
+
+variable "handler" {
+  type = string
+}
+
+variable "description" {
+  type = string
+}
+
+variable "environment_variables" {
+  description = "Environment variables to set for the Lambda function"
+  type        = map(string)
+  default     = null
 }
