@@ -94,17 +94,17 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="module_dynamodb"></a> [dynamodb](#module\_dynamodb) | ./modules/dynamodb | n/a |
 | <a name="module_dynamodb_ips"></a> [dynamodb\_ips](#module\_dynamodb\_ips) | ./modules/dynamodb-ips | n/a |
 | <a name="module_kms"></a> [kms](#module\_kms) | ./modules/kms | n/a |
-| <a name="module_lambda_accounts"></a> [lambda\_accounts](#module\_lambda\_accounts) | ./modules/lambda-accounts | n/a |
+| <a name="module_lambda_accounts"></a> [lambda\_accounts](#module\_lambda\_accounts) | ./modules/lambda | n/a |
 | <a name="module_lambda_accounts_ips"></a> [lambda\_accounts\_ips](#module\_lambda\_accounts\_ips) | ./modules/lambda | n/a |
 | <a name="module_lambda_cloudflare"></a> [lambda\_cloudflare](#module\_lambda\_cloudflare) | ./modules/lambda | n/a |
 | <a name="module_lambda_current"></a> [lambda\_current](#module\_lambda\_current) | ./modules/lambda | n/a |
-| <a name="module_lambda_resources"></a> [lambda\_resources](#module\_lambda\_resources) | ./modules/lambda-resources | n/a |
+| <a name="module_lambda_resources"></a> [lambda\_resources](#module\_lambda\_resources) | ./modules/lambda | n/a |
 | <a name="module_lambda_role"></a> [lambda\_role](#module\_lambda\_role) | ./modules/iam | n/a |
 | <a name="module_lambda_role_ips"></a> [lambda\_role\_ips](#module\_lambda\_role\_ips) | ./modules/iam | n/a |
-| <a name="module_lambda_scan"></a> [lambda\_scan](#module\_lambda\_scan) | ./modules/lambda-scan | n/a |
+| <a name="module_lambda_scan"></a> [lambda\_scan](#module\_lambda\_scan) | ./modules/lambda | n/a |
 | <a name="module_lambda_scan_ips"></a> [lambda\_scan\_ips](#module\_lambda\_scan\_ips) | ./modules/lambda | n/a |
-| <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda-slack | n/a |
-| <a name="module_lambda_takeover"></a> [lambda\_takeover](#module\_lambda\_takeover) | ./modules/lambda-takeover | n/a |
+| <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda | n/a |
+| <a name="module_lambda_takeover"></a> [lambda\_takeover](#module\_lambda\_takeover) | ./modules/lambda | n/a |
 | <a name="module_lambda_update"></a> [lambda\_update](#module\_lambda\_update) | ./modules/lambda | n/a |
 | <a name="module_lamdba_stats"></a> [lamdba\_stats](#module\_lamdba\_stats) | ./modules/lambda | n/a |
 | <a name="module_resources_event"></a> [resources\_event](#module\_resources\_event) | ./modules/cloudwatch | n/a |
@@ -168,6 +168,7 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 | <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(string)` | `[]` | no |
 | <a name="input_stats_schedule"></a> [stats\_schedule](#input\_stats\_schedule) | Cron schedule for the stats message | `string` | `"cron(0 9 1 * ? *)"` | no |
 | <a name="input_takeover"></a> [takeover](#input\_takeover) | Create supported resource types to prevent malicious subdomain takeover | `bool` | `false` | no |
+| <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br/>  "update"<br/>]</pre> | no |
 | <a name="input_update_schedule"></a> [update\_schedule](#input\_update\_schedule) | schedule for running domain-protect update function, e.g. 24 hours | `string` | `"24 hours"` | no |
 | <a name="input_vpc_config"></a> [vpc\_config](#input\_vpc\_config) | Provide this to allow your function to access your VPC (if both 'subnet\_ids' and 'security\_group\_ids' are empty then<br/>  vpc\_config is considered to be empty or unset, see https://docs.aws.amazon.com/lambda/latest/dg/vpc.html for details). | <pre>object({<br/>    security_group_ids = list(string)<br/>    subnet_ids         = list(string)<br/>  })</pre> | `null` | no |
 | <a name="input_wcu"></a> [wcu](#input\_wcu) | DynamoDB Write Capacity Units for vulnerability database | `number` | `2` | no |

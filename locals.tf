@@ -16,7 +16,7 @@ locals {
         PROJECT                  = var.project
         SNS_TOPIC_ARN            = module.sns.sns_topic_arn
         ENVIRONMENT              = var.environment
-        STATE_MACHINE_ARN        = var.state_machine_arn
+        STATE_MACHINE_ARN        = module.step_function.state_machine_arn
       }
     }
     accounts_ips = {
@@ -27,6 +27,7 @@ locals {
         SECURITY_AUDIT_ROLE_NAME = var.security_audit_role_name
         EXTERNAL_ID              = var.external_id
         PROJECT                  = var.project
+        STATE_MACHINE_ARN        = module.step_function_ips[0].state_machine_arn
       }
     }
     cloudflare = {

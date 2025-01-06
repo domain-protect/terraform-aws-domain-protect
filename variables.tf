@@ -250,3 +250,9 @@ variable "vpc_config" {
   EOF
   default     = null
 }
+
+variable "update_lambdas" {
+  description = "list of Cloudflare Lambda functions updating vulnerability status"
+  default     = ["update"]
+  type        = list(any)
+}
