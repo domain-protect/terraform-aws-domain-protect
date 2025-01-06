@@ -13,8 +13,8 @@ module "lambda_function" {
   memory_size            = var.memory_size
   timeout                = var.timeout
   dead_letter_target_arn = var.dlq_sns_topic_arn
-  vpc_subnet_ids         = lookup(var.vpc_config, "subnet_ids", null)
-  vpc_security_group_ids = lookup(var.vpc_config, "security_group_ids", null)
+  vpc_subnet_ids         = try(var.vpc_config["subnet_ids"], null)
+  vpc_security_group_ids = try(var.vpc_config["security_group_ids"], null)
   publish                = true
   tracing_mode           = "Active"
   source_path = [
