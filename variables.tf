@@ -4,12 +4,6 @@ variable "project" {
   type        = string
 }
 
-variable "region" {
-  description = "AWS region to deploy Lambda functions. This variable will be deprecated in the future."
-  default     = ""
-  type        = string
-}
-
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
   type        = string
