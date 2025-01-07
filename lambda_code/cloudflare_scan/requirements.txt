@@ -1,4 +1,4 @@
 cloudflare==2.20.0
 dnspython==2.7.0
 requests==2.32.3
-urllib3==2.2.3 # remove when Lambda upgrades Boto3 https://github.com/psf/requests/issues/6443
+urllib3==2.3.0 # remove when Lambda upgrades Boto3 https://github.com/psf/requests/issues/6443
