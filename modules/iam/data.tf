@@ -2,11 +2,6 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
-data "aws_iam_policy" "takeover" {
-  for_each = var.takeover ? toset(var.managed_policy_names) : toset([])
-  name     = each.value
-}
-
 data "aws_iam_policy_document" "assume_role" {
   statement {
     sid     = ""
@@ -65,7 +60,7 @@ data "aws_iam_policy_document" "lambda" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
@@ -79,8 +74,8 @@ data "aws_iam_policy_document" "lambda" {
     effect = "Allow"
 
     resources = [
-      "${local.ddb_table_arn}",
-      "${local.ddb_ip_table_arn}",
+      local.ddb_table_arn,
+      local.ddb_ip_table_arn,
     ]
 
     actions = [
@@ -133,7 +128,7 @@ data "aws_iam_policy_document" "takeover" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
@@ -218,7 +213,7 @@ data "aws_iam_policy_document" "resources" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
@@ -298,7 +293,7 @@ data "aws_iam_policy_document" "accounts" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
@@ -310,7 +305,7 @@ data "aws_iam_policy_document" "accounts" {
   statement {
     sid       = "DynamoDB"
     effect    = "Allow"
-    resources = ["${local.ddb_table_arn}"]
+    resources = [local.ddb_table_arn]
 
     actions = [
       "dynamodb:PutItem",
@@ -366,7 +361,7 @@ data "aws_iam_policy_document" "basic" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
@@ -390,17 +385,17 @@ data "aws_iam_policy_document" "states" {
     resources = ["*"]
 
     actions = [
+      "logs:CreateLogDelivery",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents",
-      "logs:CreateLogDelivery",
-      "logs:GetLogDelivery",
-      "logs:UpdateLogDelivery",
       "logs:DeleteLogDelivery",
-      "logs:ListLogDeliveries",
-      "logs:PutResourcePolicy",
-      "logs:DescribeResourcePolicies",
       "logs:DescribeLogGroups",
+      "logs:DescribeResourcePolicies",
+      "logs:GetLogDelivery",
+      "logs:ListLogDeliveries",
+      "logs:PutLogEvents",
+      "logs:PutResourcePolicy",
+      "logs:UpdateLogDelivery",
     ]
   }
 
@@ -410,10 +405,10 @@ data "aws_iam_policy_document" "states" {
     resources = ["*"]
 
     actions = [
-      "xray:PutTraceSegments",
-      "xray:PutTelemetryRecords",
       "xray:GetSamplingRules",
       "xray:GetSamplingTargets",
+      "xray:PutTelemetryRecords",
+      "xray:PutTraceSegments",
     ]
   }
 
@@ -434,7 +429,7 @@ data "aws_iam_policy_document" "states" {
   statement {
     sid       = "KMSforSNS"
     effect    = "Allow"
-    resources = ["${var.kms_arn}"]
+    resources = [var.kms_arn]
 
     actions = [
       "kms:Decrypt",
