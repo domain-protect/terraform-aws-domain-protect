@@ -1,6 +1,6 @@
 data "aws_region" "default" {}
 
-resource "random_string" "suffix" {
+resource "random_string" "takeover_suffix" {
   length    = 8
   min_lower = 8
 }
