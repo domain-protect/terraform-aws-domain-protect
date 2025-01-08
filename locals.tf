@@ -3,5 +3,4 @@ locals {
   production_environment = coalesce(var.production_environment, var.production_workspace)
 
   runtime = coalesce(var.runtime, format("python%s", regex("^\\d+\\.\\d+", file("${path.module}/python-version"))))
-  region  = var.region != "" ? var.region : data.aws_region.default.name
 }

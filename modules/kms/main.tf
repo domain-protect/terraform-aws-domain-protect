@@ -2,7 +2,7 @@ resource "aws_kms_key" "encryption" {
   description             = "Encryption of ${var.project}-${var.environment} resources"
   deletion_window_in_days = 7
   enable_key_rotation     = true
-  policy                  = templatefile("${path.module}/templates/${var.kms_policy}.json.tpl", { account_id = data.aws_caller_identity.current.account_id, region = var.region })
+  policy                  = templatefile("${path.module}/templates/${var.kms_policy}.json.tpl", { account_id = data.aws_caller_identity.current.account_id, region = data.aws_region.current.name })
 }
 
 resource "aws_kms_alias" "encryption" {

@@ -2,7 +2,7 @@ resource "aws_sns_topic" "sns_topic" {
   name         = var.dead_letter_queue ? "${var.project}-dlq-${var.environment}" : "${var.project}-${var.environment}"
   display_name = var.dead_letter_queue ? title(replace("${var.project}-dead-letter-queue-${var.environment}", "-", " ")) : title(replace("${var.project}-${var.environment}", "-", " "))
   policy = templatefile("${path.module}/templates/${var.sns_policy}.json.tpl", {
-    region         = var.region,
+    region         = data.aws_region.current.name,
     account_id     = data.aws_caller_identity.current.account_id,
     sns_topic_name = var.dead_letter_queue ? "${var.project}-dlq-${var.environment}" : "${var.project}-${var.environment}",
     project        = var.project,

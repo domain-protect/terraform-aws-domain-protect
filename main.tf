@@ -1,10 +1,7 @@
-data "aws_region" "default" {}
-
 module "kms" {
   source = "./modules/kms"
 
   project     = var.project
-  region      = local.region
   environment = local.env
 }
 
@@ -12,7 +9,6 @@ module "lambda_role" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   permissions_boundary_arn = var.permissions_boundary_arn
@@ -87,7 +83,6 @@ module "accounts_role" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   state_machine_arn        = module.step_function.state_machine_arn
@@ -144,7 +139,6 @@ module "takeover_role" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   takeover                 = var.takeover
@@ -174,7 +168,6 @@ module "resources_role" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   policy                   = "resources"
@@ -229,7 +222,6 @@ module "sns" {
   source = "./modules/sns"
 
   project     = var.project
-  region      = local.region
   kms_arn     = module.kms.kms_arn
   environment = local.env
 }
@@ -238,7 +230,6 @@ module "sns_dead_letter_queue" {
   source = "./modules/sns"
 
   project           = var.project
-  region            = local.region
   dead_letter_queue = true
   kms_arn           = module.kms.kms_arn
   environment       = local.env
@@ -301,7 +292,6 @@ module "step_function_role" {
   source  = "./modules/iam"
   project = var.project
 
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   policy                   = "state"
@@ -346,7 +336,6 @@ module "lambda_role_ips" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   policy                   = "lambda"
@@ -389,7 +378,6 @@ module "accounts_role_ips" {
   source = "./modules/iam"
 
   project                  = var.project
-  region                   = local.region
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   state_machine_arn        = module.step_function_ips[0].state_machine_arn
