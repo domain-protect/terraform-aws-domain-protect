@@ -139,6 +139,7 @@ module "takeover_role" {
   source = "./modules/iam"
 
   project                  = var.project
+  takeover                 = true
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
   policy                   = "takeover"
