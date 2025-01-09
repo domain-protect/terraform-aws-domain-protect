@@ -27,6 +27,10 @@ locals {
   )
 }
 
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
 resource "aws_iam_role" "lambda" {
   name                 = local.role_name
   assume_role_policy   = data.aws_iam_policy_document.assume_role.json
