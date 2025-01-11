@@ -45,3 +45,8 @@ variable "permissions_boundary_arn" {
 variable "environment" {
   type = string
 }
+
+variable "ip_address" {
+  description = "enable IP address table"
+  default     = false
+}

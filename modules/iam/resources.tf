@@ -1,4 +1,5 @@
-data "aws_iam_policy_document" "accounts" {
+
+data "aws_iam_policy_document" "resources" {
   statement {
     sid       = "WriteToCloudWatchLogs"
     effect    = "Allow"
@@ -9,13 +10,6 @@ data "aws_iam_policy_document" "accounts" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
     ]
-  }
-
-  statement {
-    sid       = "AssumeSecurityAuditRole"
-    effect    = "Allow"
-    resources = ["arn:aws:iam::*:role/${var.security_audit_role_name}"]
-    actions   = ["sts:AssumeRole"]
   }
 
   statement {
@@ -53,22 +47,27 @@ data "aws_iam_policy_document" "accounts" {
   }
 
   statement {
-    sid       = "DynamoDB"
+    sid       = "GetAccountName"
     effect    = "Allow"
-    resources = compact([data.aws_dynamodb_table.vulnerable_domains.arn, one(data.aws_dynamodb_table.ips[*].arn)])
-
-    actions = [
-      "dynamodb:PutItem",
-      "dynamodb:Query",
-      "dynamodb:Scan",
-      "dynamodb:UpdateItem",
-    ]
+    resources = ["*"]
+    actions   = ["iam:ListAccountAliases"]
   }
 
   statement {
-    sid       = "StartStateMachine"
+    sid       = "DescribeRegions"
     effect    = "Allow"
-    resources = [var.state_machine_arn]
-    actions   = ["states:StartExecution"]
+    resources = ["*"]
+    actions   = ["ec2:DescribeRegions"]
+  }
+
+  statement {
+    sid       = "CloudFormation"
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "cloudformation:DescribeStacks",
+      "cloudformation:ListStacks",
+    ]
   }
 }

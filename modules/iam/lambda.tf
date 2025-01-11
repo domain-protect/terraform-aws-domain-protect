@@ -56,10 +56,7 @@ data "aws_iam_policy_document" "lambda" {
     sid    = "DynamoDB"
     effect = "Allow"
 
-    resources = [
-      local.ddb_table_arn,
-      local.ddb_ip_table_arn,
-    ]
+    resources = local.dynamodb_arns
 
     actions = [
       "dynamodb:DescribeTable",
