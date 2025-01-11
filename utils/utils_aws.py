@@ -1,9 +1,15 @@
 import json
 import logging
 import os
+import re
 
 import boto3
 from botocore import exceptions
+
+
+# Compile once
+BUCKET_URL_ENDPOINT = re.compile(r"^.+\.s3\.([a-z0-9-]+\.)?amazonaws\.com$")
+BUCKET_WEBSITE_ENDPOINT = re.compile(r"^.+\.s3-website[-.]([a-z0-9-]+\.)?amazonaws\.com$")
 
 
 def generate_role_arn(account, role_name):
@@ -313,3 +319,13 @@ def eb_susceptible(domain):
 
     # domain is not an Elastic Beanstalk domain
     return False
+
+
+def is_s3_bucket_url(url):
+    # bucket.s3.amazonaws.com or bucket.s3.region.amazonaws.com
+    return url and BUCKET_URL_ENDPOINT.match(url)
+
+
+def is_s3_website_endpoint_url(url):
+    # bucket.s3-website-region.amazonaws.com
+    return url and BUCKET_WEBSITE_ENDPOINT.match(url)
