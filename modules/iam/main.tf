@@ -23,6 +23,10 @@ locals {
     data.aws_dynamodb_table.vulnerable_domains.arn,
     one(data.aws_dynamodb_table.ips[*].arn),
   ])
+  cloudwatch_log_groups = compact([
+    "arn:aws:logs:*:*:/aws/vendedlogs/states/${var.project}-scan-${var.environment}",
+    var.ip_address ? "arn:aws:logs:*:*:/aws/vendedlogs/states/${var.project}-ips-${var.environment}" : ""
+  ])
 }
 
 data "aws_caller_identity" "current" {}

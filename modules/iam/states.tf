@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "states" {
   statement {
     sid       = "CloudWatchLogs"
     effect    = "Allow"
-    resources = ["*"]
+    resources = [local.cloudwatch_log_groups]
 
     actions = [
       "logs:CreateLogDelivery",

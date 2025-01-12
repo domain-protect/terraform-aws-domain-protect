@@ -3,7 +3,7 @@ data "aws_iam_policy_document" "resources" {
   statement {
     sid       = "WriteToCloudWatchLogs"
     effect    = "Allow"
-    resources = ["arn:aws:logs:*:*:*"]
+    resources = [local.cloudwatch_log_groups]
 
     actions = [
       "logs:CreateLogGroup",
