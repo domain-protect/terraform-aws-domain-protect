@@ -8,8 +8,8 @@ from botocore import exceptions
 
 
 # Compile once
-BUCKET_URL_ENDPOINT = re.compile(r"^.+\.s3\.([a-z0-9-]+\.)?amazonaws\.com$")
-BUCKET_WEBSITE_ENDPOINT = re.compile(r"^.+\.s3-website[-.]([a-z0-9-]+\.)?amazonaws\.com$")
+BUCKET_URL_ENDPOINT = re.compile(r"^.+\.s3\.([a-z0-9-]+\.)?amazonaws\.com\.?$")
+BUCKET_WEBSITE_ENDPOINT = re.compile(r"^.+\.s3-website[-.]([a-z0-9-]+\.)?amazonaws\.com\.?$")
 
 
 def generate_role_arn(account, role_name):
