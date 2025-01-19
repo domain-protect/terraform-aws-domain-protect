@@ -4,6 +4,7 @@ import os
 
 from utils.utils_aws import eb_susceptible
 from utils.utils_aws import get_cloudfront_s3_origin_takeover
+from utils.utils_aws import is_s3_website_endpoint_url
 from utils.utils_aws import list_domains
 from utils.utils_aws import list_hosted_zones
 from utils.utils_aws import list_resource_record_sets
@@ -236,8 +237,7 @@ def cname_s3(account_name, record_sets):
         for r in record_sets
         if r["Type"] in ["CNAME"]
         and "ResourceRecords" in r
-        and "amazonaws.com" in r["ResourceRecords"][0]["Value"]
-        and ".s3-website" in r["ResourceRecords"][0]["Value"]
+        and is_s3_website_endpoint_url(r["ResourceRecords"][0]["Value"])
     ]
 
     for record in record_sets_filtered:
