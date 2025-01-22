@@ -57,6 +57,8 @@ export ZONE_NAME="example.com"
 export ZONE_ID="ZZZZ12345678ZZ"
 export TEST_ROLE_EXTERNAL_ID="xxxxxxxxxxxxxxxxxx"
 export AWS_REGION="eu-west-1"
+export CLOUDFLARE_API_KEY: "xxxxxxxxxxxxxxxxxx"
+export CLOUDFLARE_EMAIL: "me@example.com"
 export CLOUDFLARE_ZONE_NAME="example.net"
 ```
 * copy and paste AWS macOS / Linux CLI variables for the security audit account to terminal

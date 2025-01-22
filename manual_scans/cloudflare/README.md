@@ -34,15 +34,15 @@ export PYTHONPATH=${PYTHONPATH}:$(pwd)
 * In the Cloudflare console, My Profile, API Tokens, create an API Key
 * Set as environment variables on your laptop
 ```
-$ export CF_API_EMAIL='user@example.com'
-$ export CF_API_KEY='00000000000000000000000000000000'
+$ export CLOUDFLARE_API_KEY: "xxxxxxxxxxxxxxxxxx"
+$ export CLOUDFLARE_EMAIL: "me@example.com
 ```
 
 ## subdomain NS delegations
 <img src="../../docs/assets/images/cf/cf-ns.png" width="400">
 
 ```
-python manual_scans/cloudflare/cf-ns.py
+python manual_scans/cloudflare/cf_ns.py
 ```
 
 ## subdomains pointing to missing storage buckets
