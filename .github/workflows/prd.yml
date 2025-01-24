@@ -12,6 +12,9 @@ env:
   TF_VAR_region: ${{ secrets.AWS_REGION }}
   TF_CLI_ARGS_init: "-backend-config=\"bucket=${{ secrets.TERRAFORM_STATE_BUCKET }}\" -backend-config=\"key=${{ secrets.TERRAFORM_STATE_KEY }}\" -backend-config=\"region=${{ secrets.TERRAFORM_STATE_REGION }}\""
 
+permissions:
+  contents: read
+
 jobs:
   terraform_plan_apply_prd:
     name: Terraform plan & apply prd
@@ -27,6 +30,11 @@ jobs:
       pull-requests: write
       checks: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
