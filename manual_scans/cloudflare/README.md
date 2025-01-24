@@ -49,14 +49,14 @@ python manual_scans/cloudflare/cf_ns.py
 <img src="../../docs/assets/images/cf/cf-storage.png" width="400">
 
 ```
-python manual_scans/cloudflare/cf-storage.py
+python manual_scans/cloudflare/cf_storage.py
 ```
 
 ## vulnerable CNAMEs
 <img src="../../docs/assets/images/cf/cf-cname.png" width="400">
 
 ```
-python manual_scans/cloudflare/cf-cname.py
+python manual_scans/cloudflare/cf_cname.py
 ```
 
 [back to README](../../README.md)
