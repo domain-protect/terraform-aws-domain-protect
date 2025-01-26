@@ -1,6 +1,7 @@
 org_primary_account = "012345678901"
 external_id         = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-cloudflare_api_key          = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+cloudflare_api_key  = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+cloudflare_email    = "me@example.com"
 hackerone_api_token = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 
 slack_webhook_urls = ["https://hooks.slack.com/services/XXXXXXXXXX/XXXXXXXXXXXXXXXXX"]
