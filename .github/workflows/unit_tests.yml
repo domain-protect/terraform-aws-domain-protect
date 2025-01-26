@@ -4,6 +4,7 @@ on:
 
 env:
   TERRAFORM_DOCS_VERSION: v0.19.0
+  TERRAFORM_VERSION: "1.7.3"
 
 jobs:
   unit_tests:
@@ -15,6 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Terraform setup
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
