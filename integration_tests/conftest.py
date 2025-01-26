@@ -13,7 +13,7 @@ from integration_tests.mocks.dns_mock import DNSMock
 
 @pytest.fixture
 def cloudflare_mock():
-    with patch("CloudFlare.CloudFlare") as cf_mock:
+    with patch("cloudflare.Cloudflare") as cf_mock:
         mock = CloudFlareMock()
         cf_mock.return_value = mock
         yield mock
