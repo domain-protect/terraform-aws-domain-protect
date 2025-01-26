@@ -36,7 +36,7 @@ export PYTHONPATH=${PYTHONPATH}:$(pwd)
 * Set as environment variables on your laptop
 ```
 $ export CF_API_EMAIL='user@example.com'
-$ export CF_API_KEY='00000000000000000000000000000000'
+$ export CLOUDFLARE_API_KEY='00000000000000000000000000000000'
 ```
 
 ## subdomain NS delegations

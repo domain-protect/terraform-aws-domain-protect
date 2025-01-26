@@ -45,7 +45,7 @@ source .venv/bin/activate
 ```
 * install dependencies
 ```powershell
-pip install -r requirements-tests.txt
+pip install -r requirements-dev.txt
 ```
 * set environment variables for dev environment, e.g.
 ```bash

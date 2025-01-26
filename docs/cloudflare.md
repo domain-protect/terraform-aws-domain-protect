@@ -44,4 +44,4 @@ Supported resource types detailed in [takeover](TAKEOVER.md):
 ![Alt text](assets/images/cloudflare-api-token-summary.png?raw=true "Cloudflare API token creation")
 * press Create Token
 * copy token and save securely
-* set token as environment variable `cf_api_key = "xxxxxx"` in tfvars file or CI/CD pipeline
+* set token as environment variable `cloudflare_api_key = "xxxxxx"` in tfvars file or CI/CD pipeline

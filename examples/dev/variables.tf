@@ -1,5 +1,9 @@
-variable "cf_api_key" {
+variable "cloudflare_api_key" {
   description = "Cloudflare API token"
+}
+
+variable "cloudflare_email" {
+  description = "Cloudflare Email"
 }
 
 variable "external_id" {

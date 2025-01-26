@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from utils.utils_cloudflare_v4 import list_dns_records
-from utils.utils_cloudflare_v4 import list_dns_zones
+from utils.utils_cloudflare import list_dns_records
+from utils.utils_cloudflare import list_dns_zones
 from utils.utils_dns import firewall_test
 from utils.utils_dns import vulnerable_cname
 from utils.utils_print import my_print
