@@ -22,26 +22,30 @@ jobs:
       TF_CLI_ARGS_apply: "-compact-warnings"
     services:
       localstack-service:
-        image: localstack/localstack
+        image: localstack/localstack:stable
         ports:
-          - "4566:4566"
-          - "4510-4559:4510-4559"
+          - "127.0.0.1:4566:4566"
+          - "127.0.0.1:4510-4559:4510-4559"
         env:
-          SERVICES: "route53,sqs,s3"
+          SERVICES: "lambda,route53,sqs,step-functions,s3"
           FORCE_NONINTERACTIVE: 1
           AWS_ACCESS_KEY_ID: test
           AWS_SECRET_ACCESS_KEY: test
-        options: >-
-          --health-cmd "./bin/localstack status services"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          --health-start-period 15s
+        # options: >-
+        #   --health-cmd "./bin/localstack status services"
+        #   --health-interval 10s
+        #   --health-timeout 5s
+        #   --health-retries 5
+        #   --health-start-period 15s
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock # https://docs.localstack.cloud/references/lambda-provider-v2/#docker-not-available
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v5
 
+      - name: Sanity check
+        run: |
+          ./bin/localstack config validate
+          ./bin/localstack status services
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
