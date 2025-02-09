@@ -4,8 +4,9 @@ module "domain_protect" {
   # version = "1.0.0"
 
   allowed_regions     = "['eu-west-1', 'eu-west-2', 'us-east-1']"
-  cf_api_key          = var.cf_api_key
   cloudflare          = true
+  cloudflare_api_key  = var.cloudflare_api_key
+  cloudflare_email    = var.cloudflare_email
   environment         = "dev"
   external_id         = var.external_id
   hackerone           = "disabled"

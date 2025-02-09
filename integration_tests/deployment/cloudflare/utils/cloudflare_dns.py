@@ -1,4 +1,4 @@
-# Cloudflare Python version 3.1.1 - DNS Utils
+# Cloudflare Python version 4.0.0 - DNS Utils
 from cloudflare import Cloudflare
 from cloudflare import CloudflareError
 

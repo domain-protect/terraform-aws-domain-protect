@@ -35,15 +35,6 @@ def create_vulnerable_cf_record(zone_id, zone_name, record_name, record_type, re
     print(f"Created vulnerable {record_type.upper()} record: {record_fqdn} {record_type} {record_value}")
 
 
-def delete_vulnerable_cf_record(zone_id, zone_name, record_name):
-    record_fqdn = f"{record_name}.{zone_name}"
-    records = list_dns_records(zone_id, zone_name, record_fqdn)
-
-    for record in records:
-        delete_dns_record(zone_id, zone_name, record["id"])
-        print(f"Deleted vulnerable {record['type'].upper()} record: {record_fqdn} {record['type']} {record['content']}")
-
-
 def cf_vulnerability_reported_fixed_in_time_period(update_lambda_name, domain, seconds):
     while seconds > 0:
         invoke_lambda(update_lambda_name)
@@ -90,8 +81,8 @@ def test_cf_vulnerabilities_detected():
     ns_record_id = get_cf_record_id(cf_zone_id, cf_zone_name, ns_record_fqdn)
 
     # Delete vulnerable records
-    delete_vulnerable_cf_record(cf_zone_id, cf_zone_name, cname_record_id)
-    delete_vulnerable_cf_record(cf_zone_id, cf_zone_name, ns_record_id)
+    delete_dns_record(cf_zone_id, cname_record_id, cname_record_fqdn)
+    delete_dns_record(cf_zone_id, ns_record_id, ns_record_fqdn)
 
     # test if vulnerabilities reported as fixed within specified time period
     cname_vulnerability_reported_fixed = cf_vulnerability_reported_fixed_in_time_period(

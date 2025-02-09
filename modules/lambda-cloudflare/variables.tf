@@ -1,5 +1,6 @@
 variable "project" {}
-variable "cf_api_key" {}
+variable "cloudflare_api_key" {}
+variable "cloudflare_email" {}
 variable "lambda_role_arn" {}
 variable "kms_arn" {}
 variable "lambdas" {}
