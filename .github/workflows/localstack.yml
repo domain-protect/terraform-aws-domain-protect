@@ -40,10 +40,11 @@ jobs:
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock # https://docs.localstack.cloud/references/lambda-provider-v2/#docker-not-available
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
       - name: Sanity check
         run: |
+          find . -name "localstack"
           ./bin/localstack config validate
           ./bin/localstack status services
       - name: Setup Terraform
