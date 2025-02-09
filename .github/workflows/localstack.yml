@@ -17,40 +17,20 @@ jobs:
       run:
         shell: bash
     env:
-      AWS_DEFAULT_REGION: "eu-central-1"
+      AWS_DEFAULT_REGION: "us-east-1"
       TF_CLI_ARGS_plan: "-compact-warnings"
       TF_CLI_ARGS_apply: "-compact-warnings"
-    services:
-      localstack-service:
-        image: localstack/localstack:stable
-        ports:
-          - "127.0.0.1:4566:4566"
-          - "127.0.0.1:4510-4559:4510-4559"
-        env:
-          SERVICES: "lambda,route53,sqs,step-functions,s3"
-          FORCE_NONINTERACTIVE: 1
-          AWS_ACCESS_KEY_ID: test
-          AWS_SECRET_ACCESS_KEY: test
-        # options: >-
-        #   --health-cmd "./bin/localstack status services"
-        #   --health-interval 10s
-        #   --health-timeout 5s
-        #   --health-retries 5
-        #   --health-start-period 15s
-        volumes:
-          - /var/run/docker.sock:/var/run/docker.sock # https://docs.localstack.cloud/references/lambda-provider-v2/#docker-not-available
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sanity check
-        run: |
-          find . -name "localstack"
-          ./bin/localstack config validate
-          ./bin/localstack status services
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      - name: Start LocalStack
+        uses: LocalStack/setup-localstack@v0.2.3
         with:
-          terraform_version: 1.8.0
+          image-tag: 'stable'
+          install-awslocal: 'true'
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       - uses: actions/setup-python@v4
         with:
@@ -66,7 +46,8 @@ jobs:
         run: tflocal validate
 
       - name: terraform plan
-        run: tflocal plan -var-file=./tests/localstack.tfvars -out=plan.tfplan
+        run: |
+          tflocal plan -var-file=./integration_tests/localstack/domain-protect.tflocalvars -out=plan.tfplan
 
-      # - name: terraform apply
-      #   run: tflocal apply -auto-approve plan.tfplan
+      - name: terraform apply
+        run: tflocal apply -auto-approve plan.tfplan
