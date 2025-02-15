@@ -1,4 +1,4 @@
-name: Deploy Domain Protect into LocalStack
+name: LocalStack
 on:
   workflow_dispatch:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   localstack:
-    name: localstack
+    name: Deploy
     runs-on: ubuntu-latest
     continue-on-error: true #temporary allow to fail
     defaults:
