@@ -1,0 +1,18 @@
+// localstack/terraform.tfvars
+runtime                  = "python3.12"
+memory_size              = 256
+memory_size_ip           = 256
+memory_size_slack        = 256
+allowed_regions          = "['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2']"
+ip_address               = true
+org_primary_account      = "123456789012"
+environment              = "prd"
+security_audit_role_name = "domain-protect-audit-role"
+slack_channels           = ["domain-protect-alerts"]
+slack_webhook_urls       = ["https://hooks.slack.com/services/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"]
+takeover                 = false
+wcu                      = 1
+rcu                      = 1
+update_schedule          = "1 hour"
+ip_scan_schedule         = "1 hour"
+scan_schedule            = "1 hour"
