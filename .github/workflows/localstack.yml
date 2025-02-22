@@ -37,7 +37,7 @@ jobs:
           python-version-file: 'python-version'
 
       - name: Terraform-local installation
-        run: pip3 install terraform-local virtualenv
+        run: pip install terraform-local virtualenv
 
       - name: terraform init
         run: tflocal init -backend-config=./integration_tests/localstack/backend.tf
