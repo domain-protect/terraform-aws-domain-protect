@@ -159,8 +159,8 @@ Resources:
         OptionName: SecurityGroups
         Value: !Ref HTTPIngressSecurityGroup
       - Namespace: aws:autoscaling:launchconfiguration
-        aws:autoscaling:launchconfiguration:
-          DisableIMDSv1: true
+        OptionName: DisableIMDSv1
+        Value: 'true'
       - Namespace: aws:ec2:vpc
         OptionName: VPCId
         Value: !Ref VPC
