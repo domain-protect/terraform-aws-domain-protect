@@ -58,7 +58,7 @@ jobs:
         run: pip install virtualenv
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN}}
           aws-region: ${{ secrets.AWS_REGION }}
