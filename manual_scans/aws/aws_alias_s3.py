@@ -2,6 +2,7 @@
 import boto3
 import requests
 
+from utils.utils_aws import is_s3_website_endpoint_url
 from utils.utils_aws_manual import list_hosted_zones_manual_scan
 from utils.utils_print import my_print
 from utils.utils_print import print_list
@@ -45,8 +46,7 @@ def route53():
             record_sets = [
                 r
                 for r in page_records["ResourceRecordSets"]
-                if "AliasTarget" in r
-                if ("amazonaws.com" in r["AliasTarget"]["DNSName"]) and "s3-website" in (r["AliasTarget"]["DNSName"])
+                if "AliasTarget" in r and is_s3_website_endpoint_url(r["AliasTarget"]["DNSName"])
             ]
             for record in record_sets:
                 i = i + 1
