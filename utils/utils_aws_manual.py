@@ -1,13 +1,11 @@
-import re
 import warnings
 
 import boto3
 import requests
 import urllib3
 
-# Compile once
-BUCKET_URL_ENDPOINT = re.compile(r"^.+\.s3\.([a-z0-9-]+\.)?amazonaws\.com$")
-BUCKET_WEBSITE_ENDPOINT = re.compile(r"^.+\.s3-website[-.]([a-z0-9-]+\.)?amazonaws\.com$")
+from utils.utils_aws import is_s3_bucket_url
+from utils.utils_aws import is_s3_website_endpoint_url
 
 
 def list_hosted_zones_manual_scan():
@@ -63,16 +61,6 @@ def get_cloudfront_origin_url(domain_name):
                 if alias + "." == domain_name:
                     # We found the right distribution
                     return distribution["Origins"]["Items"][0]["DomainName"]
-
-
-def is_s3_bucket_url(url):
-    # bucket.s3.amazonaws.com or bucket.s3.region.amazonaws.com
-    return url and BUCKET_URL_ENDPOINT.match(url)
-
-
-def is_s3_website_endpoint_url(url):
-    # bucket.s3-website-region.amazonaws.com
-    return url and BUCKET_WEBSITE_ENDPOINT.match(url)
 
 
 def vulnerable_cloudfront_s3_manual(domain_name):

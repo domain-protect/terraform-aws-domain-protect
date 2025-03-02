@@ -409,7 +409,7 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
 
                 takeover_domains.append(finding["Domain"])
 
-            elif ".elasticbeanstalk.com" in finding["Takeover"]:
+            elif finding["Takeover"].endswith(".elasticbeanstalk.com"):
                 resource_type = "Elastic Beanstalk instance"
 
                 if eb_takeover(finding["Takeover"], finding["Domain"], finding["Account"]):
