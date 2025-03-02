@@ -4,8 +4,7 @@ from unittest.mock import patch
 
 import boto3
 import pytest
-from moto import mock_cloudfront
-from moto import mock_route53
+from moto import mock_aws
 
 from integration_tests.mocks.cloudflare_mock import CloudFlareMock
 from integration_tests.mocks.dns_mock import DNSMock
@@ -13,7 +12,7 @@ from integration_tests.mocks.dns_mock import DNSMock
 
 @pytest.fixture
 def cloudflare_mock():
-    with patch("CloudFlare.CloudFlare") as cf_mock:
+    with patch("cloudflare.Cloudflare") as cf_mock:
         mock = CloudFlareMock()
         cf_mock.return_value = mock
         yield mock
@@ -37,12 +36,12 @@ def aws_credentials():
 # pylint: disable=unused-argument
 @pytest.fixture(scope="function")
 def moto_route53(aws_credentials):
-    with mock_route53():
+    with mock_aws():
         yield boto3.client("route53", region_name="us-east-1")
 
 
 # pylint: disable=unused-argument
 @pytest.fixture(scope="function")
 def moto_cloudfront(aws_credentials):
-    with mock_cloudfront():
+    with mock_aws():
         yield boto3.client("cloudfront", region_name="us-east-1")

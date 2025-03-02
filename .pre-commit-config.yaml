@@ -34,7 +34,7 @@ repos:
         args: [--py3-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/psf/black
-    rev: 24.10.0
+    rev: 25.1.0
     hooks:
     -   id: black
         args: [--line-length=120]
@@ -45,7 +45,7 @@ repos:
     -   id: bandit
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/pycqa/prospector
-    rev: v1.13.3
+    rev: v1.15.2
     hooks:
     -   id: prospector
         args:
@@ -53,7 +53,7 @@ repos:
         exclude: .\.tf | ^\.github/
         additional_dependencies: ["setuptools"]
 -   repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.96.3
+    rev: v1.97.4
     hooks:
     -   id: terraform_fmt
     -   id: terraform_checkov

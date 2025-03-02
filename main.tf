@@ -244,7 +244,8 @@ module "lambda_cloudflare" {
   platform                 = var.platform
   memory_size              = var.memory_size
   project                  = var.project
-  cf_api_key               = var.cf_api_key
+  cloudflare_api_key       = var.cloudflare_api_key
+  cloudflare_email         = var.cloudflare_email
   lambda_role_arn          = module.lambda_role.lambda_role_arn
   kms_arn                  = module.kms.kms_arn
   security_audit_role_name = var.security_audit_role_name

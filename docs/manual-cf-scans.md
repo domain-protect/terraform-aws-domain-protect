@@ -35,8 +35,8 @@ export PYTHONPATH=${PYTHONPATH}:$(pwd)
 * In the Cloudflare console, My Profile, API Tokens, create an API Key
 * Set as environment variables on your laptop
 ```
-$ export CF_API_EMAIL='user@example.com'
-$ export CF_API_KEY='00000000000000000000000000000000'
+$ export CLOUDFLARE_API_KEY='00000000000000000000000000000000'
+$ export CLOUDFLARE_EMAIL='user@example.com'
 ```
 
 ## subdomain NS delegations

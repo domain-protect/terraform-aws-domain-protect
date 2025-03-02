@@ -5,8 +5,9 @@ import os
 from utils.utils_aws import eb_susceptible
 from utils.utils_aws import publish_to_sns
 from utils.utils_bugcrowd import bugcrowd_create_issue
-from utils.utils_cloudflare import list_cloudflare_records
-from utils.utils_cloudflare import list_cloudflare_zones
+from utils.utils_cloudflare import convert_cf_records_to_dict
+from utils.utils_cloudflare import list_dns_records
+from utils.utils_cloudflare import list_dns_zones
 from utils.utils_db import db_get_unfixed_vulnerability_found_date_time
 from utils.utils_db import db_vulnerability_found
 from utils.utils_dns import vulnerable_cname
@@ -209,15 +210,16 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     global json_data
     json_data = {"New": []}
 
-    zones = list_cloudflare_zones()
+    zones = list_dns_zones()
 
     for zone in zones:
-        print(f"Searching for vulnerable subdomain records in Cloudflare DNS zone {zone['Name']}")
+        print(f"Searching for vulnerable subdomain records in Cloudflare DNS zone {zone.name}")
 
-        zone_id = zone["Id"]
-        zone_name = zone["Name"]
+        zone_id = zone.id
+        zone_name = zone.name
 
-        records = list_cloudflare_records(zone_id, zone_name)
+        cf_records = list_dns_records(zone_id, zone_name)
+        records = convert_cf_records_to_dict(cf_records)
 
         cf_ns_subdomain("Cloudflare", zone_name, records)
         cf_cname("Cloudflare", zone_name, records)

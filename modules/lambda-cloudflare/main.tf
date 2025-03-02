@@ -51,7 +51,8 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      CF_API_KEY               = var.cf_api_key
+      CLOUDFLARE_API_KEY       = var.cloudflare_api_key
+      CLOUDFLARE_EMAIL         = var.cloudflare_email
       ORG_PRIMARY_ACCOUNT      = var.org_primary_account
       SECURITY_AUDIT_ROLE_NAME = var.security_audit_role_name
       EXTERNAL_ID              = var.external_id

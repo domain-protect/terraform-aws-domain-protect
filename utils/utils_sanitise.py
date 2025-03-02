@@ -64,3 +64,9 @@ def filtered_ns_records(records, zone_name):
     filtered_ns_records = [r for r in records if r["Type"] == "NS" and r["Name"] != zone_name and r["Name"][0] != "_"]
 
     return filtered_ns_records
+
+
+def filtered_ns_records_cf_v4(records, zone_name):
+    filtered_ns_records = [r for r in records if r.type == "NS" and r.name != zone_name and r.name[0] != "_"]
+
+    return filtered_ns_records

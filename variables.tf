@@ -208,11 +208,17 @@ variable "cloudflare" {
   type        = bool
 }
 
-variable "cf_api_key" {
+variable "cloudflare_api_key" {
   description = "Cloudflare API token"
   default     = ""
   type        = string
   sensitive   = true
+}
+
+variable "cloudflare_email" {
+  description = "Cloudflare Email"
+  default     = ""
+  type        = string
 }
 
 variable "cloudflare_lambdas" {

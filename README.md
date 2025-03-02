@@ -125,8 +125,9 @@ No resources.
 | <a name="input_bugcrowd_api_key"></a> [bugcrowd\_api\_key](#input\_bugcrowd\_api\_key) | Bugcrowd API token | `string` | `""` | no |
 | <a name="input_bugcrowd_email"></a> [bugcrowd\_email](#input\_bugcrowd\_email) | Email address of Bugcrowd researcher service account | `string` | `""` | no |
 | <a name="input_bugcrowd_state"></a> [bugcrowd\_state](#input\_bugcrowd\_state) | State in which issue is created, e.g. new, triaged, unresolved, resolved | `string` | `"unresolved"` | no |
-| <a name="input_cf_api_key"></a> [cf\_api\_key](#input\_cf\_api\_key) | Cloudflare API token | `string` | `""` | no |
 | <a name="input_cloudflare"></a> [cloudflare](#input\_cloudflare) | Set to true to enable CloudFlare | `bool` | `false` | no |
+| <a name="input_cloudflare_api_key"></a> [cloudflare\_api\_key](#input\_cloudflare\_api\_key) | Cloudflare API token | `string` | `""` | no |
+| <a name="input_cloudflare_email"></a> [cloudflare\_email](#input\_cloudflare\_email) | Cloudflare Email | `string` | `""` | no |
 | <a name="input_cloudflare_lambdas"></a> [cloudflare\_lambdas](#input\_cloudflare\_lambdas) | list of names of Lambda files in the lambda-cloudflare/code folder | `list(any)` | <pre>[<br/>  "cloudflare-scan"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment deploying to, defaults to terraform.workspace - optionally enter in tfvars file | `string` | `""` | no |
 | <a name="input_external_id"></a> [external\_id](#input\_external\_id) | external ID for security audit role to be defined in tvars file. Leave empty if not configured | `string` | `""` | no |
