@@ -31,7 +31,7 @@ jobs:
       - run: pip install -r requirements-dev.txt
 
       - name: Install terraform-docs
-        uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b # v1.14.0
+        uses: jaxxstorm/action-install-gh-release@4304621e8c48d66093a8a214af5d5b5bc3b3d943 # v2.0.0
         with:
           repo: terraform-docs/terraform-docs
           tag: ${{ env.TERRAFORM_DOCS_VERSION }}
