@@ -3,6 +3,9 @@ name: "CodeQL"
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   CodeQL-Build:
     runs-on: ubuntu-latest
@@ -17,6 +20,11 @@ jobs:
         language: [ 'python' ]
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
