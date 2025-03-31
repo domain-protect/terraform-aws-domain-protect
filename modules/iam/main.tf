@@ -1,25 +1,61 @@
+locals {
+  role_name = format(
+    "%s-%s-%s",
+    var.project,
+    var.role_name == "policyname" ? var.policy : var.role_name,
+    var.environment
+  )
+  policy_name = format(
+    "%s-%s-%s",
+    var.project,
+    var.role_name == "policyname" ? var.policy : var.role_name,
+    var.environment
+  )
+  ddb_table_name = format("%sVulnerableDomains%s",
+    replace(title(replace(var.project, "-", " ")), " ", ""),
+    title(var.environment),
+  )
+  ddb_ip_table_name = format("%sIPs%s",
+    replace(title(replace(var.project, "-", " ")), " ", ""),
+    title(var.environment),
+  )
+  dynamodb_arns = compact([
+    data.aws_dynamodb_table.vulnerable_domains.arn,
+    one(data.aws_dynamodb_table.ips[*].arn),
+  ])
+  cloudwatch_log_groups = compact([
+    "arn:aws:logs:*:*:/aws/vendedlogs/states/${var.project}-scan-${var.environment}",
+    var.ip_address ? "arn:aws:logs:*:*:/aws/vendedlogs/states/${var.project}-ips-${var.environment}" : ""
+  ])
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_dynamodb_table" "vulnerable_domains" {
+  name = local.ddb_table_name
+}
+
+data "aws_dynamodb_table" "ips" {
+  count = var.ip_address ? 1 : 0
+  name  = local.ddb_ip_table_name
+}
+
 resource "aws_iam_role" "lambda" {
-  name                 = "${var.project}-${var.takeover ? "takeover" : var.role_name == "policyname" ? var.policy : var.role_name}-${var.environment}"
-  assume_role_policy   = templatefile("${path.module}/templates/${var.assume_role_policy}_role.json.tpl", { project = var.project })
+  name                 = local.role_name
+  assume_role_policy   = data.aws_iam_policy_document.assume_role.json
   permissions_boundary = var.permissions_boundary_arn
 }
 
-resource "aws_iam_role_policy_attachment" "default" {
-  for_each   = var.takeover ? toset([for policy in data.aws_iam_policy.default : policy.arn]) : toset([])
+resource "aws_iam_role_policy_attachment" "takeover" {
+  for_each   = var.takeover ? toset([for policy in data.aws_iam_policy_document.takeover : policy.arn]) : toset([])
   role       = aws_iam_role.lambda.name
   policy_arn = each.value
 }
 
 resource "aws_iam_role_policy" "lambda" {
-  name = "${var.project}-${var.role_name == "policyname" ? var.policy : var.role_name}-${var.environment}"
-  role = aws_iam_role.lambda.id
-  policy = templatefile("${path.module}/templates/${var.policy}_policy.json.tpl", {
-    security_audit_role_name = var.security_audit_role_name,
-    project                  = var.project,
-    env                      = var.environment,
-    kms_arn                  = var.kms_arn,
-    ddb_table_arn            = "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}VulnerableDomains${title(var.environment)}",
-    ddb_ip_table_arn         = "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}IPs${title(var.environment)}",
-    state_machine_arn        = var.state_machine_arn,
-  })
+  name   = local.policy_name
+  role   = aws_iam_role.lambda.id
+  policy = data.aws_iam_policy_document.lambda.json
 }
