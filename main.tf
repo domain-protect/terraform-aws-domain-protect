@@ -6,7 +6,8 @@ module "kms" {
 }
 
 module "lambda_role" {
-  source = "./modules/iam"
+  source     = "./modules/iam"
+  depends_on = [module.dynamodb]
 
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
@@ -16,7 +17,8 @@ module "lambda_role" {
 }
 
 module "lambda_slack" {
-  source = "./modules/lambda-slack"
+  source     = "./modules/lambda-slack"
+  depends_on = [module.dynamodb]
 
   runtime            = local.runtime
   platform           = var.platform
@@ -38,7 +40,8 @@ module "lambda_slack" {
 }
 
 module "lambda" {
-  source = "./modules/lambda"
+  source     = "./modules/lambda"
+  depends_on = [module.dynamodb]
 
   lambdas                  = var.lambdas
   runtime                  = local.runtime
@@ -60,7 +63,8 @@ module "lambda" {
 }
 
 module "lambda_accounts" {
-  source = "./modules/lambda-accounts"
+  source     = "./modules/lambda-accounts"
+  depends_on = [module.dynamodb]
 
   lambdas                  = ["accounts"]
   runtime                  = local.runtime
@@ -80,7 +84,8 @@ module "lambda_accounts" {
 }
 
 module "accounts_role" {
-  source = "./modules/iam"
+  source     = "./modules/iam"
+  depends_on = [module.dynamodb]
 
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
@@ -92,7 +97,8 @@ module "accounts_role" {
 }
 
 module "lambda_scan" {
-  source = "./modules/lambda-scan"
+  source     = "./modules/lambda-scan"
+  depends_on = [module.dynamodb]
 
   lambdas                  = ["scan"]
   runtime                  = local.runtime
@@ -295,8 +301,8 @@ module "step_function_role" {
 
   security_audit_role_name = var.security_audit_role_name
   kms_arn                  = module.kms.kms_arn
-  policy                   = "state"
-  assume_role_policy       = "state"
+  policy                   = "states"
+  assume_role_policy       = "states"
   permissions_boundary_arn = var.permissions_boundary_arn
   environment              = local.env
 }
@@ -333,8 +339,9 @@ module "step_function_ips" {
 }
 
 module "lambda_role_ips" {
-  count  = var.ip_address ? 1 : 0
-  source = "./modules/iam"
+  count      = var.ip_address ? 1 : 0
+  source     = "./modules/iam"
+  depends_on = [module.dynamodb_ips]
 
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
@@ -375,8 +382,9 @@ module "lambda_scan_ips" {
 }
 
 module "accounts_role_ips" {
-  count  = var.ip_address ? 1 : 0
-  source = "./modules/iam"
+  count      = var.ip_address ? 1 : 0
+  source     = "./modules/iam"
+  depends_on = [module.dynamodb_ips]
 
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
