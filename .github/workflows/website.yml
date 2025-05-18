@@ -24,13 +24,13 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Set up Python
-        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version-file: 'python-version'
           cache: 'pip'
 
       - name: Set up build cache
-        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           key: mkdocs-material-${{ hashfiles('.cache/**') }}
           path: .cache
@@ -45,7 +45,7 @@ jobs:
         run: mkdocs gh-deploy --force
 
       - name: Save build cache
-        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           key: mkdocs-material-${{ hashfiles('.cache/**') }}
           path: .cache
