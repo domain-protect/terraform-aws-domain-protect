@@ -9,5 +9,5 @@ pytest-cov==6.0.0
 assertpy==1.1
 moto==5.1.4
 requests-mock==1.12.1
-checkov==3.2
+checkov==3.2.424
 pre-commit==4.2.0
