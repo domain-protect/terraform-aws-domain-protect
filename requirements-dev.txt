@@ -7,7 +7,7 @@ prospector==1.14.0
 pytest==8.3.4
 pytest-cov==6.0.0
 assertpy==1.1
-moto==5.1.0
+moto==5.1.4
 requests-mock==1.12.1
 checkov==3.2
 pre-commit==4.1.0
