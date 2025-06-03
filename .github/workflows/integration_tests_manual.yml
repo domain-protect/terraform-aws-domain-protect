@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Set up Python
-        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version-file: 'python-version'
           cache: 'pip'
@@ -36,7 +36,7 @@ jobs:
           pytest --cov=manual_scans --cov=utils --cov-branch --cov-fail-under=19 --junitxml=test_reports/junit-integration.xml integration_tests/manual_scans
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@170bf24d20d201b842d7a52403b73ed297e6645b # v2
+        uses: EnricoMi/publish-unit-test-result-action@afb2984f4d89672b2f9d9c13ae23d53779671984 # v2
         if: always()
         with:
           files: "test_reports/junit-integration.xml"

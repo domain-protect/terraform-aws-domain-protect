@@ -11,9 +11,9 @@ to help organisations improve their security and stay ahead of threats
 * if a researcher submits a similar finding after Domain Protect, their submission can be marked as a Duplicate
 * reduces payouts to Bug Bounty researchers
 
-<img src="assets/images/hackerone-report.png" width="600">
+![Alt text](assets/images/hackerone-report.png?raw=true "HackerOne Report")
 
-<img src="assets/images/hackerone-notification.png" width="500">
+![Alt text](assets/images/hackerone-notification.png?raw=true "HackerOne Notification")
 
 ## When are HackerOne issues created?
 * to avoid duplicate issues, only your production environment will be integrated with HackerOne
@@ -29,22 +29,22 @@ production_environment = "prd"
 * Log in to HackerOne as an org admin, select Organization Settings, API Tokens
 * Press Create API token
 
-<img src="assets/images/hackerone-api-tokens.png" width="600">
+![Alt text](assets/images/hackerone-api-tokens.png?raw=true "HackerOne API Tokens")
 
 * Enter `domain-protect` as the identifier (or alternative if configured in `project` Terraform variable)
 * Select your HackerOne Bug Bounty program, e.g. `OWASP Sandbox 2 H1B`
 * select Standard permissions
 
-<img src="assets/images/hackerone-new-api-token.png" width="600">
+![Alt text](assets/images/hackerone-new-api-token.png?raw=true "New HackerOne API Token")
 
 * press Create API Token
 
-<img src="assets/images/hackerone-api-token-value.png" width="600">
+![Alt text](assets/images/hackerone-api-token-value.png?raw=true "Create HackerOne API Token")
 
 * copy the API token and store securely
 * press I have stored the API token
 
-<img src="assets/images/hackerone-token-created.png" width="600">
+![Alt text](assets/images/hackerone-token-created.png?raw=true "HackerOne API Token created")
 
 * set Terraform variables in your CI/CD pipeline or tfvars file, e.g.
 
