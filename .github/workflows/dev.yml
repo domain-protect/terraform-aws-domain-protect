@@ -30,7 +30,7 @@ jobs:
 
     permissions:
       id-token: write
-      contents: write
+      contents: read
       pull-requests: write
       checks: write
     steps:
