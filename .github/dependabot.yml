@@ -12,3 +12,48 @@ updates:
     schedule:
       interval: "weekly"
     target-branch: "dependencies"
+
+  - package-ecosystem: pip
+    directory: /lambda_code/cloudflare_scan
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/notify
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/scan
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/scan_ips
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/stats
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/takeover
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /lambda_code/update
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /manual_scans/aws
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /manual_scans/cloudflare
+    schedule:
+      interval: daily

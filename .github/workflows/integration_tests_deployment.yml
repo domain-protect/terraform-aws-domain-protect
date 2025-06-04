@@ -27,6 +27,9 @@ env:
   CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
   CLOUDFLARE_ZONE_NAME: ${{ secrets.CLOUDFLARE_ZONE_NAME }}
 
+permissions:
+  contents: read
+
 jobs:
   integration_tests_deployment:
     name: Integration tests deployment ${{ inputs.environment }}
@@ -39,6 +42,11 @@ jobs:
       pull-requests: write # Required for Publish Test Results
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@cb605e52c26070c328afc4562f0b4ada7618a84e # v2.10.4
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
