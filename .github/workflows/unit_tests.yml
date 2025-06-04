@@ -6,6 +6,9 @@ env:
   TERRAFORM_DOCS_VERSION: v0.19.0
   TERRAFORM_VERSION: "1.7.3"
 
+permissions:
+  contents: read
+
 jobs:
   unit_tests:
     name: Unit Test
@@ -14,6 +17,11 @@ jobs:
       checks: write # Required for Publish Test Results
       pull-requests: write # Required for Publish Test Results
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
