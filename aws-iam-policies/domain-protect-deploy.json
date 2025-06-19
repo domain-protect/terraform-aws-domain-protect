@@ -200,6 +200,13 @@
     {
       "Effect": "Allow",
       "Action": [
+          "states:ValidateStateMachineDefinition"
+      ],
+      "Resource": "arn:aws:states:eu-west-1:SECURITY_AWS_ACCOUNT_ID:stateMachine:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "logs:AssociateKmsKey",
         "logs:CreateLogGroup",
         "logs:DeleteLogGroup",
