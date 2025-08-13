@@ -3,7 +3,7 @@ cloudflare==4.1.0
 dnspython==2.7.0
 requests==2.32.3
 black==25.1.0
-prospector==1.15.2
+prospector==1.17.3
 pytest==8.4.0
 pytest-cov==6.1.1
 assertpy==1.1
