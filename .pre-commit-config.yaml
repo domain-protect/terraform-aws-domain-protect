@@ -45,7 +45,7 @@ repos:
     -   id: bandit
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/pycqa/prospector
-    rev: v1.16.1
+    rev: v1.17.3
     hooks:
     -   id: prospector
         args:
