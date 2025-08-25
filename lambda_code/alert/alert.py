@@ -310,9 +310,8 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     slack_message = {}
     subject = event["Records"][0]["Sns"]["Subject"]
 
-    # Base message parameters - always use the app's configured icon
+    # Base message parameters
     text = subject
-    icon_emoji = slack_emoji  # This stays as the app's configured icon
     attachments = []
 
     message = event["Records"][0]["Sns"]["Message"]
@@ -334,16 +333,13 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     elif new_message(json_data) is not None:
         slack_message = new_message(json_data)
         text = f"{slack_new_emoji} {subject}"
-        # Keep the app's configured icon, emoji is already inline in text
 
     elif fixed_message(json_data) is not None:
         slack_message = fixed_message(json_data)
         text = f"{slack_fix_emoji} {subject}"
-        # Keep the app's configured icon, emoji is already inline in text
 
     elif monthly_stats_message(json_data) is not None:
         slack_message = monthly_stats_message(json_data)
-        # Keep the app's configured icon for stats messages
 
     if len(slack_message) > 0:
         attachments.append(slack_message)
@@ -363,7 +359,6 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
                     channel=channel.strip(),
                     text=text,
                     username=slack_username,
-                    icon_emoji=icon_emoji,
                     **slack_message,
                 )
             else:
@@ -372,7 +367,6 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
                     channel=channel.strip(),
                     text=text,
                     username=slack_username,
-                    icon_emoji=icon_emoji,
                     attachments=attachments,
                 )
 

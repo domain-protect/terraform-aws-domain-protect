@@ -47,3 +47,15 @@ For backwards compatibility, [legacy Slack webhook configurations](slack-webhook
 * In AWS Secrets Manager, select the Domain Protect Slack OAuth Secret
 * overwrite the `dummy-value` Secret value
 * press Save
+* you'll see the new app in Your Apps
+
+![Alt text](assets/images/slack-your-apps.png?raw=true "Your Slack apps")
+
+* at Basic Information, scroll down to Display Information
+* at description, add `Prevent subdomain takeover`
+* add the Domain Protect Slack [App Icon](./assets/slack/domain-protect-icon.png) from this repository
+* for background color enter `#2c2d30`
+
+![Alt text](assets/images/slack-oauth-display-info.png?raw=true "Slack app display information")
+
+* save changes
