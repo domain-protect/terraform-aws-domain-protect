@@ -18,8 +18,9 @@ resource "aws_iam_role_policy" "lambda" {
     project                  = var.project,
     env                      = var.environment,
     kms_arn                  = var.kms_arn,
-    ddb_table_arn            = "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}VulnerableDomains${title(var.environment)}",
-    ddb_ip_table_arn         = "arn:aws:dynamodb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}IPs${title(var.environment)}",
+    ddb_table_arn            = "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}VulnerableDomains${title(var.environment)}",
+    ddb_ip_table_arn         = "arn:aws:dynamodb:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:table/${replace(title(replace(var.project, "-", " ")), " ", "")}IPs${title(var.environment)}",
+    secret_arn               = var.secret_arn,
     state_machine_arn        = var.state_machine_arn,
   })
 }

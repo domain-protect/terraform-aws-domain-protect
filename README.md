@@ -70,7 +70,7 @@ This tool cannot guarantee 100% protection against subdomain takeovers.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | > 1 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | > 2.2.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > 5.12.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > 6.0.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | > 3.1.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | > 3.1.0 |
 
@@ -100,11 +100,14 @@ No providers.
 | <a name="module_lambda_role_ips"></a> [lambda\_role\_ips](#module\_lambda\_role\_ips) | ./modules/iam | n/a |
 | <a name="module_lambda_scan"></a> [lambda\_scan](#module\_lambda\_scan) | ./modules/lambda-scan | n/a |
 | <a name="module_lambda_scan_ips"></a> [lambda\_scan\_ips](#module\_lambda\_scan\_ips) | ./modules/lambda-scan-ips | n/a |
-| <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda-slack | n/a |
+| <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda-slack-legacy | n/a |
+| <a name="module_lambda_slack_oauth"></a> [lambda\_slack\_oauth](#module\_lambda\_slack\_oauth) | ./modules/lambda-slack-oauth | n/a |
+| <a name="module_lambda_slack_oauth_role"></a> [lambda\_slack\_oauth\_role](#module\_lambda\_slack\_oauth\_role) | ./modules/iam | n/a |
 | <a name="module_lambda_takeover"></a> [lambda\_takeover](#module\_lambda\_takeover) | ./modules/lambda-takeover | n/a |
 | <a name="module_lamdba_stats"></a> [lamdba\_stats](#module\_lamdba\_stats) | ./modules/lambda-stats | n/a |
 | <a name="module_resources_event"></a> [resources\_event](#module\_resources\_event) | ./modules/cloudwatch | n/a |
 | <a name="module_resources_role"></a> [resources\_role](#module\_resources\_role) | ./modules/iam | n/a |
+| <a name="module_slack_oauth_secret"></a> [slack\_oauth\_secret](#module\_slack\_oauth\_secret) | ./modules/secret | n/a |
 | <a name="module_sns"></a> [sns](#module\_sns) | ./modules/sns | n/a |
 | <a name="module_sns_dead_letter_queue"></a> [sns\_dead\_letter\_queue](#module\_sns\_dead\_letter\_queue) | ./modules/sns | n/a |
 | <a name="module_step_function"></a> [step\_function](#module\_step\_function) | ./modules/step-function | n/a |
@@ -155,9 +158,10 @@ No resources.
 | <a name="input_slack_emoji"></a> [slack\_emoji](#input\_slack\_emoji) | Slack emoji | `string` | `":warning:"` | no |
 | <a name="input_slack_fix_emoji"></a> [slack\_fix\_emoji](#input\_slack\_fix\_emoji) | Slack fix emoji | `string` | `":white_check_mark:"` | no |
 | <a name="input_slack_new_emoji"></a> [slack\_new\_emoji](#input\_slack\_new\_emoji) | Slack emoji for new vulnerability | `string` | `":octagonal_sign:"` | no |
+| <a name="input_slack_oauth_app"></a> [slack\_oauth\_app](#input\_slack\_oauth\_app) | Use Slack OAuth App | `bool` | `true` | no |
 | <a name="input_slack_username"></a> [slack\_username](#input\_slack\_username) | Slack username appearing in the from field in the Slack message | `string` | `"Domain Protect"` | no |
-| <a name="input_slack_webhook_type"></a> [slack\_webhook\_type](#input\_slack\_webhook\_type) | Slack webhook type, can be legacy or app | `string` | `"legacy"` | no |
-| <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - enter in tfvars file | `list(string)` | `[]` | no |
+| <a name="input_slack_webhook_type"></a> [slack\_webhook\_type](#input\_slack\_webhook\_type) | Slack webhook type, can be legacy or app - not needed for OAuth | `string` | `"app"` | no |
+| <a name="input_slack_webhook_urls"></a> [slack\_webhook\_urls](#input\_slack\_webhook\_urls) | List of Slack webhook URLs, in the same order as the slack\_channels list - not needed for OAuth | `list(string)` | `[]` | no |
 | <a name="input_stats_schedule"></a> [stats\_schedule](#input\_stats\_schedule) | Cron schedule for the stats message | `string` | `"cron(0 9 1 * ? *)"` | no |
 | <a name="input_takeover"></a> [takeover](#input\_takeover) | Create supported resource types to prevent malicious subdomain takeover | `bool` | `false` | no |
 | <a name="input_update_lambdas"></a> [update\_lambdas](#input\_update\_lambdas) | list of Cloudflare Lambda functions updating vulnerability status | `list(any)` | <pre>[<br/>  "update"<br/>]</pre> | no |

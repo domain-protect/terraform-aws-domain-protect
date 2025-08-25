@@ -1,6 +1,16 @@
 variable "project" {}
-variable "security_audit_role_name" {}
+
 variable "kms_arn" {}
+
+variable "secret_arn" {
+  description = "Secret ARN"
+  default     = ""
+}
+
+variable "security_audit_role_name" {
+  description = "Security audit role name"
+  default     = ""
+}
 
 variable "state_machine_arn" {
   description = "Step Function state machine ARN"

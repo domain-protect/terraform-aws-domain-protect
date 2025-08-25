@@ -128,15 +128,21 @@ variable "slack_channels" {
   type        = list(string)
 }
 
+variable "slack_oauth_app" {
+  description = "Use Slack OAuth App"
+  default     = true
+  type        = bool
+}
+
 variable "slack_webhook_urls" {
-  description = "List of Slack webhook URLs, in the same order as the slack_channels list - enter in tfvars file"
+  description = "List of Slack webhook URLs, in the same order as the slack_channels list - not needed for OAuth"
   default     = []
   type        = list(string)
 }
 
 variable "slack_webhook_type" {
-  description = "Slack webhook type, can be legacy or app"
-  default     = "legacy"
+  description = "Slack webhook type, can be legacy or app - not needed for OAuth"
+  default     = "app"
   type        = string
 }
 

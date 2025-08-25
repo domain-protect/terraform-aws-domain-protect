@@ -5,18 +5,53 @@ module "kms" {
   environment = local.env
 }
 
-module "lambda_role" {
+module "slack_oauth_secret" {
+  source = "./modules/secret"
+
+  project     = var.project
+  environment = local.env
+  purpose     = "slack-oauth"
+  description = "OAuth token for Slack app"
+  kms_key_id  = module.kms.kms_arn
+  value       = "dummy-value"
+}
+
+module "lambda_slack_oauth_role" {
   source = "./modules/iam"
 
   project                  = var.project
-  security_audit_role_name = var.security_audit_role_name
+  policy                   = "slack"
   kms_arn                  = module.kms.kms_arn
+  secret_arn               = module.slack_oauth_secret.secret_arn
   permissions_boundary_arn = var.permissions_boundary_arn
   environment              = local.env
 }
 
+module "lambda_slack_oauth" {
+  source = "./modules/lambda-slack-oauth"
+  count  = var.slack_oauth_app ? 1 : 0
+
+  runtime           = local.runtime
+  platform          = var.platform
+  memory_size       = var.memory_size_slack
+  project           = var.project
+  lambda_role_arn   = module.lambda_slack_oauth_role.lambda_role_arn
+  kms_arn           = module.kms.kms_arn
+  sns_topic_arn     = module.sns.sns_topic_arn
+  dlq_sns_topic_arn = module.sns_dead_letter_queue.sns_topic_arn
+  oauth_secret_arn  = module.slack_oauth_secret.secret_arn
+  slack_channels    = var.slack_channels
+  slack_emoji       = var.slack_emoji
+  slack_fix_emoji   = var.slack_fix_emoji
+  slack_new_emoji   = var.slack_new_emoji
+  slack_username    = var.slack_username
+  environment       = local.env
+  vpc_config        = var.vpc_config
+}
+
 module "lambda_slack" {
-  source = "./modules/lambda-slack"
+  source = "./modules/lambda-slack-legacy"
+  count  = var.slack_oauth_app ? 0 : 1
 
   runtime            = local.runtime
   platform           = var.platform
@@ -35,6 +70,16 @@ module "lambda_slack" {
   slack_username     = var.slack_username
   environment        = local.env
   vpc_config         = var.vpc_config
+}
+
+module "lambda_role" {
+  source = "./modules/iam"
+
+  project                  = var.project
+  security_audit_role_name = var.security_audit_role_name
+  kms_arn                  = module.kms.kms_arn
+  permissions_boundary_arn = var.permissions_boundary_arn
+  environment              = local.env
 }
 
 module "lambda" {
