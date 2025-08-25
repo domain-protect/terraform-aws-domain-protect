@@ -3,11 +3,10 @@ import json
 import os
 
 import boto3
-import requests
 from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 from utils.utils_dates import calc_prev_month_start
-from utils.utils_globalvars import requests_timeout
 
 
 oauth_secret_arn = os.environ["OAUTH_SECRET_ARN"]
@@ -311,13 +310,10 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     slack_message = {}
     subject = event["Records"][0]["Sns"]["Subject"]
 
-    payload = {
-        "channel": slack_channel,
-        "username": slack_username,
-        "icon_emoji": slack_emoji,
-        "attachments": [],
-        "text": subject,
-    }
+    # Base message parameters
+    text = subject
+    icon_emoji = slack_emoji
+    attachments = []
 
     message = event["Records"][0]["Sns"]["Message"]
     json_data = json.loads(message)
@@ -333,50 +329,59 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
 
     elif current_message(json_data) is not None:
         slack_message = current_message(json_data)
-        payload["text"] = f"{slack_emoji} {subject}"
-
-    elif current_message(json_data) is not None:
-        slack_message = current_message(json_data)
+        text = f"{slack_emoji} {subject}"
 
     elif new_message(json_data) is not None:
         slack_message = new_message(json_data)
-        payload["text"] = f"{slack_new_emoji} {subject}"
-
-    elif new_message(json_data) is not None:
-        slack_message = new_message(json_data)
-        payload["icon_emoji"] = slack_new_emoji
+        text = f"{slack_new_emoji} {subject}"
+        icon_emoji = slack_new_emoji
 
     elif fixed_message(json_data) is not None:
         slack_message = fixed_message(json_data)
-        payload["text"] = f"{slack_fix_emoji} {subject}"
-
-    elif fixed_message(json_data) is not None:
-        slack_message = fixed_message(json_data)
-        payload["icon_emoji"] = slack_fix_emoji
+        text = f"{slack_fix_emoji} {subject}"
+        icon_emoji = slack_fix_emoji
 
     elif monthly_stats_message(json_data) is not None:
         slack_message = monthly_stats_message(json_data)
-        payload["icon_emoji"] = slack_fix_emoji
+        icon_emoji = slack_fix_emoji
 
     if len(slack_message) > 0:
-        payload["attachments"].append(slack_message)
+        attachments.append(slack_message)
 
     # Set up WebClient with the Slack OAuth token
     client = WebClient(token=get_slack_token())
 
     # Send message to channels
-    slack_channels = os.environ["SLACK_CHANNELS"].split(",")
+    channel_list = slack_channels.split(",")
 
-    for channel in slack_channels:
-        client.chat_postMessage(
-            channel=channel,
-            data=json.dumps(payload),
-            headers={"Content-Type": "application/json"},
-            timeout=requests_timeout(),
-        )
+    for channel in channel_list:
+        try:
+            # Use the proper slack_sdk WebClient method
+            if "blocks" in slack_message:
+                # For messages with blocks (like monthly stats)
+                response = client.chat_postMessage(
+                    channel=channel.strip(),
+                    text=text,
+                    username=slack_username,
+                    icon_emoji=icon_emoji,
+                    **slack_message,
+                )
+            else:
+                # For messages with attachments
+                response = client.chat_postMessage(
+                    channel=channel.strip(),
+                    text=text,
+                    username=slack_username,
+                    icon_emoji=icon_emoji,
+                    attachments=attachments,
+                )
 
-        if response.status_code != 200:
-            ValueError(f"Request to Slack returned error {response.status_code}:\n{response.text}")
+            if response["ok"]:
+                print(f"Message sent to {channel.strip()} Slack channel")
+            else:
+                print(f"Failed to send message to {channel.strip()}: {response['error']}")
 
-        else:
-            print(f"Message sent to {channel} Slack channel")
+        except SlackApiError as e:
+            print(f"Slack API error sending message to {channel.strip()}: {e.response['error']}")
+        except Exception as e:
+            print(f"Error sending message to {channel.strip()}: {str(e)}")
