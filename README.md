@@ -101,7 +101,7 @@ No providers.
 | <a name="module_lambda_scan"></a> [lambda\_scan](#module\_lambda\_scan) | ./modules/lambda-scan | n/a |
 | <a name="module_lambda_scan_ips"></a> [lambda\_scan\_ips](#module\_lambda\_scan\_ips) | ./modules/lambda-scan-ips | n/a |
 | <a name="module_lambda_slack"></a> [lambda\_slack](#module\_lambda\_slack) | ./modules/lambda-slack-legacy | n/a |
-| <a name="module_lambda_slack_oauth"></a> [lambda\_slack\_oauth](#module\_lambda\_slack\_oauth) | ./modules/lambda-slack-oauth | n/a |
+| <a name="module_lambda_slack_oauth"></a> [lambda\_slack\_oauth](#module\_lambda\_slack\_oauth) | ./modules/lambda-slack | n/a |
 | <a name="module_lambda_slack_oauth_role"></a> [lambda\_slack\_oauth\_role](#module\_lambda\_slack\_oauth\_role) | ./modules/iam | n/a |
 | <a name="module_lambda_takeover"></a> [lambda\_takeover](#module\_lambda\_takeover) | ./modules/lambda-takeover | n/a |
 | <a name="module_lamdba_stats"></a> [lamdba\_stats](#module\_lamdba\_stats) | ./modules/lambda-stats | n/a |

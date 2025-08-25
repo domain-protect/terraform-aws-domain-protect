@@ -28,7 +28,7 @@ module "lambda_slack_oauth_role" {
 }
 
 module "lambda_slack_oauth" {
-  source = "./modules/lambda-slack-oauth"
+  source = "./modules/lambda-slack"
   count  = var.slack_oauth_app ? 1 : 0
 
   runtime           = local.runtime

@@ -19,7 +19,7 @@ resource "null_resource" "install_python_dependencies" {
 
     environment = {
       source_code_path = "${local.rel_path_root}/lambda_code"
-      function_name    = "notify"
+      function_name    = "slack"
       path_module      = path.module
       runtime          = var.runtime
       platform         = var.platform
@@ -33,11 +33,11 @@ resource "aws_lambda_function" "lambda" {
   # checkov:skip=CKV_AWS_117: not configured inside VPC as no handling of confidential data
   # checkov:skip=CKV_AWS_272: code-signing not validated to avoid need for signing profile
 
-  filename         = "${local.rel_path_root}/build/notify.zip"
+  filename         = "${local.rel_path_root}/build/slack.zip"
   function_name    = "${var.project}-slack-${var.environment}"
   description      = "${var.project} Lambda function for ${var.environment} environment"
   role             = var.lambda_role_arn
-  handler          = "notify.lambda_handler"
+  handler          = "slack.lambda_handler"
   kms_key_arn      = var.kms_arn
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   runtime          = var.runtime
