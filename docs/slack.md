@@ -1,6 +1,6 @@
 # Slack
 
-A Slack app with OAuth is the default, recommended setup for Domain Protect notifications.
+By default, Domain Protect delivers notifications to Slack using an App with OAuth token authentication.
 
 The Slack OAuth token is stored as an AWS Secret.
 

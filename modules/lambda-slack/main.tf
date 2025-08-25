@@ -1,8 +1,8 @@
 data "archive_file" "lambda_zip" {
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
-  source_dir  = "${local.rel_path_root}/build/lambda_dist_pkg_notify"
-  output_path = "${local.rel_path_root}/build/notify.zip"
+  source_dir  = "${local.rel_path_root}/build/lambda_dist_pkg_slack"
+  output_path = "${local.rel_path_root}/build/slack.zip"
 }
 
 resource "null_resource" "install_python_dependencies" {
@@ -35,7 +35,7 @@ resource "aws_lambda_function" "lambda" {
 
   filename         = "${local.rel_path_root}/build/slack.zip"
   function_name    = "${var.project}-slack-${var.environment}"
-  description      = "${var.project} Lambda function for ${var.environment} environment"
+  description      = "${var.project} Slack Lambda function for ${var.environment} environment"
   role             = var.lambda_role_arn
   handler          = "slack.lambda_handler"
   kms_key_arn      = var.kms_arn
