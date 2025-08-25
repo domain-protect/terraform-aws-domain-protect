@@ -22,7 +22,7 @@ def get_slack_token():
     """Get Slack OAuth token from AWS Secrets Manager"""
 
     client = boto3.client("secretsmanager")
-    return client.get_secret_value(SecretId=secret_arn)["SecretString"]
+    return client.get_secret_value(SecretId=oauth_secret_arn)["SecretString"]
 
 
 def findings_message(json_data):
