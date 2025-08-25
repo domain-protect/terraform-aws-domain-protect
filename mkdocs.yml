@@ -61,7 +61,8 @@ nav:
     - Requirements: requirements.md
     - Installation: installation.md
     - Migration: migration.md
-    - Slack Webhooks: slack-webhook.md
+    - Slack: slack.md
+    - Slack Webhooks (legacy): slack-webhook.md
     - AWS IAM policies: aws-iam-policies.md
     - CI/CD: ci-cd.md
   - Manual scans:
