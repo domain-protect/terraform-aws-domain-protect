@@ -96,6 +96,7 @@
         "kms:EnableKey",
         "kms:EnableKeyRotation",
         "kms:Encrypt",
+        "kms:GenerateDataKey",
         "kms:GetKeyPolicy",
         "kms:GetKeyRotationStatus",
         "kms:ListAliases",
