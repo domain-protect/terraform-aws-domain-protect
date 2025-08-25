@@ -231,6 +231,7 @@
         "secretsmanager:CreateSecret",
         "secretsmanager:DeleteSecret",
         "secretsmanager:DescribeSecret",
+        "secretsmanager:GetResourcePolicy",
         "secretsmanager:GetSecretValue",
         "secretsmanager:PutSecretValue",
         "secretsmanager:TagResource",
