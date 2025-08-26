@@ -17,8 +17,6 @@ module "domain_protect" {
   rcu                 = 1
   scan_schedule       = "10 minutes"
   slack_channels      = ["devsecops"]
-  slack_webhook_type  = "app"
-  slack_webhook_urls  = var.slack_webhook_urls
   takeover            = true
   update_schedule     = "10 minutes"
   wcu                 = 1

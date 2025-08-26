@@ -1,4 +1,3 @@
 cairosvg==2.8.2
 mkdocs-material==9.6.18
 pillow==11.3.0
-urllib3==2.3.0

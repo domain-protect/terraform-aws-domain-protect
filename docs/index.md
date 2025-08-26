@@ -57,7 +57,8 @@ We welcome collaborators! Please see the [OWASP Domain Protect website](https://
 [Requirements](requirements.md)<br>
 [Installation](installation.md)<br>
 [Migration](migration.md)<br>
-[Slack Webhooks](slack-webhook.md)<br>
+[Slack](slack.md)<br>
+[Slack Webhooks (legacy)](slack-webhook.md)<br>
 [AWS IAM policies](aws-iam-policies.md)<br>
 [CI/CD](ci-cd.md)<br>
 [Development](development.md)<br>
