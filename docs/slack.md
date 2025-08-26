@@ -9,7 +9,7 @@ For backwards compatibility, [legacy Slack webhook configurations](slack-webhook
 ## Create Slack app
 
 * Log in to your Slack workspace
-* Open https://api.slack.com/apps
+* Open [https://api.slack.com/apps](https://api.slack.com/apps)
 
 ![Alt text](assets/images/slack-oauth-create-app.png?raw=true "Create Slack app")
 
