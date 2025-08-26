@@ -15,9 +15,6 @@ module "domain_protect" {
   org_primary_account = var.org_primary_account
   rcu                 = 1
   slack_channels      = ["devsecops-dev"]
-  # slack_oauth_app     = false
-  # slack_webhook_type  = "app"
-  # slack_webhook_urls  = var.slack_webhook_urls
-  takeover = false
-  wcu      = 1
+  takeover            = false
+  wcu                 = 1
 }

@@ -5,7 +5,6 @@ on:
 env:
   TERRAFORM_VERSION: "1.7.3"
   TF_VAR_org_primary_account: ${{ secrets.ORG_PRIMARY_ACCOUNT }}
-  TF_VAR_slack_webhook_urls: ${{ secrets.SLACK_WEBHOOK_URLS }}
   TF_VAR_external_id: ${{ secrets.EXTERNAL_ID }}
   TF_VAR_cloudflare_api_key: ${{ secrets.CLOUDFLARE_API_KEY }}
   TF_VAR_cloudflare_email: ${{ secrets.CLOUDFLARE_EMAIL }}
