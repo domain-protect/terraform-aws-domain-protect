@@ -163,7 +163,6 @@ module "lambda_scan" {
 }
 
 module "lambda_takeover" {
-  #checkov:skip=CKV_AWS_274:role is ElasticBeanstalk admin, not full Administrator Access
   count  = var.takeover ? 1 : 0
   source = "./modules/lambda-takeover"
 
