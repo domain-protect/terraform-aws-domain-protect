@@ -33,10 +33,6 @@ resource "random_string" "suffix" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  # checkov:skip=CKV_AWS_115: concurrency limit on individual Lambda function not required
-  # checkov:skip=CKV_AWS_117: not configured inside VPC as no handling of confidential data
-  # checkov:skip=CKV_AWS_272: code-signing not validated to avoid need for signing profile
-
   filename         = "${local.rel_path_root}/build/takeover.zip"
   function_name    = "${var.project}-takeover-${var.environment}"
   description      = "${var.project} Lambda function to takeover vulnerable resources"

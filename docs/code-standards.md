@@ -2,9 +2,7 @@
 
 [pre-commit](https://pre-commit.com) is used to ensure code standards are met, includes tests with automated fixes using:
 ```
-bandit
 black
-checkov
 prospector
 terraform fmt
 ```
