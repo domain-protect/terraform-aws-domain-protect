@@ -142,7 +142,7 @@ variable "slack_webhook_urls" {
 
 variable "slack_webhook_type" {
   description = "Slack webhook type, can be legacy or app - not needed for OAuth"
-  default     = "app"
+  default     = "legacy"
   type        = string
 }
 

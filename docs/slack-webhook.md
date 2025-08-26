@@ -7,7 +7,9 @@ However there are two supported methods of using webhooks with Domain Protect, f
 * Slack webhook app
 * legacy Slack webhook
 
-If using a Slack app, to ensure correct formatting set Terraform variable `slack_webhook_type = "app"`
+To use either of the Slack webhook methods, set Terraform variable `slack_oauth_app = false`
+
+If using a Slack app, to ensure correct formatting, also set Terraform variable `slack_webhook_type = "app"`
 
 ## Slack Webhook app (not recommended)
 
