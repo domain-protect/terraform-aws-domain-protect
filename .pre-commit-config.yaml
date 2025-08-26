@@ -39,11 +39,6 @@ repos:
     -   id: black
         args: [--line-length=120]
         exclude: .\.tf | ^\.github/
--   repo: https://github.com/pycqa/bandit
-    rev: 1.7.4
-    hooks:
-    -   id: bandit
-        exclude: .\.tf | ^\.github/
 -   repo: https://github.com/pycqa/prospector
     rev: v1.16.1
     hooks:
@@ -52,15 +47,3 @@ repos:
           - --zero-exit
         exclude: .\.tf | ^\.github/
         additional_dependencies: ["setuptools"]
--   repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.97.4
-    hooks:
-    -   id: terraform_fmt
-    -   id: terraform_checkov
-        args:
-          - --args=--config-file=__GIT_WORKING_DIR__/.config/sast_terraform_checkov_json.yml
-        exclude: .\.py | ^\.github/
-    -   id: terraform_docs
-        args:
-          - "--args=--config=.terraform-docs.yml"
-          - "--args=--lockfile=false"

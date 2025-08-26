@@ -96,6 +96,7 @@
         "kms:EnableKey",
         "kms:EnableKeyRotation",
         "kms:Encrypt",
+        "kms:GenerateDataKey",
         "kms:GetKeyPolicy",
         "kms:GetKeyRotationStatus",
         "kms:ListAliases",
@@ -223,6 +224,21 @@
         "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group::log-stream:",
         "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group:/aws/vendedlogs/states/*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:DeleteSecret",
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetResourcePolicy",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:TagResource",
+        "secretsmanager:UntagResource",
+        "secretsmanager:UpdateSecret"
+      ],
+      "Resource": "arn:aws:secretsmanager:eu-west-1:SECURITY_AWS_ACCOUNT_ID:secret:domain-protect-*"
     }
   ]
 }

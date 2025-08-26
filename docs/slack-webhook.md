@@ -1,13 +1,17 @@
-# Slack Webhook
+# Slack Webhook (not recommended)
 
-A Slack webhook is required for Domain Protect notifications, there are two options:
+The default Slack setup for Domain Protect is as a [Slack App with OAuth token](slack.md).
 
-* Slack app
-* legacy Slack webhook (not recommended)
+However there are two supported methods of using webhooks with Domain Protect, for backwards compatibility:
 
-If using a Slack app, to ensure correct formatting set Terraform variable `slack_webhook_type = "app"`
+* Slack webhook app
+* legacy Slack webhook
 
-## Slack Webhook app
+To use either of the Slack webhook methods, set Terraform variable `slack_oauth_app = false`
+
+If using a Slack app, to ensure correct formatting, also set Terraform variable `slack_webhook_type = "app"`
+
+## Slack Webhook app (not recommended)
 
 * in your Slack client menu panel, select More, Apps, App Directory, Build
 

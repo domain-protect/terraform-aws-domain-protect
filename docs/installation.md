@@ -9,17 +9,16 @@ Before starting ensure [requirements](requirements.md) are met
 ```
 module "domain_protect" {
   source  = "domain-protect/domain-protect/aws"
-  version = "1.0.0"
+  version = "3.0.0"
 
   environment              = "dev"
   org_primary_account      = "123456789012"
   slack_channels           = ["security-alerts-dev"]
-  slack_webhook_urls       = ["https://hooks.slack.com/services/XXX/XXX/XXX"]
 }
 ```
 * Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
 * Add extra variables if desired as detailed in [module inputs](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest?tab=inputs)
-* The Slack webhook URL is sensitive and should be protected, e.g. as a CI/CD pipeline secret
+* After installation, copy the Slack OAuth app token value to the OAuth Slack AWS Secret
 
 ## Examples
 

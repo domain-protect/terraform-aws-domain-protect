@@ -2,7 +2,8 @@
 
 In order to deploy Domain Protect successfully, it is necessary to meet the requirements below, as the terraform module will not create them
 
-* Slack App or legacy Slack webhook, see [Slack Webhook](slack-webhook.md) for details
+* Slack App with OAuth token, see [Slack](slack.md) for details
+* After initial deployment of Domain Protect, copy the Slack App OAuth token value to the Slack OAuth AWS Secret
 * Security audit account within AWS Organizations
 * Security audit read-only role with an identical name in every AWS account of the Organization
 * Storage bucket for Terraform state file
