@@ -197,7 +197,7 @@ module "lambda_resources" {
 
   lambdas           = ["resources"]
   runtime           = local.runtime
-  memory_size       = var.memory_size_slack
+  memory_size       = var.memory_size_large
   project           = var.project
   lambda_role_arn   = one(module.resources_role[*].lambda_role_arn)
   kms_arn           = module.kms.kms_arn

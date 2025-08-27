@@ -111,6 +111,12 @@ variable "memory_size" {
   type        = number
 }
 
+variable "memory_size_large" {
+  description = "Memory allocation for compute heavy Lambda functions"
+  default     = 512
+  type        = number
+}
+
 variable "memory_size_ip" {
   description = "Memory allocation for scan IP Lambda functions"
   default     = 256
