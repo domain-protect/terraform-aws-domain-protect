@@ -111,17 +111,18 @@ variable "memory_size" {
   type        = number
 }
 
-variable "memory_size_ip" {
-  description = "Memory allocation for scan IP Lambda functions"
+variable "memory_size_medium" {
+  description = "Memory allocation for medium compute Lambda functions"
   default     = 256
   type        = number
 }
 
-variable "memory_size_slack" {
-  description = "Memory allocation for Slack Lambda functions"
-  default     = 128
+variable "memory_size_large" {
+  description = "Memory allocation for compute heavy Lambda functions"
+  default     = 512
   type        = number
 }
+
 variable "slack_channels" {
   description = "List of Slack Channels - enter in tfvars file"
   default     = []
