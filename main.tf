@@ -33,7 +33,7 @@ module "lambda_slack_oauth" {
 
   runtime           = local.runtime
   platform          = var.platform
-  memory_size       = var.memory_size_slack
+  memory_size       = var.memory_size_medium
   project           = var.project
   lambda_role_arn   = module.lambda_slack_oauth_role.lambda_role_arn
   kms_arn           = module.kms.kms_arn
@@ -55,7 +55,7 @@ module "lambda_slack" {
 
   runtime            = local.runtime
   platform           = var.platform
-  memory_size        = var.memory_size_slack
+  memory_size        = var.memory_size_medium
   project            = var.project
   lambda_role_arn    = module.lambda_role.lambda_role_arn
   kms_arn            = module.kms.kms_arn
@@ -168,7 +168,7 @@ module "lambda_takeover" {
 
   runtime           = local.runtime
   platform          = var.platform
-  memory_size       = var.memory_size_slack
+  memory_size       = var.memory_size_medium
   project           = var.project
   lambda_role_arn   = one(module.takeover_role[*].lambda_role_arn)
   kms_arn           = module.kms.kms_arn
@@ -396,7 +396,7 @@ module "lambda_scan_ips" {
   lambdas                  = ["scan-ips"]
   runtime                  = local.runtime
   platform                 = var.platform
-  memory_size              = var.memory_size_ip
+  memory_size              = var.memory_size_medium
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
   external_id              = var.external_id
