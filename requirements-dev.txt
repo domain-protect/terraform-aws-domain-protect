@@ -5,7 +5,7 @@ requests==2.32.5
 black==25.1.0
 prospector==1.17.3
 pytest==8.4.1
-pytest-cov==6.2.1
+pytest-cov==6.3.0
 assertpy==1.1
 moto==5.1.11
 requests-mock==1.12.1
