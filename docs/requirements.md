@@ -5,7 +5,7 @@ In order to deploy Domain Protect successfully, it is necessary to meet the requ
 * Security audit account within AWS Organizations
 * Security audit read-only role with an identical name in every AWS account of the Organization
 * Storage bucket for Terraform state file
-* OIDC role with [deploy policy](../aws-iam-policies/domain-protect-deploy.json) assigned, for CI/CD deployment
+* OIDC role with [deploy policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-deploy.json) assigned, for CI/CD deployment
 * Slack App with OAuth token, see [Slack](slack.md) for details
 * After initial deployment of Domain Protect, copy the Slack App OAuth token value to the Slack OAuth AWS Secret
 
@@ -15,8 +15,8 @@ In order to deploy Domain Protect successfully, it is necessary to meet the requ
 * You can select using the `security_audit_role_name` Terraform variable
 * If you don't already have a suitable role in all AWS accounts, create a new one
 * Name new role `domain-protect-audit` to match default Terraform variable value
-* Assign [domain-protect-audit](../aws-iam-policies/domain-protect-audit.json) IAM policy
-* Set [trust policy](../aws-iam-policies/domain-protect-audit-trust-external-id.json) with Security Audit AWS Account ID
+* Assign [domain-protect-audit](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) IAM policy
+* Set [trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust-external-id.json) with Security Audit AWS Account ID
 * Use External ID in trust policy
 * Deploy across  Organization using [CloudFormation StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
 
