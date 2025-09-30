@@ -19,6 +19,7 @@ In order to deploy Domain Protect successfully, it is necessary to meet the requ
 * Set [trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust-external-id.json) with Security Audit AWS Account ID
 * Use External ID in trust policy
 * Deploy across  Organization using [CloudFormation StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
+* See [Org Management Account](org-management.md) for considerations on installling domain protect audit role in the management account.
 
 ## Requirements for takeover
 
