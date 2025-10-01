@@ -92,14 +92,12 @@ def list_accounts():
     org_primary_account = os.environ["ORG_PRIMARY_ACCOUNT"]
 
     client = boto3.client("organizations")
-    try:
-        return list_aws_accounts(client)
 
-    except exceptions.ClientError:
-        logging.info(
-            "Unable to list AWS accounts in org from this account, trying to assume role in management account %s",
-            org_primary_account,
-        )
+    accounts = list_aws_accounts(client)
+
+    if accounts:
+        logging.info("Listed %s AWS accounts in organization from this account", len(accounts))
+        return accounts
 
     boto3_session = assume_role(org_primary_account)
     if boto3_session is None:
