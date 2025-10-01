@@ -82,7 +82,7 @@ def list_aws_accounts(client):
 
         return accounts_list
 
-    except Exception:
+    except exceptions.ClientError:
         logging.exception("ERROR: Unable to list AWS accounts across organization")
 
     return []
@@ -95,7 +95,7 @@ def list_accounts():
     try:
         return list_aws_accounts(client)
 
-    except Exception:
+    except exceptions.ClientError:
         logging.info(
             "Unable to list AWS accounts in org from this account, trying to assume role in management account %s",
             org_primary_account,
