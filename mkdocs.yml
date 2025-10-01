@@ -60,6 +60,7 @@ nav:
   - Installation:
     - Requirements: requirements.md
     - Installation: installation.md
+    - Org management account: org-management.md
     - Migration: migration.md
     - Slack: slack.md
     - Slack Webhooks (legacy): slack-webhook.md
