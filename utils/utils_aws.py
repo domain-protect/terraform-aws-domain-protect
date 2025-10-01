@@ -68,12 +68,7 @@ def assume_role(account, region_override="None"):
         return None
 
 
-def list_accounts():
-    org_primary_account = os.environ["ORG_PRIMARY_ACCOUNT"]
-
-    boto3_session = assume_role(org_primary_account)
-    client = boto3_session.client(service_name="organizations")
-
+def list_aws_accounts(client):
     accounts_list = []
 
     try:
@@ -88,12 +83,30 @@ def list_accounts():
         return accounts_list
 
     except Exception:
-        logging.exception(
-            "ERROR: Unable to list AWS accounts across organization with primary account %a",
-            org_primary_account,
-        )
+        logging.info("Unable to list AWS accounts across organization from this account")
 
     return []
+
+
+def list_accounts():
+    org_primary_account = os.environ["ORG_PRIMARY_ACCOUNT"]
+
+    client = boto3.client("organizations")
+
+    accounts = list_aws_accounts(client)
+
+    if accounts:
+        logging.info("Listed %s AWS accounts in organization from this account", len(accounts))
+        return accounts
+
+    boto3_session = assume_role(org_primary_account)
+    if boto3_session is None:
+        logging.error("Failed to assume role in management account %s", org_primary_account)
+        return []
+
+    client = boto3_session.client("organizations")
+
+    return list_aws_accounts(client)
 
 
 def list_hosted_zones(account):
