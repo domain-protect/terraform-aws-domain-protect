@@ -83,7 +83,7 @@ def list_aws_accounts(client):
         return accounts_list
 
     except exceptions.ClientError:
-        logging.exception("ERROR: Unable to list AWS accounts across organization")
+        logging.info("Unable to list AWS accounts across organization from this account")
 
     return []
 
