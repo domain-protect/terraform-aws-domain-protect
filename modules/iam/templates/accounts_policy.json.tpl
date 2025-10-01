@@ -61,6 +61,14 @@
       "Resource": "${ddb_table_arn}"
     },
     {
+      "Sid": "Organizations",
+      "Effect": "Allow",
+      "Action": [
+        "organizations:ListAccounts"
+      ],
+      "Resource": "*"
+    },
+    {
       "Sid": "StartStateMachine",
       "Effect": "Allow",
       "Action": [
