@@ -23,6 +23,10 @@ resource "aws_cloudformation_stack_set" "domain_protect" {
     max_concurrent_percentage    = 50
     region_concurrency_type      = "PARALLEL"
   }
+
+  lifecycle {
+    ignore_changes = [administration_role_arn]
+  }
 }
 
 resource "aws_cloudformation_stack_instances" "member_account_deployments" {
