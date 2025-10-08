@@ -1,3 +1,13 @@
+module "stackset" {
+  source = "./modules/stackset"
+  count  = var.deploy_audit_role && local.env == var.production_environment ? 1 : 0
+
+  policy_name   = var.policy_name
+  project       = var.project
+  role_name     = var.security_audit_role_name
+  stackset_name = var.stackset_name
+}
+
 module "kms" {
   source = "./modules/kms"
 
@@ -158,7 +168,7 @@ module "lambda_scan" {
   hackerone                = var.hackerone
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
-  production_environment   = local.production_environment
+  production_environment   = var.production_environment
   vpc_config               = var.vpc_config
 }
 
@@ -297,7 +307,7 @@ module "lambda_cloudflare" {
   org_primary_account      = var.org_primary_account
   sns_topic_arn            = module.sns.sns_topic_arn
   dlq_sns_topic_arn        = module.sns_dead_letter_queue.sns_topic_arn
-  production_environment   = local.production_environment
+  production_environment   = var.production_environment
   bugcrowd                 = var.bugcrowd
   bugcrowd_api_key         = var.bugcrowd_api_key
   bugcrowd_email           = var.bugcrowd_email
@@ -405,7 +415,7 @@ module "lambda_scan_ips" {
   kms_arn                  = module.kms.kms_arn
   sns_topic_arn            = module.sns.sns_topic_arn
   dlq_sns_topic_arn        = module.sns_dead_letter_queue.sns_topic_arn
-  production_environment   = local.production_environment
+  production_environment   = var.production_environment
   allowed_regions          = var.allowed_regions
   ip_time_limit            = var.ip_time_limit
   bugcrowd                 = var.bugcrowd
