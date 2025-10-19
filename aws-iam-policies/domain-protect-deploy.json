@@ -239,6 +239,34 @@
         "secretsmanager:UpdateSecret"
       ],
       "Resource": "arn:aws:secretsmanager:eu-west-1:SECURITY_AWS_ACCOUNT_ID:secret:domain-protect-*"
-    }
+    },
+    {
+			"Effect": "Allow",
+			"Action": [
+				"organizations:Describe*",
+        "organizations:List*"
+			],
+			"Resource": "*"
+		},
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:*"
+      ],
+      "Resource": [
+        "arn:aws:cloudformation:eu-west-1:ORG_MGMT_ACCOUNT_ID:stackset/domain-protect",
+        "arn:aws:cloudformation:*:ORG_MGMT_ACCOUNT_ID:stackset-target/domain-protect:*",
+        "arn:aws:cloudformation:*:*:type/resource/AWS-IAM-Role",
+        "arn:aws:cloudformation:*:*:type/resource/AWS-IAM-ManagedPolicy",
+        "arn:aws:cloudformation:*:*:type/resource/AWS-IAM-Policy"
+      ]
+    },
+    {
+			"Effect": "Allow",
+			"Action": [
+				"cloudformation:GetTemplateSummary"
+			],
+			"Resource": "*"
+		}
   ]
 }
