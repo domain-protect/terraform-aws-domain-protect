@@ -55,7 +55,7 @@
                   "aws:PrincipalArn": [
                     {
                       "Fn::Sub": [
-                        "arn:aws:sts::${AccountId}:assumed-role/${Project}-*",
+                        "arn:aws:iam::${AccountId}:role/${Project}-*",
                         {
                           "AccountId": {
                             "Ref": "AccountId"
