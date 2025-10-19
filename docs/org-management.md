@@ -6,7 +6,7 @@ AWS best practice is to have as few resources as possible within the Organizatio
 
 ## Option to deploy Domain Protect audit role in Org Management account
 
-The [Domain Protect audit role](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) can be implemented in the Org Management account, which may be appropriate in any of these scenarios:
+The Domain Protect audit role can be implemented in the Org Management account with [this attached policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) and [this trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust.json), which may be appropriate in any of these scenarios:
 
 * Route 53 domains or hosted zones present in Org Management account
 * There are resources with public IP addresses in the Org Management account

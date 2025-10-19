@@ -11,14 +11,15 @@ In order to deploy Domain Protect successfully, it is necessary to meet prerequi
 
 ## Optional Domain Protect audit role in AWS org management account
 
+Domain Protect installs a role in all accounts in the Organization using a CloudFormation StackSet, with the exception of the Organization management account.
+
 If you have Route53 domains or hosted zones in the Organization Management account:
 
-* Create an IAM role n the Org Management account
+* Create an IAM role in the Org Management account
 * Name new role `domain-protect-audit`
 * Assign [domain-protect-audit](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) IAM policy
-* Set [trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust-external-id.json) with Security Audit AWS Account ID
+* Set IAM role [trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust.json)
 
-* Deploy across  Organization using [CloudFormation StackSets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
 * See [Org Management Account](org-management.md) for more information.
 
 ## Requirements for takeover
