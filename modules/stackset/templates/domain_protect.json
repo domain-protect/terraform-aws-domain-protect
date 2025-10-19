@@ -55,7 +55,7 @@
                   "aws:SourceArn": [
                     {
                       "Fn::Sub": [
-                        "arn:aws:lambda:${AWS::Region}:${AccountId}:function:${Project}-*",
+                        "arn:aws:sts::${AccountId}:assumed-role/${Project}-*",
                         {
                           "AccountId": {
                             "Ref": "AccountId"
