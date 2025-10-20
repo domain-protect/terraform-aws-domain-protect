@@ -1,0 +1,128 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Domain Protect IAM Role",
+  "Outputs": {
+    "RoleARN": {
+      "Description": "Role ARN",
+      "Value": {
+        "Fn::GetAtt": [
+          "Role",
+          "Arn"
+        ]
+      }
+    }
+  },
+  "Parameters": {
+    "PolicyName": {
+      "AllowedPattern": "[a-zA-Z0-9-]{3,63}",
+      "Description": "Policy Name",
+      "Type": "String"
+    },
+    "RoleName": {
+      "AllowedPattern": "[a-zA-Z0-9-]{3,63}",
+      "Description": "Role Name",
+      "Type": "String"
+    },
+    "AccountId": {
+      "AllowedPattern": "[0-9]{12}",
+      "Description": "Account ID",
+      "Type": "String"
+    },
+    "Project": {
+      "AllowedPattern": "[a-zA-Z0-9-]{3,63}",
+      "Description": "Project Name",
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "Role": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Ref": "AccountId"
+                }
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ],
+              "Condition": {
+                "ArnLike": {
+                  "aws:PrincipalArn": [
+                    {
+                      "Fn::Sub": [
+                        "arn:aws:iam::${AccountId}:role/${Project}-*",
+                        {
+                          "AccountId": {
+                            "Ref": "AccountId"
+                          },
+                          "Project": {
+                            "Ref": "Project"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "RoleName": {
+          "Ref": "RoleName"
+        }
+      },
+      "Type": "AWS::IAM::Role"
+    },
+    "Policy": {
+      "Properties": {
+        "ManagedPolicyName": {
+          "Ref": "PolicyName"
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "DomainProtect",
+              "Effect": "Allow",
+              "Resource": "*",
+              "Action": [
+                "cloudfront:ListDistributions",
+                "organizations:ListAccounts",
+                "route53:ListHostedZones",
+                "route53:ListResourceRecordSets",
+                "route53domains:ListDomains"
+              ]
+            },
+            {
+              "Sid": "DomainProtectIPs",
+              "Effect": "Allow",
+              "Resource": "*",
+              "Action": [
+                "ec2:DescribeAddresses",
+                "ec2:DescribeInstances",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeRegions",
+                "ecs:DescribeTasks",
+                "ecs:ListClusters",
+                "ecs:ListTasks",
+                "globalaccelerator:ListAccelerators"
+              ]
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "Role"
+          }
+        ]
+      },
+      "Type": "AWS::IAM::ManagedPolicy"
+    }
+  }
+}

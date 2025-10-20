@@ -8,9 +8,7 @@ module "domain_protect" {
   cloudflare_api_key  = var.cloudflare_api_key
   cloudflare_email    = var.cloudflare_email
   environment         = "dev"
-  external_id         = var.external_id
   hackerone           = "disabled"
-  ip_address          = true
   ip_time_limit       = 0.1 # 6 minutes
   org_primary_account = var.org_primary_account
   rcu                 = 1

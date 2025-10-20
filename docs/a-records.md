@@ -1,5 +1,5 @@
 # Vulnerable A records (IP addresses)
-*optional feature turned off by default*
+*optional feature turned on by default*
 
 * detects A records pointing to AWS IP addresses no longer in use within organisation
   * Elastic IP addresses
@@ -45,10 +45,10 @@ If A record points to legitimate IP address, e.g. in a service provider's AWS ac
 
 ![Alt text](assets/images/ip-exception.png?raw=true "IP Address exception")
 
-## Enabling A record feature
+## Disabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:
 ```
-ip_address = true
+ip_address = false
 ```
 * apply Terraform
 
@@ -63,32 +63,12 @@ False positive alerts can occur when an 'A' record legitimately points
 to an IP address in an AWS account outside your organisation,
 for example a company website hosted by a third party.
 
-To minimise false positive alerts when enabling feature in production for the first time:
-* set Terraform environment variable for a private dev Slack channel in your pipeline or `tfvars` file
-```
-slack_channels_dev = ["test_a_records"]
-```
-* enable A record feature
-```
-ip_address = true
-```
-* don't apply Terraform to production yet
-* deploy a development instance of Domain Protect to your production security audit account
-```
-terraform workspace new dev
-terraform apply
-```
-* leave running for 48 hours
-* monitor dev Slack channel
+To minimise false positive alerts:
+
+* monitor Slack channel
 * assess which IP addresses are legitimate
-* deploy A record feature to production
-```
-terraform workspace select prd
-terraform apply
-```
 * immediately after deploying, [record IP address as OK](#record-ip-address-as-ok) for legitimate addresses
 * complete before DynamoDB `DomainProtectIPsPrd` item count updates from initial value of `0`
-* remove development instance of Domain Protect if no longer needed
 
 ## Optimising cost and performance
 Optional Terraform variables can be entered in your CI/CD pipeline or tfvars file to optimise performance and cost:

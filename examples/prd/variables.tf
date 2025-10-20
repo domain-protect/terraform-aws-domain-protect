@@ -6,16 +6,18 @@ variable "cloudflare_email" {
   description = "Cloudflare Email"
 }
 
-variable "external_id" {
-  description = "external ID for security audit role to be defined in tvars file. Leave empty if not configured"
-}
-
 variable "hackerone_api_token" {
   description = "HackerOne API token"
 }
 
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
+}
+
+variable "region" {
+  description = "AWS region to deploy resources into"
+  default     = "eu-west-1"
+  type        = string
 }
 
 variable "tags" {

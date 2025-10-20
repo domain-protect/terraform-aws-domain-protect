@@ -1,23 +1,21 @@
 # Organization Management Acccount
 
-There are two options for setting up Domain Protect with the Org Management account:
-
-## No new resources in Org Management account (Standard approach)
+Be default, Domain Protect assumes it's being installed in a dedicated security tooling account. Domain Protect uses a CloudFormation Stack Set to deploy a security audit role in all AWS accounts in the Organization, with the exception of the Org Management Account.
 
 AWS best practice is to have as few resources as possible within the Organization Management account, and to have the minimum possible users and roles with access to it.
 
-In line with this, the recommended approach for Domain Protect installation is:
+## Option to deploy Domain Protect audit role in Org Management account
 
-* install Domain Protect in a dedicated security tooling AWS account
-* don't create the [Domain Protect audit role](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) in the Org Management account
-* delegate an Organization service, e.g. Cloud Formation Stack Sets, to the security tooling account
-* this allows Domain Protect to list all AWS accounts in the organisation, essential for correct operation of Domain Protect
-
-## Domain Protect audit role in Org Management account (Alternative approach)
-
-The [Domain Protect audit role](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) can be implemented in the Org Management account, which may be appropriate in either of these scenarios:
+The Domain Protect audit role can be implemented in the Org Management account with [this attached policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit.json) and [this trust policy](https://github.com/domain-protect/terraform-aws-domain-protect/blob/main/aws-iam-policies/domain-protect-audit-trust.json), which may be appropriate in any of these scenarios:
 
 * Route 53 domains or hosted zones present in Org Management account
+* There are resources with public IP addresses in the Org Management account
 * There is a preference not to delegate Organization services to other accounts
 
-If present, Domain Protect will assume the role in the Org Management account, and use this role both to list all accounts, and to test for domains vulnerable to takeover.
+Domain Protect begins its operations by listing all accounts in the Organization. It will attempt to do this in the security tooling account, which requires an Organization service, e.g. CloudForamtion Stack Sets, to be registerd as a dedicated administrator.
+
+If listing accounts in the Organization is not supported in the security tooling account, Domain Protect will assume the audit role in the Org Management account, and then list all accounts.
+
+Domain Protect will later assume the audit role in the Org Management account again to scan for domains vulnerable to takeover.
+
+Domain Protect does not include Terraform to deploy the optional audit role to the Management account, so if required, this needs to be done separately.
