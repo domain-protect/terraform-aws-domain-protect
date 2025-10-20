@@ -24,9 +24,18 @@ module "domain_protect" {
 
 * see the [examples directory](https://github.com/domain-protect/terraform-aws-domain-protect/tree/main/examples) for complete Terraform examples including `provider.tf` and `backend.tf` files
 
+## A record (IP address) vulnerabilities
+
+False positive alerts can occur when an 'A' record legitimately points to an IP address in an AWS account outside your organisation,
+for example a company website hosted by a third party.
+
+See [A Records](a-records.md)  for actions to prevent false positives, and how to disable A record vulnerability detection.
+
 ## Domain Protect audit role in every AWS account
 
 By default, Domain Protect uses a CloudFormation Stack Set to deploy an audit role to every AWS account in the Organization, with the exception of the Org Management account.
+
+If you have Route53 zones or domains in the Org Management account you'll need to separately install the Domain Protect audit role to that account, as described in [Org Management Account](org-management.md).
 
 ## Optional self-installation of Domain Protect audit role
 
