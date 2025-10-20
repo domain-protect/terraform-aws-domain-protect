@@ -16,7 +16,7 @@ repos:
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 -   repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.1
+    rev: v3.21.0
     hooks:
     -   id: pyupgrade
         args: [--py36-plus]
@@ -28,7 +28,7 @@ repos:
         args: [--py36-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/asottile/reorder_python_imports
-    rev: v3.15.0
+    rev: v3.16.0
     hooks:
     -   id: reorder-python-imports
         args: [--py3-plus]
