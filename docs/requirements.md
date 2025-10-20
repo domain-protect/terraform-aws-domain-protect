@@ -22,6 +22,9 @@ If you have Route53 domains or hosted zones in the Organization Management accou
 
 * See [Org Management Account](org-management.md) for more information.
 
+## Self-installation of Domain Protect audit role to Organization accounts
+Optionally you can self-install the Domain Protect audit role across your Organization by another method, as detailed in [Domain Protect audit role](audit-role.md).
+
 ## Requirements for takeover
 
 * Creation of takeover resources in security account must not be blocked in some regions by SCP
