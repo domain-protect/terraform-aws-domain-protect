@@ -41,31 +41,13 @@ The A record check may create false positive alerts where the IP address is outs
 * public IP address on-premise
 * public IP address in private data centre
 
-There are two methods which can be used to authorise IP addresses outside the AWS Organization:
-
-* authorise networks outside AWS Organization (recommended)
-* record IP address as OK in DynamoDB (not recommended)
-
-Each method is detailed below.
-
-## Authorise networks outside AWS Organization (recommended)
-Approved networks outside AWS can be pre-authorised by setting the Terraform variable, using CIDR notation:
+Approved networks outside the AWS Organization can be pre-authorised by setting the Terraform variable, using CIDR notation:
 
 ```
-networks = ['212.137.0.0/16', '84.67.112.128/26']
+networks = ['212.137.0.0/16', '84.67.112.135/32']
 ```
 
-This approach ensures exception configuration uses infrastructure-as-code, and doesn't require administrator access to the database.
-
-## Record IP address as OK in DynamoDB (not recommended)
-To authorise a single IP address (not a network):
-
-* manually create item in IP address DynamoDB database
-* enter IP address known to be authorised
-* create Account field with text starting `IP OK`
-* item must be manually removed when resource is decommissioned
-
-![Alt text](assets/images/ip-exception.png?raw=true "IP Address exception")
+There is no need to include private networks in this list.
 
 ## Disabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:
