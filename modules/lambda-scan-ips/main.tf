@@ -61,6 +61,7 @@ resource "aws_lambda_function" "lambda" {
       BUGCROWD_STATE           = var.bugcrowd_state
       HACKERONE                = var.hackerone
       HACKERONE_API_TOKEN      = var.hackerone_api_token
+      NETWORKS                 = join(",", var.networks)
     }
   }
 

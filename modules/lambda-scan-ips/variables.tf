@@ -19,6 +19,7 @@ variable "bugcrowd_email" {}
 variable "bugcrowd_state" {}
 variable "hackerone" {}
 variable "hackerone_api_token" {}
+variable "networks" {}
 
 variable "vpc_config" {
   type = object({

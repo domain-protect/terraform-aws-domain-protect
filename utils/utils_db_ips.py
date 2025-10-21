@@ -1,10 +1,16 @@
+import ast
 import datetime
 import os
 
 import boto3
 
+from utils.utils_ips import is_ip_in_networks
+
+
 project = os.environ["PROJECT"]
 env_name = os.environ["ENVIRONMENT"]
+networks_str = os.environ.get("NETWORKS", "[]")
+networks = ast.literal_eval(networks_str)
 ip_base_table_name = "IPs"
 
 
@@ -99,7 +105,9 @@ def db_check_ip(ip, max_age_hours):
     if item:
 
         if "IP OK" in item["Account"]["S"]:
+            return True
 
+        if is_ip_in_networks(ip):
             return True
 
         last_date_time_string = item["LastDateTime"]["S"]

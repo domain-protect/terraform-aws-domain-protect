@@ -425,6 +425,7 @@ module "lambda_scan_ips" {
   hackerone                = var.hackerone
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
+  networks                 = var.networks
   vpc_config               = var.vpc_config
 }
 

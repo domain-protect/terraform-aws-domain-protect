@@ -34,10 +34,32 @@ A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
 
 ![Alt text](assets/images/ip-database.png?raw=true "IP Address database")
 
-## Record IP address as OK
-The A record check may create false positive alerts.
+## Authorising IP addresses outside AWS Organization
+The A record check may create false positive alerts where the IP address is outside the AWS Organization scanned by Domain Protect, for example:
 
-If A record points to legitimate IP address, e.g. in a service provider's AWS account:
+* public IP address in service provider AWS account
+* public IP address on-premise
+* public IP address in private data centre
+
+There are two methods which can be used to authorise IP addresses outside the AWS Organization:
+
+* authorise networks outside AWS Organization (recommended)
+* record IP address as OK in DynamoDB (not recommended)
+
+Each method is detailed below.
+
+## Authorise networks outside AWS Organization (recommended)
+Approved networks outside AWS can be pre-authorised by setting the Terraform variable, using CIDR notation:
+
+```
+networks = ['212.137.0.0/16', '84.67.112.128/26']
+```
+
+This approach ensures exception configuration uses infrastructure-as-code, and doesn't require administrator access to the database.
+
+## Record IP address as OK in DynamoDB (not recommended)
+To authorise a single IP address (not a network):
+
 * manually create item in IP address DynamoDB database
 * enter IP address known to be authorised
 * create Account field with text starting `IP OK`

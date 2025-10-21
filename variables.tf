@@ -127,6 +127,12 @@ variable "memory_size_medium" {
   type        = number
 }
 
+variable "networks" {
+  description = "List of trusted networks outside of AWS, e.g. on-premise, used for A record checks"
+  default     = []
+  type        = list(string)
+}
+
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
   type        = string
