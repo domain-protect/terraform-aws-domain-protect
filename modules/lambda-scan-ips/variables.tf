@@ -1,5 +1,6 @@
 variable "project" {}
 variable "security_audit_role_name" {}
+variable "aws_ip_addresses" {}
 variable "external_id" {}
 variable "org_primary_account" {}
 variable "lambda_role_arn" {}
@@ -19,7 +20,6 @@ variable "bugcrowd_email" {}
 variable "bugcrowd_state" {}
 variable "hackerone" {}
 variable "hackerone_api_token" {}
-variable "networks" {}
 
 variable "vpc_config" {
   type = object({

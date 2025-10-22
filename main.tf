@@ -409,6 +409,7 @@ module "lambda_scan_ips" {
   memory_size              = var.memory_size_medium
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
+  aws_ip_addresses         = var.aws_ip_addresses
   external_id              = var.external_id
   org_primary_account      = var.org_primary_account
   lambda_role_arn          = module.lambda_role_ips[0].lambda_role_arn
@@ -425,7 +426,6 @@ module "lambda_scan_ips" {
   hackerone                = var.hackerone
   hackerone_api_token      = var.hackerone_api_token
   environment              = local.env
-  networks                 = var.networks
   vpc_config               = var.vpc_config
 }
 

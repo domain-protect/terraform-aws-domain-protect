@@ -4,6 +4,12 @@ variable "allowed_regions" {
   type        = string
 }
 
+variable "aws_ip_addresses" {
+  description = "Authorised AWS IP addresses or networks outside AWS Organization"
+  default     = []
+  type        = list(string)
+}
+
 variable "bugcrowd" {
   description = "Set to enabled for Bugcrowd integration"
   default     = "disabled"
@@ -125,12 +131,6 @@ variable "memory_size_medium" {
   description = "Memory allocation for medium compute Lambda functions"
   default     = 256
   type        = number
-}
-
-variable "networks" {
-  description = "List of trusted networks outside of AWS, e.g. on-premise, used for A record checks"
-  default     = []
-  type        = list(string)
 }
 
 variable "org_primary_account" {

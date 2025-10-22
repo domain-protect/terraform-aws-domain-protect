@@ -1,8 +1,8 @@
 import ipaddress
 import os
 
-# environment variable NETWORKS can be empty, or with format: "'56.0.0.0/8', '34.77.1.243/32'"
-networks_str = os.environ.get("NETWORKS")
+# environment variable AWS_IP_ADDRESSES can be empty, or with format: "'3.5.140.1', '3.5.140.128/30'"
+networks_str = os.environ.get("AWS_IP_ADDRESSES")
 networks = networks_str.split(",") if networks_str else []
 
 

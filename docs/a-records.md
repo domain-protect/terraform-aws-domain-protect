@@ -34,20 +34,18 @@ A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
 
 ![Alt text](assets/images/ip-database.png?raw=true "IP Address database")
 
-## Authorising IP addresses outside AWS Organization
-The A record check may create false positive alerts where the IP address is outside the AWS Organization scanned by Domain Protect, for example:
+## Authorising AWS IP addresses outside AWS Organization
+The A record check may create false positive alerts where the IP address is within AWS, but outside the AWS Organization scanned by Domain Protect.
 
-* public IP address in service provider AWS account
-* public IP address on-premise
-* public IP address in private data centre
+For example, the A record may point to a public IP address in a service provider's AWS account.
 
-Approved networks outside the AWS Organization can be pre-authorised by setting the Terraform variable, using CIDR notation:
+Approved AWS IP addresses outside the AWS Organization can be pre-authorised by setting the Terraform variable:
 
 ```
-networks = ['212.137.0.0/16', '84.67.112.135/32']
+aws_ip_addresses = ["3.5.140.1", "15.230.15.30"]
 ```
 
-There is no need to include private networks in this list.
+If there is a network of AWS IP addresses which you wish to authorise, rather than a single address, add to the list in CIDR notation, e.g. 52.93.178.144/30.
 
 ## Disabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:

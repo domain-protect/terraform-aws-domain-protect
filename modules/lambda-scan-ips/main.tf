@@ -54,6 +54,7 @@ resource "aws_lambda_function" "lambda" {
       ENVIRONMENT              = var.environment
       PRODUCTION_ENVIRONMENT   = var.production_environment
       ALLOWED_REGIONS          = var.allowed_regions
+      AWS_IP_ADDRESSES         = join(",", var.aws_ip_addresses)
       IP_TIME_LIMIT            = var.ip_time_limit
       BUGCROWD                 = var.bugcrowd
       BUGCROWD_API_KEY         = var.bugcrowd_api_key
@@ -61,7 +62,6 @@ resource "aws_lambda_function" "lambda" {
       BUGCROWD_STATE           = var.bugcrowd_state
       HACKERONE                = var.hackerone
       HACKERONE_API_TOKEN      = var.hackerone_api_token
-      NETWORKS                 = join(",", var.networks)
     }
   }
 
