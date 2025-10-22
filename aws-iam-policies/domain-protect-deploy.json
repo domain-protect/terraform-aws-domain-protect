@@ -46,19 +46,19 @@
       "Resource": "*"
     },
     {
-        "Effect": "Allow",
-        "Action": [
-            "iam:AttachRolePolicy",
-            "iam:DetachRolePolicy",
-            "iam:GetPolicy",
-            "iam:GetPolicyVersion"
-        ],
-        "Resource": [
-            "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
-            "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess",
-            "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk",
-            "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-        ]
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion"
+      ],
+      "Resource": [
+        "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
+        "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess",
+        "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk",
+        "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+      ]
     },
     {
       "Effect": "Allow",
