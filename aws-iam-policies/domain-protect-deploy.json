@@ -78,7 +78,9 @@
         "iam:ListRolePolicies",
 	      "iam:PutRolePermissionsBoundary",
         "iam:PutRolePolicy",
-        "iam:PassRole"
+        "iam:PassRole",
+        "iam:TagRole",
+        "iam:UntagRole"
       ],
       "Resource": "arn:aws:iam::SECURITY_AWS_ACCOUNT_ID:role/domain-protect-*"
     },
