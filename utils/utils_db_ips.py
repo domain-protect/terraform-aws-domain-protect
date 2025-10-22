@@ -1,4 +1,3 @@
-import ast
 import datetime
 import os
 
@@ -9,8 +8,6 @@ from utils.utils_ips import is_ip_in_networks
 
 project = os.environ["PROJECT"]
 env_name = os.environ["ENVIRONMENT"]
-networks_str = os.environ.get("NETWORKS", "[]")
-networks = ast.literal_eval(networks_str)
 ip_base_table_name = "IPs"
 
 
