@@ -40,3 +40,10 @@ def test_is_ip_not_in_networks():
     result = is_ip_in_networks(ip)
 
     assert_that(result).is_false()
+
+
+@patch("utils.utils_ips.networks", [])
+def test_is_ip_in_networks_no_networks():
+    ip = "192.168.1.10"
+    result = is_ip_in_networks(ip)
+    assert_that(result).is_false()
