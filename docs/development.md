@@ -50,3 +50,44 @@ export HACKERONE_API_TOKEN="xxxxxxxxxxxxxxxxxx"
 from lambda_code.cloudflare_scan.cloudflare_scan import lambda_handler
 lambda_handler({},{})
 ```
+
+## testing Lambda functions locally (Windows)
+* create virtual environment
+```
+cd modules\terraform-aws-ca-lambda
+python -m venv .venv
+```
+* activate virtual environment
+```
+.venv/scripts/activate
+```
+* install dependencies
+```
+pip install -r requirements-dev.txt
+```
+* set environment variables for dev environment
+```
+$env:ALLOWED_REGIONS="['eu-west-1', 'us-east-1']"
+$env:AWS_DEFAULT_REGION="eu-west-1"
+$env:AWS_REGION="eu-west-1"
+$env:ORG_PRIMARY_ACCOUNT="123456789012"
+$env:SECURITY_AUDIT_ROLE_NAME="domain-protect-audit"
+$env:PROJECT="domain-protect"
+$env:SNS_TOPIC_ARN="arn:aws:sns:eu-west-1:123456789012:domain-protect-dev"
+$env:ENVIRONMENT="dev"
+$env:PRODUCTION_ENVIRONMENT="prd"
+$env:BUGCROWD="disabled"
+$env:BUGCROWD_API_KEY="xxxxxxxxxxxxxxxxxx"
+$env:BUGCROWD_EMAIL="me@example.com"
+$env:BUGCROWD_STATE="unresolved"
+$env:HACKERONE="enabled"
+$env:HACKERONE_API_TOKEN="xxxxxxxxxxxxxxxxxx"
+$env:IP_TIME_LIMIT="48"
+```
+* copy and paste AWS PowerShell variables to PowerShell terminal
+* test Lambda function locally
+* enter `python`
+```
+from lambda_code.scan_ips.scan_ips import lambda_handler
+lambda_handler({"Id": "123456789012", "Name": "MyAWSAccount"},{})
+```
