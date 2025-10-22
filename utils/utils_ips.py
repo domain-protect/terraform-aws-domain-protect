@@ -1,10 +1,9 @@
-import ast
 import ipaddress
 import os
 
-
-networks_str = os.environ.get("NETWORKS", "[]")
-networks = ast.literal_eval(networks_str)
+# environment variable NETWORKS can be empty, or with format: "'56.0.0.0/8', '34.77.1.243/32'"
+networks_str = os.environ.get("NETWORKS")
+networks = networks_str.split(",") if networks_str else []
 
 
 def is_ip_in_network(ip, network):
