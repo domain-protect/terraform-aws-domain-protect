@@ -53,7 +53,7 @@ def create_session(credentials, region_override):
 def assume_role(account, region_override="None"):
     project = os.environ["PROJECT"]
     security_audit_role_name = os.environ["SECURITY_AUDIT_ROLE_NAME"]
-    external_id = os.environ["EXTERNAL_ID"]
+    external_id = os.environ.get("EXTERNAL_ID") or ""
 
     try:
         assumed_role_object = generate_temporary_credentials(account, security_audit_role_name, external_id, project)

@@ -4,9 +4,9 @@ import requests
 
 from utils.utils_globalvars import requests_timeout
 
-bugcrowd_api_key = os.environ["BUGCROWD_API_KEY"]
-bugcrowd_email = os.environ["BUGCROWD_EMAIL"]
-bugcrowd_state = os.environ["BUGCROWD_STATE"]
+bugcrowd_api_key = os.environ.get("BUGCROWD_API_KEY") or ""
+bugcrowd_email = os.environ.get("BUGCROWD_EMAIL") or ""
+bugcrowd_state = os.environ.get("BUGCROWD_STATE") or ""
 bugcrowd_base_url = "https://api.bugcrowd.com"
 project = os.environ["PROJECT"]
 
