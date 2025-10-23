@@ -12,6 +12,20 @@ from integration_tests.deployment.aws.utils.route53 import get_zone_id
 from utils.utils_db import db_get_unfixed_vulnerability_found_date_time
 
 
+# not vulnerable - AWS EC2 address outside AWS Organization, included in aws_ip_addresses in dev environment
+a_record_1_details = {
+    "record_value": "18.96.8.1",
+    "record_type": "A",
+    "resource_type": "18.96.8.1",
+}
+
+# vulnerable - AWS EC2 address outside AWS Organization, not included in aws_ip_addresses
+a_record_2_details = {
+    "record_value": "18.96.8.2",
+    "record_type": "A",
+    "resource_type": "18.96.8.2",
+}
+
 ns_record_details = {
     "record_value": "ns1.amazon.com",
     "record_type": "NS",
@@ -64,24 +78,36 @@ def test_aws_vulnerabilities_detected():
 
     zone_id = get_zone_id(route53_account, zone_name)
     accounts_lambda_name = f"{project}-accounts-{environment}"
+    accounts_ips_lambda_name = f"{project}-accounts-ips-{environment}"
     update_lambda_name = f"{project}-update-{environment}"
+    a_record_1_suffix = random_string()
+    a_record_2_suffix = random_string()
     cname_suffix = random_string()
     ns_suffix = random_string()
+    a_record_1_name = f"not-vulnerable-{a_record_1_suffix}.{zone_name}"
+    a_record_2_name = f"vulnerable-{a_record_2_suffix}.{zone_name}"
     cname_record_name = f"vulnerable-{cname_suffix}.{zone_name}"
     ns_record_name = f"vulnerable-{ns_suffix}.{zone_name}"
 
     # Create vulnerable records in Route53 AWS account
+    create_vulnerable_record(a_record_1_name, a_record_1_details, route53_account, zone_id)
+    create_vulnerable_record(a_record_2_name, a_record_2_details, route53_account, zone_id)
     create_vulnerable_record(cname_record_name, cname_record_details, route53_account, zone_id)
     create_vulnerable_record(ns_record_name, ns_record_details, route53_account, zone_id)
 
-    # Invoke Accounts Lambda function
+    # Invoke Accounts Lambda functions
     invoke_lambda(accounts_lambda_name)
+    invoke_lambda(accounts_ips_lambda_name)
 
     # test if vulnerabilities detected within specified time period
+    a_1_vulnerability_found = vulnerability_detected_in_time_period(f"{a_record_1_name}.", 30)
+    a_2_vulnerability_found = vulnerability_detected_in_time_period(f"{a_record_2_name}.", 120)
     cname_vulnerability_found = vulnerability_detected_in_time_period(f"{cname_record_name}.", 120)
     ns_vulnerability_found = vulnerability_detected_in_time_period(f"{ns_record_name}.", 120)
 
     # Delete vulnerable records
+    delete_vulnerable_record(a_record_1_name, a_record_1_details, route53_account, zone_id)
+    delete_vulnerable_record(a_record_2_name, a_record_2_details, route53_account, zone_id)
     delete_vulnerable_record(cname_record_name, cname_record_details, route53_account, zone_id)
     delete_vulnerable_record(ns_record_name, ns_record_details, route53_account, zone_id)
 
@@ -97,6 +123,8 @@ def test_aws_vulnerabilities_detected():
         300,
     )
 
+    assert_that(a_1_vulnerability_found).is_false()
+    assert_that(a_2_vulnerability_found).is_true()
     assert_that(cname_vulnerability_found).is_true()
     assert_that(ns_vulnerability_found).is_true()
     assert_that(cname_vulnerability_reported_fixed).is_true()
