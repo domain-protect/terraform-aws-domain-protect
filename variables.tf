@@ -4,6 +4,12 @@ variable "allowed_regions" {
   type        = string
 }
 
+variable "aws_ip_addresses" {
+  description = "Authorised AWS IPv4 addresses or networks outside AWS Organization"
+  default     = []
+  type        = list(string)
+}
+
 variable "bugcrowd" {
   description = "Set to enabled for Bugcrowd integration"
   default     = "disabled"

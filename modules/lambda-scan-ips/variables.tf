@@ -1,5 +1,6 @@
 variable "project" {}
 variable "security_audit_role_name" {}
+variable "aws_ip_addresses" {}
 variable "external_id" {}
 variable "org_primary_account" {}
 variable "lambda_role_arn" {}

@@ -3,6 +3,9 @@ import os
 
 import boto3
 
+from utils.utils_ips import is_ip_in_networks
+
+
 project = os.environ["PROJECT"]
 env_name = os.environ["ENVIRONMENT"]
 ip_base_table_name = "IPs"
@@ -90,18 +93,21 @@ def db_ip(ip, account, region, resource_type, cloud="AWS"):
 
 def db_check_ip(ip, max_age_hours):
     # checks database for IP address
-    # ignores if LastDateTime is older than specified number of hours
-    # doesn't check age of manually entered exceptions
 
     date_time = datetime.datetime.now()
+
+    # check if IP is in variable AWS_IP_ADDRESSES
+    if is_ip_in_networks(ip):
+        return True
+
     item = db_get_ip(ip)
 
     if item:
-
+        # check if IP address is marked as OK in database (deprecated)
         if "IP OK" in item["Account"]["S"]:
-
             return True
 
+        # ignore if LastDateTime is older than specified number of hours
         last_date_time_string = item["LastDateTime"]["S"]
         last_date_time = datetime.datetime.strptime(last_date_time_string, "%Y-%m-%d %H:%M:%S")
 

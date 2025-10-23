@@ -4,6 +4,7 @@ module "domain_protect" {
   # version = "1.0.0"
 
   allowed_regions     = "['eu-west-1', 'eu-west-2', 'us-east-1']"
+  aws_ip_addresses    = ["18.96.8.1"]
   cloudflare          = true
   cloudflare_api_key  = var.cloudflare_api_key
   cloudflare_email    = var.cloudflare_email
