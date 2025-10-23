@@ -5,7 +5,7 @@ variable "allowed_regions" {
 }
 
 variable "aws_ip_addresses" {
-  description = "Authorised AWS IP addresses or networks outside AWS Organization"
+  description = "Authorised AWS IPv4 addresses or networks outside AWS Organization"
   default     = []
   type        = list(string)
 }
