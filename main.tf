@@ -101,6 +101,7 @@ module "lambda" {
   memory_size              = var.memory_size
   project                  = var.project
   security_audit_role_name = var.security_audit_role_name
+  aws_ip_addresses         = var.aws_ip_addresses
   external_id              = var.external_id
   org_primary_account      = var.org_primary_account
   lambda_role_arn          = module.lambda_role.lambda_role_arn
