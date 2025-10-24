@@ -9,8 +9,8 @@ from utils.utils_aws import assume_role
 from utils.utils_db_ips import db_check_ip
 
 # environment variable ALLOWED_REGIONS can be empty, or with format: "'eu-west-1', 'us-east-1'"
-allowed_regions = os.environ.get("ALLOWED_REGIONS").replace(" ", "")
-allowed_regions = allowed_regions.split(",") if allowed_regions else []
+allowed_regions = os.environ.get("ALLOWED_REGIONS")
+allowed_regions = allowed_regions.replace(" ", "").split(",") if allowed_regions else []
 ip_time_limit = os.environ["IP_TIME_LIMIT"]
 
 
