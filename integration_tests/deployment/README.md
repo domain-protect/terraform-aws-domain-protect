@@ -33,7 +33,7 @@ This page details the process for developing and testing deployment integration 
 }
 ```
 
-## Configure development environment
+## Configure development environment - MacOS / Linux
 
 * create virtual environment
 ```bash
@@ -62,6 +62,38 @@ export CLOUDFLARE_EMAIL: "me@example.com"
 export CLOUDFLARE_ZONE_NAME="example.net"
 ```
 * copy and paste AWS macOS / Linux CLI variables for the security audit account to terminal
+
+## Configure development environment - Windows
+
+* create virtual environment
+```powershell
+python -m venv .venv
+```
+* activate virtual environment
+```powershell
+.venv/scripts/activate
+```
+* install dependencies
+```powershell
+pip install -r requirements-dev.txt
+```
+* set environment variables for dev environment, e.g.
+```powershell
+$env:PROJECT="domain-protect"
+$env:ENVIRONMENT="dev"
+$env:ROUTE53_ACCOUNT="12345678901"
+$env:TEST_ROLE_NAME="domain-protect-integration-test"
+$env:ZONE_NAME="example.com"
+$env:ZONE_ID="ZZZZ12345678ZZ"
+$env:TEST_ROLE_EXTERNAL_ID="xxxxxxxxxxxxxxxxxx"
+$env:AWS_REGION="eu-west-1"
+$env:CLOUDFLARE_API_KEY="xxxxxxxxxxxxxxxxxx"
+$env:CLOUDFLARE_EMAIL="me@example.com"
+$env:CLOUDFLARE_ZONE_NAME="example.net"
+```
+* copy and paste AWS PowerShell variables for the security audit account to terminal
+
+## Run integration tests locally
 
 * test integration locally
 ```python

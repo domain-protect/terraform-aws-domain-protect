@@ -34,16 +34,18 @@ A records pointing to an IPv4 address can be vulnerable to subdomain takeover:
 
 ![Alt text](assets/images/ip-database.png?raw=true "IP Address database")
 
-## Record IP address as OK
-The A record check may create false positive alerts.
+## Authorising AWS IP addresses outside AWS Organization
+The A record check may create false positive alerts where the IP address is within AWS, but outside the AWS Organization scanned by Domain Protect.
 
-If A record points to legitimate IP address, e.g. in a service provider's AWS account:
-* manually create item in IP address DynamoDB database
-* enter IP address known to be authorised
-* create Account field with text starting `IP OK`
-* item must be manually removed when resource is decommissioned
+For example, the A record may point to a public IP address in a service provider's AWS account.
 
-![Alt text](assets/images/ip-exception.png?raw=true "IP Address exception")
+Approved AWS IP addresses outside the AWS Organization can be pre-authorised by setting the Terraform variable:
+
+```
+aws_ip_addresses = ["3.5.140.1", "15.230.15.30"]
+```
+
+If there is a network of AWS IP addresses which you wish to authorise, rather than a single address, add to the list in CIDR notation, e.g. 52.93.178.144/30.
 
 ## Disabling A record feature
 * set Terraform variable in your CI/CD pipeline or tfvars file:

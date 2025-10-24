@@ -53,7 +53,8 @@ resource "aws_lambda_function" "lambda" {
       SNS_TOPIC_ARN            = var.sns_topic_arn
       ENVIRONMENT              = var.environment
       PRODUCTION_ENVIRONMENT   = var.production_environment
-      ALLOWED_REGIONS          = var.allowed_regions
+      ALLOWED_REGIONS          = join(",", var.allowed_regions)
+      AWS_IP_ADDRESSES         = join(",", var.aws_ip_addresses)
       IP_TIME_LIMIT            = var.ip_time_limit
       BUGCROWD                 = var.bugcrowd
       BUGCROWD_API_KEY         = var.bugcrowd_api_key

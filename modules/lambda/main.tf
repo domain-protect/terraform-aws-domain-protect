@@ -48,11 +48,12 @@ resource "aws_lambda_function" "lambda" {
     variables = {
       ORG_PRIMARY_ACCOUNT      = var.org_primary_account
       SECURITY_AUDIT_ROLE_NAME = var.security_audit_role_name
+      AWS_IP_ADDRESSES         = join(",", var.aws_ip_addresses)
       EXTERNAL_ID              = var.external_id
       PROJECT                  = var.project
       SNS_TOPIC_ARN            = var.sns_topic_arn
       ENVIRONMENT              = var.environment
-      ALLOWED_REGIONS          = var.allowed_regions
+      ALLOWED_REGIONS          = join(",", var.allowed_regions)
       IP_TIME_LIMIT            = var.ip_time_limit
     }
   }

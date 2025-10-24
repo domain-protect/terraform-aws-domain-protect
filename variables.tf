@@ -1,7 +1,13 @@
 variable "allowed_regions" {
-  description = "If SCPs block certain regions across all accounts, optionally replace with string formatted list of allowed regions"
-  default     = "['all']" # example "['eu-west-1', 'us-east-1']"
-  type        = string
+  description = "If SCPs block certain regions across all accounts, optional list of allowed regions"
+  default     = ["all"] # example ["eu-west-1", "us-east-1"]
+  type        = list(string)
+}
+
+variable "aws_ip_addresses" {
+  description = "Authorised AWS IPv4 addresses or networks outside AWS Organization"
+  default     = []
+  type        = list(string)
 }
 
 variable "bugcrowd" {
