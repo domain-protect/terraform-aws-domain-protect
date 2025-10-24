@@ -352,7 +352,7 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     client = WebClient(token=get_slack_token())
 
     # Send message to channels
-    channel_list = slack_channels.split(",")
+    channel_list = slack_channels.replace(" ", "").split(",")
 
     for channel in channel_list:
         try:

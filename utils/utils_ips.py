@@ -3,7 +3,7 @@ import os
 
 # environment variable AWS_IP_ADDRESSES can be empty, or with format: "'3.5.140.1', '3.5.140.128/30'"
 networks_str = os.environ.get("AWS_IP_ADDRESSES")
-networks = networks_str.split(",") if networks_str else []
+networks = networks_str.replace(" ", "").split(",") if networks_str else []
 
 
 def is_ip_in_network(ip, network):

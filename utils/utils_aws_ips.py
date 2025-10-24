@@ -8,10 +8,9 @@ from botocore import exceptions
 from utils.utils_aws import assume_role
 from utils.utils_db_ips import db_check_ip
 
-allowed_regions = os.environ["ALLOWED_REGIONS"][1:][:-1]
-allowed_regions = allowed_regions.replace(" ", "")
-allowed_regions = allowed_regions.replace("'", "")
-allowed_regions = allowed_regions.split(",")
+# environment variable ALLOWED_REGIONS can be empty, or with format: "'eu-west-1', 'us-east-1'"
+allowed_regions = os.environ.get("ALLOWED_REGIONS")
+allowed_regions = allowed_regions.replace(" ", "").split(",") if allowed_regions else []
 ip_time_limit = os.environ["IP_TIME_LIMIT"]
 
 

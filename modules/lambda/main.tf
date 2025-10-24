@@ -53,7 +53,7 @@ resource "aws_lambda_function" "lambda" {
       PROJECT                  = var.project
       SNS_TOPIC_ARN            = var.sns_topic_arn
       ENVIRONMENT              = var.environment
-      ALLOWED_REGIONS          = var.allowed_regions
+      ALLOWED_REGIONS          = join(",", var.allowed_regions)
       IP_TIME_LIMIT            = var.ip_time_limit
     }
   }
