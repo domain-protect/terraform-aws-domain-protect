@@ -66,7 +66,7 @@ pip install -r requirements-dev.txt
 ```
 * set environment variables for dev environment
 ```
-$env:ALLOWED_REGIONS="['eu-west-1', 'us-east-1']"
+$env:ALLOWED_REGIONS="eu-west-1, us-east-1"
 $env:AWS_IP_ADDRESSES="18.96.8.1"
 $env:AWS_DEFAULT_REGION="eu-west-1"
 $env:AWS_REGION="eu-west-1"
