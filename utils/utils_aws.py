@@ -142,6 +142,30 @@ def list_hosted_zones(account):
     return []
 
 
+def get_nameservers_route53(account_id, account_name, hosted_zone_id):
+
+    try:
+        boto3_session = assume_role(account_id)
+        route53 = boto3_session.client("route53")
+
+        try:
+            response = route53.get_hosted_zone(Id=hosted_zone_id)
+            name_servers = response["DelegationSet"]["NameServers"]
+
+            return sorted(name_servers)
+
+        except Exception:
+            logging.error(
+                "ERROR: Lambda execution role requires route53:GetHostedZone permission in %a account",
+                account_name,
+            )
+
+    except Exception:
+        logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
+
+    return []
+
+
 def list_resource_record_sets(account_id, account_name, hosted_zone_id):
 
     try:
