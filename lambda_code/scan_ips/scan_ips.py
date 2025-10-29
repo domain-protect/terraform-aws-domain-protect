@@ -19,6 +19,7 @@ from utils.utils_db import db_vulnerability_found
 from utils.utils_db_ips import db_count_items
 from utils.utils_db_ips import db_get_ip_table_name
 from utils.utils_db_ips import db_ip
+from utils.utils_dns import dns_deleted
 from utils.utils_hackerone import hackerone_create_report
 from utils.utils_requests import get_all_aws_ips
 from utils.utils_sanitise import restore_wildcard
@@ -111,6 +112,10 @@ def a_record(account_name, record_sets, prefixes):
         domain = record["Name"]
         domain = restore_wildcard(domain)
         print(f"checking if {domain} is vulnerable to takeover")
+
+        if dns_deleted(domain):
+            print(f"hosted zone not authoritative")
+            return
 
         ip_addresses = [r["Value"] for r in record["ResourceRecords"]]
 

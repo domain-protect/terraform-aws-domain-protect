@@ -71,7 +71,7 @@ To minimise false positive alerts:
 
 * monitor Slack channel
 * assess which IP addresses are legitimate
-* immediately after deploying, [record IP address as OK](#record-ip-address-as-ok) for legitimate addresses
+* immediately after deploying, add approved addresses to `aws_ip_addresses` Terraform variable
 * complete before DynamoDB `DomainProtectIPsPrd` item count updates from initial value of `0`
 
 ## Optimising cost and performance
