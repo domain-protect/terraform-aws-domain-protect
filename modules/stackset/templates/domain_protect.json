@@ -111,7 +111,9 @@
                 "ecs:DescribeTasks",
                 "ecs:ListClusters",
                 "ecs:ListTasks",
-                "globalaccelerator:ListAccelerators"
+                "globalaccelerator:ListAccelerators",
+                "lightsail:GetInstances",
+                "lightsail:GetStaticIps"
               ]
             }
           ]
