@@ -43,7 +43,7 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
     misconfigured_domains = []
 
     global json_data
-    json_data = {"New": []}
+    json_data = {"Misconfigured": []}
 
     print(f"Input: {event}")
 
