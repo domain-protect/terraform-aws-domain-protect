@@ -231,10 +231,7 @@ def misconfigured_message(json_data):
 
         for misconfiguration in misconfigurations:
 
-            message = (
-                f"{misconfiguration['Domain']} misconfigured in {misconfiguration['Account']} AWS Account: "
-                f"{misconfiguration['Issue']}"
-            )
+            message = f"Misconfiguration in {misconfiguration['Account']} AWS Account: " f"{misconfiguration['Issue']}"
 
             print(message)
             slack_message["fields"].append(

@@ -12,7 +12,7 @@ resource "null_resource" "install_python_dependencies" {
 
     environment = {
       source_code_path = "${local.rel_path_root}/lambda_code"
-      function_names   = join(":", var.lambdas)
+      function_names   = join(":", [for l in var.lambdas : replace(l, "-", "_")])
       runtime          = var.runtime
       platform         = var.platform
       path_cwd         = local.rel_path_root
@@ -21,7 +21,7 @@ resource "null_resource" "install_python_dependencies" {
 }
 
 data "archive_file" "lambda_zip" {
-  for_each = toset(var.lambdas)
+  for_each = toset([for l in var.lambdas : replace(l, "-", "_")])
 
   depends_on  = [null_resource.install_python_dependencies]
   type        = "zip"
@@ -36,9 +36,9 @@ resource "aws_lambda_function" "lambda" {
   function_name    = "${var.project}-${each.value}-${var.environment}"
   description      = "${var.project} ${each.value} Lambda function"
   role             = var.lambda_role_arn
-  handler          = "${each.value}.lambda_handler"
+  handler          = "${replace(each.value, "-", "_")}.lambda_handler"
   kms_key_arn      = var.kms_arn
-  source_code_hash = data.archive_file.lambda_zip[each.key].output_base64sha256
+  source_code_hash = data.archive_file.lambda_zip[replace(each.value, "-", "_")].output_base64sha256
   runtime          = var.runtime
   memory_size      = var.memory_size
   timeout          = var.timeout

@@ -150,7 +150,7 @@ module "accounts_role" {
 module "lambda_scan" {
   source = "./modules/lambda-scan"
 
-  lambdas                  = ["scan"]
+  lambdas                  = var.misconfigured ? ["scan", "scan-dns"] : ["scan"]
   runtime                  = local.runtime
   platform                 = var.platform
   memory_size              = var.memory_size
