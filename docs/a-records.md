@@ -6,6 +6,8 @@
   * EC2 instances with public IP addresses
   * ECS Fargate public IP addresses
   * Global Accelerator IP addresses
+  * Lightsail instance public IP addresses
+  * Lightsail static IP addresses
 * automated takeover not supported
 
 ![Alt text](assets/images/a-record-vulnerable.png?raw=true "Vulnerable A Record")

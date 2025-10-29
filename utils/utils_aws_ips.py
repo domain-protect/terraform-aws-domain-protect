@@ -311,6 +311,67 @@ def get_ecs_addresses(account_id, account_name, region):
     return []
 
 
+def get_lightsail_instance_addresses(account_id, account_name, region):
+
+    try:
+        boto3_session = assume_role(account_id, region)
+        lightsail = boto3_session.client("lightsail")
+
+        public_ip_list = []
+
+        try:
+            paginator = lightsail.get_paginator("get_instances")
+            pages = paginator.paginate()
+            for page in pages:
+                instances = [i for i in page["instances"] if "publicIpAddress" in i]
+                for instance in instances:
+                    public_ip = instance["publicIpAddress"]
+                    public_ip_list.append(public_ip)
+
+            return public_ip_list
+
+        except Exception:
+            logging.error(
+                "ERROR: Lambda execution role requires lightsail:GetInstances permission in %a account",
+                account_name,
+            )
+
+    except (AttributeError, Exception):
+        logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
+
+    return []
+
+
+def get_lightsail_static_addresses(account_id, account_name, region):
+
+    try:
+        boto3_session = assume_role(account_id, region)
+        lightsail = boto3_session.client("lightsail")
+
+        public_ip_list = []
+
+        try:
+            paginator = lightsail.get_paginator("get_static_ips")
+            pages = paginator.paginate()
+            for page in pages:
+                for static_ip in page["staticIps"]:
+                    public_ip = static_ip["ipAddress"]
+                    public_ip_list.append(public_ip)
+
+            return public_ip_list
+
+        except Exception:
+            logging.error(
+                "ERROR: Lambda execution role requires lightsail:GetStaticIps permission in %a account",
+                account_name,
+            )
+
+    except (AttributeError, Exception):
+        logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
+
+    return []
+
+
 def vulnerable_aws_a_record(ip_prefixes, ip_address, ip_time_limit):
 
     if ipaddress.ip_address(ip_address).is_private:

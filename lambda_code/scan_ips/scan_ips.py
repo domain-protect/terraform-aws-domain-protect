@@ -9,6 +9,8 @@ from utils.utils_aws_ips import get_accelerator_addresses
 from utils.utils_aws_ips import get_ec2_addresses
 from utils.utils_aws_ips import get_ecs_addresses
 from utils.utils_aws_ips import get_eip_addresses
+from utils.utils_aws_ips import get_lightsail_instance_addresses
+from utils.utils_aws_ips import get_lightsail_static_addresses
 from utils.utils_aws_ips import get_regions
 from utils.utils_aws_ips import vulnerable_aws_a_record
 from utils.utils_bugcrowd import bugcrowd_create_issue
@@ -143,6 +145,16 @@ def get_ips(account_id, account_name):
 
         for ecs_public_ip in ecs_public_ips:
             db_ip(ecs_public_ip, account_name, region, "ECS Public IP")
+
+        lightsail_instance_public_ips = get_lightsail_instance_addresses(account_id, account_name, region)
+
+        for lightsail_instance_public_ip in lightsail_instance_public_ips:
+            db_ip(lightsail_instance_public_ip, account_name, region, "Lightsail Instance Public IP")
+
+        lightsail_static_public_ips = get_lightsail_static_addresses(account_id, account_name, region)
+
+        for lightsail_static_public_ip in lightsail_static_public_ips:
+            db_ip(lightsail_static_public_ip, account_name, region, "Lightsail Static Public IP")
 
 
 def lambda_handler(event, context):  # pylint:disable=unused-argument
