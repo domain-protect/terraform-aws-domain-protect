@@ -32,7 +32,7 @@ data "archive_file" "lambda_zip" {
 resource "aws_lambda_function" "lambda" {
   for_each = toset(var.lambdas)
 
-  filename         = "${local.rel_path_root}/build/${each.value}.zip"
+  filename         = "${local.rel_path_root}/build/${replace(each.value, "-", "_")}.zip"
   function_name    = "${var.project}-${each.value}-${var.environment}"
   description      = "${var.project} ${each.value} Lambda function"
   role             = var.lambda_role_arn
