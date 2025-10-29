@@ -219,6 +219,38 @@ def current_message(json_data):
         return None
 
 
+def misconfigured_message(json_data):
+
+    try:
+        misconfigurations = json_data["Misconfigured"]
+
+        slack_message = {
+            "fallback": "A new message",
+            "fields": [{"title": "Misconfigured domains"}],
+        }
+
+        for misconfiguration in misconfigurations:
+
+            message = (
+                f"{misconfiguration['Domain']} misconfigured in {misconfiguration['Account']} AWS Account "
+                f"{misconfiguration['Issue']}"
+            )
+
+            print(message)
+            slack_message["fields"].append(
+                {
+                    "value": message,
+                    "short": False,
+                },
+            )
+
+        return slack_message
+
+    except KeyError:
+
+        return None
+
+
 def new_message(json_data):
 
     try:
@@ -329,6 +361,10 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
 
     elif current_message(json_data) is not None:
         slack_message = current_message(json_data)
+        text = f"{slack_emoji} {subject}"
+
+    elif misconfigured_message(json_data) is not None:
+        slack_message = misconfigured_message(json_data)
         text = f"{slack_emoji} {subject}"
 
     elif new_message(json_data) is not None:

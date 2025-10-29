@@ -69,12 +69,12 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
             if issue:
                 print(f"hosted zone {domain} misconfigured: {issue}")
                 misconfigured_domains.append(domain)
-                json_data["New"].append({"Account": account_name, "Domain": domain, "Issue": issue})
+                json_data["Misconfigured"].append({"Account": account_name, "Domain": domain, "Issue": issue})
 
             else:
                 print(f"hosted zone {domain} is not authoritative")
                 misconfigured_domains.append(domain)
-                json_data["New"].append(
+                json_data["Misconfigured"].append(
                     {"Account": account_name, "Domain": domain, "Issue": "Non-authoritative hosted zone"},
                 )
 
