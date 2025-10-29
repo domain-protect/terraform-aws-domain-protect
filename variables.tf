@@ -133,6 +133,12 @@ variable "memory_size_medium" {
   type        = number
 }
 
+variable "misconfigured" {
+  description = "Enable detection of misconfigured DNS"
+  default     = true
+  type        = bool
+}
+
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
   type        = string

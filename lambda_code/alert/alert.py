@@ -226,13 +226,13 @@ def misconfigured_message(json_data):
 
         slack_message = {
             "fallback": "A new message",
-            "fields": [{"title": "Misconfigured domains"}],
+            "fields": [{"title": "Hosted zones with misconfigured DNS delegation"}],
         }
 
         for misconfiguration in misconfigurations:
 
             message = (
-                f"{misconfiguration['Domain']} misconfigured in {misconfiguration['Account']} AWS Account "
+                f"{misconfiguration['Domain']} misconfigured in {misconfiguration['Account']} AWS Account: "
                 f"{misconfiguration['Issue']}"
             )
 
