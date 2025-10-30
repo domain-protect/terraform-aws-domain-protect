@@ -480,6 +480,68 @@ module "accounts_event_ips" {
   environment                 = local.env
 }
 
+module "step_function_dns" {
+  count  = var.misconfigured ? 1 : 0
+  source = "./modules/step-function"
+
+  project     = var.project
+  purpose     = "dns"
+  lambda_arn  = module.lambda_scan.lambda_function_arns["scan-dns"]
+  role_arn    = module.step_function_role.lambda_role_arn
+  kms_arn     = module.kms.kms_arn
+  environment = local.env
+}
+
+module "accounts_role_dns" {
+  count  = var.misconfigured ? 1 : 0
+  source = "./modules/iam"
+
+  project                  = var.project
+  security_audit_role_name = var.security_audit_role_name
+  kms_arn                  = module.kms.kms_arn
+  state_machine_arn        = module.step_function_dns[0].state_machine_arn
+  policy                   = "accounts"
+  role_name                = "accounts-dns"
+  permissions_boundary_arn = var.permissions_boundary_arn
+  environment              = local.env
+}
+
+module "lambda_accounts_dns" {
+  count  = var.misconfigured ? 1 : 0
+  source = "./modules/lambda-accounts"
+
+  lambdas                  = ["accounts-dns"]
+  runtime                  = local.runtime
+  platform                 = var.platform
+  memory_size              = var.memory_size
+  project                  = var.project
+  security_audit_role_name = var.security_audit_role_name
+  external_id              = var.external_id
+  org_primary_account      = var.org_primary_account
+  lambda_role_arn          = module.accounts_role_dns[0].lambda_role_arn
+  kms_arn                  = module.kms.kms_arn
+  sns_topic_arn            = module.sns.sns_topic_arn
+  dlq_sns_topic_arn        = module.sns_dead_letter_queue.sns_topic_arn
+  state_machine_arn        = module.step_function_dns[0].state_machine_arn
+  environment              = local.env
+  vpc_config               = var.vpc_config
+}
+
+module "cloudwatch_dns_event" {
+  source = "./modules/cloudwatch"
+  count  = var.misconfigured ? 1 : 0
+
+  project                     = var.project
+  lambda_function_arns        = module.lambda_accounts_dns[0].lambda_function_arns
+  lambda_function_names       = module.lambda_accounts_dns[0].lambda_function_names
+  lambda_function_alias_names = module.lambda_accounts_dns[0].lambda_function_alias_names
+  schedule                    = var.reports_schedule
+  takeover                    = var.takeover
+  update_schedule             = var.update_schedule
+  update_lambdas              = var.update_lambdas
+  environment                 = local.env
+}
+
 module "lamdba_stats" {
   source = "./modules/lambda-stats"
 
