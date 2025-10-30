@@ -53,6 +53,7 @@ nav:
     - Cloudflare: cloudflare.md
     - Bugcrowd: bugcrowd.md
     - HackerOne: hackerone.md
+    - Misconfigured DNS: misconfigured-dns.md
     - Vulnerable A records (IP addresses): a-records.md
     - Database: database.md
     - Alerts: alerts.md
