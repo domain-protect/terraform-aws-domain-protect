@@ -10,10 +10,19 @@ from dns.resolver import Timeout
 
 from utils.utils_dns import dns_deleted
 from utils.utils_dns import firewall_test
+from utils.utils_dns import get_nameservers_dns
 from utils.utils_dns import updated_a_record
 from utils.utils_dns import vulnerable_alias
 from utils.utils_dns import vulnerable_cname
 from utils.utils_dns import vulnerable_ns
+
+
+class MockNSRecord:
+    def __init__(self, ns_name):
+        self.ns_name = ns_name
+
+    def to_text(self):
+        return self.ns_name
 
 
 @patch("dns.resolver.Resolver.resolve")
@@ -348,3 +357,130 @@ def test_firewall_test_exits_with_dns_noanswer(resolve_mock):
     with pytest.raises(SystemExit) as pytest_wrapped_e:
         firewall_test()
     assert_that(pytest_wrapped_e.type).is_equal_to(SystemExit)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_sorted_nameservers(resolve_mock):
+    mock_response = [
+        MockNSRecord("ns2.example.com."),
+        MockNSRecord("ns1.example.com."),
+        MockNSRecord("ns3.example.com."),
+    ]
+    resolve_mock.return_value = mock_response
+
+    result = get_nameservers_dns("example.com")
+
+    expected = ["ns1.example.com", "ns2.example.com", "ns3.example.com"]
+    assert_that(result).is_equal_to(expected)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_removes_trailing_dots(resolve_mock):
+    mock_response = [MockNSRecord("ns1.example.com.")]
+    resolve_mock.return_value = mock_response
+
+    result = get_nameservers_dns("example.com")
+
+    expected = ["ns1.example.com"]
+    assert_that(result).is_equal_to(expected)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_empty_list_when_domain_does_not_exist(resolve_mock):
+    resolve_mock.side_effect = NXDOMAIN
+
+    result = get_nameservers_dns("nonexistent.com")
+
+    assert_that(result).is_empty()
+
+
+@patch("builtins.print")
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_prints_message_when_domain_does_not_exist(resolve_mock, print_mock):
+    resolve_mock.side_effect = NXDOMAIN
+    expected_message = "Domain nonexistent.com does not exist"
+
+    _ = get_nameservers_dns("nonexistent.com")
+
+    print_mock.assert_called_with(expected_message)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_empty_list_when_no_ns_records(resolve_mock):
+    resolve_mock.side_effect = NoAnswer
+
+    result = get_nameservers_dns("example.com")
+
+    assert_that(result).is_empty()
+
+
+@patch("builtins.print")
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_prints_message_when_no_ns_records(resolve_mock, print_mock):
+    resolve_mock.side_effect = NoAnswer
+    expected_message = "No NS records found for example.com"
+
+    _ = get_nameservers_dns("example.com")
+
+    print_mock.assert_called_with(expected_message)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_empty_list_when_no_nameservers(resolve_mock):
+    resolve_mock.side_effect = NoNameservers
+
+    result = get_nameservers_dns("example.com")
+
+    assert_that(result).is_empty()
+
+
+@patch("builtins.print")
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_prints_message_when_no_nameservers(resolve_mock, print_mock):
+    resolve_mock.side_effect = NoNameservers
+    expected_message = "No name servers available to query example.com"
+
+    _ = get_nameservers_dns("example.com")
+
+    print_mock.assert_called_with(expected_message)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_empty_list_when_timeout(resolve_mock):
+    resolve_mock.side_effect = Timeout
+
+    result = get_nameservers_dns("example.com")
+
+    assert_that(result).is_empty()
+
+
+@patch("builtins.print")
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_prints_message_when_timeout(resolve_mock, print_mock):
+    resolve_mock.side_effect = Timeout
+    expected_message = "DNS query timeout for example.com"
+
+    _ = get_nameservers_dns("example.com")
+
+    print_mock.assert_called_with(expected_message)
+
+
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_returns_empty_list_on_exception(resolve_mock):
+    resolve_mock.side_effect = Exception("Some DNS error")
+
+    result = get_nameservers_dns("example.com")
+
+    assert_that(result).is_empty()
+
+
+@patch("builtins.print")
+@patch("dns.resolver.Resolver.resolve")
+def test_get_nameservers_dns_prints_message_on_exception(resolve_mock, print_mock):
+    e = Exception("Some DNS error")
+    resolve_mock.side_effect = e
+    expected_message = f"Unhandled exception querying NS records for example.com: {e}"
+
+    _ = get_nameservers_dns("example.com")
+
+    print_mock.assert_called_with(expected_message)

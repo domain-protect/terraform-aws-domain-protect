@@ -8,6 +8,7 @@
       "Action": [
         "cloudfront:ListDistributions",
         "organizations:ListAccounts",
+        "route53:GetHostedZone",
         "route53:ListHostedZones",
         "route53:ListResourceRecordSets",
         "route53domains:ListDomains"

@@ -133,6 +133,12 @@ variable "memory_size_medium" {
   type        = number
 }
 
+variable "misconfigured" {
+  description = "Enable detection of misconfigured DNS"
+  default     = true
+  type        = bool
+}
+
 variable "org_primary_account" {
   description = "The AWS account number of the organization primary account"
   type        = string
@@ -175,7 +181,7 @@ variable "rcu" {
 }
 
 variable "reports_schedule" {
-  description = "schedule for running reports, e.g. 24 hours. Irrespective of setting, you will be immediately notified of new vulnerabilities"
+  description = "schedule for running reports, e.g. 24 hours. Irrespective of setting, you will be immediately notified of new vulnerabilities. Also used for misconfigured DNS checks"
   default     = "24 hours"
   type        = string
 }

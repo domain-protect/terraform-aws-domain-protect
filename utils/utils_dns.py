@@ -1,5 +1,9 @@
 import sys
 
+import dns.flags
+import dns.message
+import dns.query
+import dns.rdatatype
 from dns import resolver
 
 # Google public DNS servers
@@ -134,6 +138,125 @@ def updated_a_record(domain_name, ip_address):
         return ip_address
 
     return ip_address
+
+
+def get_nameservers_dns_non_recursive(domain_name):
+    """
+    Returns list of name servers for the given domain using non-recursive DNS query
+    Queries parent domain's authoritative nameservers to obtain delegation records
+    """
+    try:
+        # Get the parent domain
+        domain_parts = domain_name.split(".")
+        if len(domain_parts) < 2:
+            print(f"Cannot determine parent domain for {domain_name}")
+            return []
+
+        parent_domain = ".".join(domain_parts[1:])
+
+        # Get the authoritative name servers of the parent domain (recursive query)
+        parent_nameservers = get_nameservers_dns(parent_domain)
+        if not parent_nameservers:
+            print(f"No parent nameservers found for {parent_domain}")
+            return []
+
+        # Resolve parent nameservers to IP addresses
+        parent_nameserver_ips = []
+        for ns in parent_nameservers:
+            try:
+                ns_response = myresolver.resolve(ns, "A")
+                for rdata in ns_response:
+                    parent_nameserver_ips.append(rdata.to_text())
+                    break  # Use first IP address
+            except Exception as ns_e:
+                print(f"Could not resolve nameserver {ns} to IP: {ns_e}")
+                continue
+
+        if not parent_nameserver_ips:
+            print(f"Could not resolve any parent nameservers to IP addresses")
+            return []
+
+        # Create a non-recursive DNS query for the subdomain
+        query_msg = dns.message.make_query(domain_name, "NS")
+        query_msg.flags &= ~dns.flags.RD  # Clear recursion desired flag
+
+        nameservers = []
+
+        # Try each parent nameserver IP until response
+        for ns_ip in parent_nameserver_ips:
+            try:
+                response = dns.query.udp(query_msg, ns_ip, timeout=10)
+
+                # Check if answer section received (delegation records)
+                if response.answer:
+                    for rrset in response.answer:
+                        if rrset.rdtype == dns.rdatatype.NS:
+                            for rdata in rrset:
+                                ns = str(rdata).rstrip(".")
+                                nameservers.append(ns)
+                    break  # Response received, no need to try other nameservers
+
+                # Check authority section for referrals
+                elif response.authority:
+                    for rrset in response.authority:
+                        if rrset.rdtype == dns.rdatatype.NS and rrset.name.to_text().rstrip(".") == domain_name:
+                            for rdata in rrset:
+                                ns = str(rdata).rstrip(".")
+                                nameservers.append(ns)
+                    if nameservers:
+                        break
+
+            except dns.query.timeout:
+                print(f"Timeout querying parent nameserver {ns_ip} for {domain_name}")
+                continue
+            except Exception as query_e:
+                print(f"Failed to query parent nameserver {ns_ip} for {domain_name}: {query_e}")
+                continue
+
+        if not nameservers:
+            print(f"No delegation records found for {domain_name} in parent zone")
+            return []
+
+        return sorted(nameservers)
+
+    except Exception as e:
+        print(f"Unhandled exception in non-recursive NS query for {domain_name}: {e}")
+        return []
+
+
+def get_nameservers_dns(domain_name):
+    """
+    Returns list of name servers for domain
+    """
+    try:
+        response = myresolver.resolve(domain_name, "NS")
+        nameservers = []
+
+        for rdata in response:
+            ns = rdata.to_text().rstrip(".")
+            nameservers.append(ns)
+
+        return sorted(nameservers)
+
+    except resolver.NXDOMAIN:
+        print(f"Domain {domain_name} does not exist")
+        return []
+
+    except resolver.NoAnswer:
+        print(f"No NS records found for {domain_name}")
+        return []
+
+    except resolver.NoNameservers:
+        print(f"No name servers available to query {domain_name}")
+        return []
+
+    except resolver.Timeout:
+        print(f"DNS query timeout for {domain_name}")
+        return []
+
+    except Exception as e:
+        print(f"Unhandled exception querying NS records for {domain_name}: {e}")
+        return []
 
 
 def firewall_test():
