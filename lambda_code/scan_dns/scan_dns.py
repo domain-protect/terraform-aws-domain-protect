@@ -60,7 +60,10 @@ def lambda_handler(event, context):  # pylint:disable=unused-argument
 
         route53_nameservers, dns_nameservers = get_domain_configuration(account_id, account_name, hosted_zone, domain)
 
-        if route53_nameservers == dns_nameservers:
+        if len(route53_nameservers) == 0:
+            print("Ensure route53:GetHostedZone permission is included in audit policy")
+
+        elif route53_nameservers == dns_nameservers:
             print(f"hosted zone {domain} is authoritative and correctly configured")
 
         else:
