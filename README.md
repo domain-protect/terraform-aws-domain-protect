@@ -7,7 +7,15 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/domain-protect/terraform-aws-domain-protect/badge)](https://scorecard.dev/viewer/?uri=github.com/domain-protect/terraform-aws-domain-protect)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/9420/badge)](https://www.bestpractices.dev/projects/9420)
 
-Published as a public [Terraform registry module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
+An open-source public [Terraform registry module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest) to deploy serverless infrastructure that continuously monitors DNS to detect vulnerable and misconfigured domains, and prevents subdomain takeover:
+
+* scan Amazon Route53 across an AWS Organization for domain records vulnerable to takeover
+* scan [Cloudflare](docs/cloudflare.md) for vulnerable DNS records
+* identify [misconfigured DNS](docs/misconfigured-dns.md) issues
+* take over vulnerable subdomains yourself before attackers and bug bounty researchers
+* automatically create known issues in [Bugcrowd](docs/bugcrowd.md) or [HackerOne](docs/hackerone.md)
+* vulnerable domains in Google Cloud DNS can be detected by [Domain Protect for GCP](https://github.com/ovotech/domain-protect-gcp)
+* [manual scans](manual_scans/aws/README.md) of cloud accounts with no installation
 
 ## Prevent subdomain takeover ...
 <a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/slack-webhook-notifications.png" /></a>
@@ -19,14 +27,7 @@ Published as a public [Terraform registry module](https://registry.terraform.io/
 <a href="#"><img src="https://raw.githubusercontent.com/domain-protect/terraform-aws-domain-protect/main/docs/assets/images/global-appsec-dublin.png" /></a>
 Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 
-## Features
-* scan Amazon Route53 across an AWS Organization for domain records vulnerable to takeover
-* scan [Cloudflare](docs/cloudflare.md) for vulnerable DNS records
-* identify [misconfigured DNS](docs/misconfigured-dns.md) issues
-* take over vulnerable subdomains yourself before attackers and bug bounty researchers
-* automatically create known issues in [Bugcrowd](docs/bugcrowd.md) or [HackerOne](docs/hackerone.md)
-* vulnerable domains in Google Cloud DNS can be detected by [Domain Protect for GCP](https://github.com/ovotech/domain-protect-gcp)
-* [manual scans](manual_scans/aws/README.md) of cloud accounts with no installation
+
 
 ## Installation
 * Domain Protect is packaged as a [public Terraform Module](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
