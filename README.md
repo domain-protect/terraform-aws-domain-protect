@@ -34,7 +34,7 @@ Talk and demo on [YouTube](https://youtu.be/fLrRLmKZTvE)
 * Ensure [requirements](docs/requirements.md) are met
 * See [Installation](docs/installation.md) for details on how to install
 
-Here is a basic example with slack integration
+Example with more frequent scans than default settings:
 
 ```hcl
 module "domain_protect" {
@@ -42,13 +42,16 @@ module "domain_protect" {
   # It is recommended to pin every module to a specific version
   # version = "x.x.x"
 
-  ip_address               = true
+  allowed_regions          = ["eu-west-1", "eu-west-2", "us-east-1"]
+  environment              = "prod"
+  ip_scan_schedule         = "1 hour"
+  ip_time_limit            = "2" # hours
   org_primary_account      = "123456789012"
-  environment              = "prd"
-  security_audit_role_name = "domain-protect-audit"
-  takeover                 = false
+  production_environment   = "prod"
+  scan_schedule            = "1 hour"
   slack_channels           = ["security-alerts"]
-  slack_webhook_urls       = ["https://hooks.slack.com/services/XXXXXXX/YYYYYYYYYYY"]
+  takeover                 = true
+  update_schedule          = "1 hour"
 }
 ```
 

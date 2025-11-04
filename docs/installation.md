@@ -6,14 +6,21 @@ Before starting ensure [requirements](requirements.md) are met
 
 * Include a code snippet in your code based on the example below:
 
-```
+```hcl
 module "domain_protect" {
   source  = "domain-protect/domain-protect/aws"
-  version = "4.0.0"
+  version = "5.4.0"
 
-  environment              = "prd"
+  allowed_regions          = ["eu-west-1", "eu-west-2", "us-east-1"]
+  environment              = "prod"
+  ip_scan_schedule         = "1 hour"
+  ip_time_limit            = "2" # hours
   org_primary_account      = "123456789012"
+  production_environment   = "prod"
+  scan_schedule            = "1 hour"
   slack_channels           = ["security-alerts"]
+  takeover                 = true
+  update_schedule          = "1 hour"
 }
 ```
 * Replace the version with the latest in the [Terraform registry](https://registry.terraform.io/modules/domain-protect/domain-protect/aws/latest)
