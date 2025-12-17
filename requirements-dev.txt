@@ -9,6 +9,6 @@ pytest-cov==7.0.0
 assertpy==1.1
 moto==5.1.15
 requests-mock==1.12.1
-pre-commit==4.3.0
+pre-commit==4.5.1
 slack_sdk==3.37.0
 aiohttp==3.13.1
