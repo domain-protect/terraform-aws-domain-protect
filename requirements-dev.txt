@@ -7,7 +7,7 @@ prospector==1.17.3
 pytest==8.4.2
 pytest-cov==7.0.0
 assertpy==1.1
-moto==5.1.15
+moto==5.1.21
 requests-mock==1.12.1
 pre-commit==4.3.0
 slack_sdk==3.37.0
