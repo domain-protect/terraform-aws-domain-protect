@@ -10,5 +10,5 @@ assertpy==1.1
 moto==5.1.21
 requests-mock==1.12.1
 pre-commit==4.5.1
-slack_sdk==3.37.0
+slack_sdk==3.40.1
 aiohttp==3.13.3
