@@ -11,4 +11,4 @@ moto==5.1.21
 requests-mock==1.12.1
 pre-commit==4.5.1
 slack_sdk==3.37.0
-aiohttp==3.13.3
+aiohttp==3.13.4
