@@ -114,7 +114,10 @@
                 "ecs:ListTasks",
                 "globalaccelerator:ListAccelerators",
                 "lightsail:GetInstances",
-                "lightsail:GetStaticIps"
+                "lightsail:GetStaticIps",
+                "gamelift:ListCompute",
+                "gamelift:ListContainerFleets",
+                "gamelift:ListFleets"
               ]
             }
           ]

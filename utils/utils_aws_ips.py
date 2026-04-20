@@ -311,6 +311,92 @@ def get_ecs_addresses(account_id, account_name, region):
     return []
 
 
+def get_gamelift_fleet_ips(account_id, account_name, region):
+    try:
+        boto3_session = assume_role(account_id, region)
+        gamelift = boto3_session.client("gamelift")
+
+        public_ip_list = []
+
+        try:
+            paginator = gamelift.get_paginator("list_fleets")
+            pages = paginator.paginate()
+            for page in pages:
+                for fleet_id in page["FleetIds"]:
+                    public_ips = get_gamelift_ips_by_fleet(boto3_session, account_name, fleet_id)
+                    for public_ip in public_ips:
+                        public_ip_list.append(public_ip)
+
+            return public_ip_list
+
+        except Exception:
+            logging.error(
+                "ERROR: Lambda execution role requires gamelift:ListFleets permission in %a account",
+                account_name,
+            )
+
+    except (AttributeError, Exception):
+        logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
+
+    return []
+
+
+def get_gamelift_container_fleet_ips(account_id, account_name, region):
+    try:
+        boto3_session = assume_role(account_id, region)
+        gamelift = boto3_session.client("gamelift")
+
+        public_ip_list = []
+
+        try:
+            paginator = gamelift.get_paginator("list_container_fleets")
+            pages = paginator.paginate()
+            for page in pages:
+                for container_fleet in page["ContainerFleets"]:
+                    container_fleet_id = container_fleet["FleetId"]
+                    public_ips = get_gamelift_ips_by_fleet(boto3_session, account_name, container_fleet_id)
+                    for public_ip in public_ips:
+                        public_ip_list.append(public_ip)
+
+            return public_ip_list
+
+        except Exception:
+            logging.error(
+                "ERROR: Lambda execution role requires gamelift:ListContainerFleets permission in %a account",
+                account_name,
+            )
+
+    except (AttributeError, Exception):
+        logging.error("ERROR: unable to assume role in %a account %s", account_name, account_id)
+
+    return []
+
+
+def get_gamelift_ips_by_fleet(session, account_name, fleet_id):
+    public_ips = []
+
+    gamelift = session.client("gamelift")
+
+    try:
+        paginator = gamelift.get_paginator("list_compute")
+        pages = paginator.paginate(FleetId=fleet_id)
+        for page in pages:
+            print(page["ComputeList"])
+            for compute in page["ComputeList"]:
+                public_ip = compute["IpAddress"]
+                public_ips.append(public_ip)
+
+        return public_ips
+
+    except Exception:
+        logging.error(
+            "ERROR: Lambda execution role requires gamelift:ListCompute permission in %a account",
+            account_name,
+        )
+
+    return []
+
+
 def get_lightsail_instance_addresses(account_id, account_name, region):
 
     try:

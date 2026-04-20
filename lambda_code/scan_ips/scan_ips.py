@@ -9,6 +9,8 @@ from utils.utils_aws_ips import get_accelerator_addresses
 from utils.utils_aws_ips import get_ec2_addresses
 from utils.utils_aws_ips import get_ecs_addresses
 from utils.utils_aws_ips import get_eip_addresses
+from utils.utils_aws_ips import get_gamelift_container_fleet_ips
+from utils.utils_aws_ips import get_gamelift_fleet_ips
 from utils.utils_aws_ips import get_lightsail_instance_addresses
 from utils.utils_aws_ips import get_lightsail_static_addresses
 from utils.utils_aws_ips import get_regions
@@ -150,6 +152,16 @@ def get_ips(account_id, account_name):
 
         for ecs_public_ip in ecs_public_ips:
             db_ip(ecs_public_ip, account_name, region, "ECS Public IP")
+
+        gamelift_container_fleet_ips = get_gamelift_container_fleet_ips(account_id, account_name, region)
+
+        for gamelift_container_fleet_ip in gamelift_container_fleet_ips:
+            db_ip(gamelift_container_fleet_ip, account_name, region, "GameLift Container Instance IP")
+
+        gamelift_fleet_ips = get_gamelift_fleet_ips(account_id, account_name, region)
+
+        for gamelift_fleet_ip in gamelift_fleet_ips:
+            db_ip(gamelift_fleet_ip, account_name, region, "GameLift Instance IP")
 
         lightsail_static_public_ips = get_lightsail_static_addresses(account_id, account_name, region)
 
