@@ -8,7 +8,6 @@ from slack_sdk.errors import SlackApiError
 
 from utils.utils_dates import calc_prev_month_start
 
-
 oauth_secret_arn = os.environ["OAUTH_SECRET_ARN"]
 slack_channels = os.environ["SLACK_CHANNELS"]
 slack_username = os.environ["SLACK_USERNAME"]

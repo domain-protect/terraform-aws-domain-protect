@@ -5,7 +5,6 @@ import boto3
 
 from utils.utils_ips import is_ip_in_networks
 
-
 project = os.environ["PROJECT"]
 env_name = os.environ["ENVIRONMENT"]
 ip_base_table_name = "IPs"

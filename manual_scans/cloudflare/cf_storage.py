@@ -5,7 +5,6 @@ from utils.utils_print import my_print
 from utils.utils_print import print_list
 from utils.utils_requests import vulnerable_storage
 
-
 vulnerable_domains = []
 
 if __name__ == "__main__":
