@@ -7,7 +7,6 @@ import requests
 from utils.utils_dates import calc_prev_month_start
 from utils.utils_globalvars import requests_timeout
 
-
 slack_url = os.environ["SLACK_WEBHOOK_URL"]
 slack_channel = os.environ["SLACK_CHANNEL"]
 slack_webhook_type = os.environ["SLACK_WEBHOOK_TYPE"]

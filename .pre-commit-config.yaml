@@ -4,7 +4,7 @@ default_language_version:
 exclude: ^build/|CNAME
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
     -   id: check-docstring-first
     -   id: check-executables-have-shebangs
@@ -22,10 +22,9 @@ repos:
         args: [--py36-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/asottile/add-trailing-comma
-    rev: v3.2.0
+    rev: v4.0.0
     hooks:
     -   id: add-trailing-comma
-        args: [--py36-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/asottile/reorder_python_imports
     rev: v3.16.0
@@ -34,7 +33,7 @@ repos:
         args: [--py3-plus]
         exclude: .\.tf | ^\.github/
 -   repo: https://github.com/psf/black
-    rev: 25.9.0
+    rev: 26.3.1
     hooks:
     -   id: black
         args: [--line-length=120]

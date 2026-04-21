@@ -11,7 +11,6 @@ from integration_tests.deployment.aws.utils.route53 import delete_record_set
 from integration_tests.deployment.aws.utils.route53 import get_zone_id
 from utils.utils_db import db_get_unfixed_vulnerability_found_date_time
 
-
 # not vulnerable - AWS EC2 address outside AWS Organization, included in aws_ip_addresses in dev environment
 a_record_1_details = {
     "record_value": "18.96.8.1",

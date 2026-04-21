@@ -6,7 +6,6 @@ from utils.utils_dns import vulnerable_cname
 from utils.utils_print import my_print
 from utils.utils_print import print_list
 
-
 vulnerable_domains = []
 vulnerability_list = ["azure", ".cloudapp.net", "core.windows.net", "elasticbeanstalk.com", "trafficmanager.net"]
 
