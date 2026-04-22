@@ -323,7 +323,7 @@ def get_gamelift_fleet_ips(account_id, account_name, region):
             pages = paginator.paginate()
             for page in pages:
                 for fleet_id in page["FleetIds"]:
-                    public_ips = get_gamelift_ips_by_fleet(boto3_session, account_name, fleet_id)
+                    public_ips = get_gamelift_ips_by_fleet(gamelift, account_name, fleet_id)
                     for public_ip in public_ips:
                         public_ip_list.append(public_ip)
 
@@ -354,7 +354,7 @@ def get_gamelift_container_fleet_ips(account_id, account_name, region):
             for page in pages:
                 for container_fleet in page["ContainerFleets"]:
                     container_fleet_id = container_fleet["FleetId"]
-                    public_ips = get_gamelift_ips_by_fleet(boto3_session, account_name, container_fleet_id)
+                    public_ips = get_gamelift_ips_by_fleet(gamelift, account_name, container_fleet_id)
                     for public_ip in public_ips:
                         public_ip_list.append(public_ip)
 
@@ -372,10 +372,8 @@ def get_gamelift_container_fleet_ips(account_id, account_name, region):
     return []
 
 
-def get_gamelift_ips_by_fleet(session, account_name, fleet_id):
+def get_gamelift_ips_by_fleet(gamelift, account_name, fleet_id):
     public_ips = []
-
-    gamelift = session.client("gamelift")
 
     try:
         paginator = gamelift.get_paginator("list_compute")
@@ -383,8 +381,9 @@ def get_gamelift_ips_by_fleet(session, account_name, fleet_id):
         for page in pages:
             print(page["ComputeList"])
             for compute in page["ComputeList"]:
-                public_ip = compute["IpAddress"]
-                public_ips.append(public_ip)
+                public_ip = compute.get("IpAddress")
+                if public_ip:
+                    public_ips.append(public_ip)
 
         return public_ips
 
