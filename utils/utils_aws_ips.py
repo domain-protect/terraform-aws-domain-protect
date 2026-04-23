@@ -329,6 +329,13 @@ def get_gamelift_fleet_ips(account_id, account_name, region):
 
             return public_ip_list
 
+        except gamelift.exceptions.UnsupportedRegionException:
+            logging.info(
+                "INFO: GameLift not supported in %a region in %a account",
+                region,
+                account_name,
+            )
+
         except Exception:
             logging.error(
                 "ERROR: Lambda execution role requires gamelift:ListFleets permission in %a account",
@@ -359,6 +366,13 @@ def get_gamelift_container_fleet_ips(account_id, account_name, region):
                         public_ip_list.append(public_ip)
 
             return public_ip_list
+
+        except gamelift.exceptions.UnsupportedRegionException:
+            logging.info(
+                "INFO: GameLift Containers not supported in %a region in %a account",
+                region,
+                account_name,
+            )
 
         except Exception:
             logging.error(
