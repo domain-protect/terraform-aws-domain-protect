@@ -26,6 +26,9 @@
         "ecs:DescribeTasks",
         "ecs:ListClusters",
         "ecs:ListTasks",
+        "gamelift:ListCompute",
+        "gamelift:ListContainerFleets",
+        "gamelift:ListFleets",
         "globalaccelerator:ListAccelerators",
         "lightsail:GetInstances",
         "lightsail:GetStaticIps"

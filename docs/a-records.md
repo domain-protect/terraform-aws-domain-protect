@@ -5,6 +5,8 @@
   * Elastic IP addresses
   * EC2 instances with public IP addresses
   * ECS Fargate public IP addresses
+  * GameLift Fleet IP addresses
+  * GameLift Container Fleet IP addresses
   * Global Accelerator IP addresses
   * Lightsail instance public IP addresses
   * Lightsail static IP addresses
