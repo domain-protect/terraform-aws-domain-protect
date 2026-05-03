@@ -51,10 +51,14 @@ jobs:
           repo: terraform-docs/terraform-docs
           tag: ${{ env.TERRAFORM_DOCS_VERSION }}
 
-      - name: Linting and formatting
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
+      - name: Cache pre-commit environments
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
-          extra_args: --all-files --show-diff-on-failure
+          path: ~/.cache/pre-commit
+          key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Linting and formatting
+        run: pre-commit run --all-files --show-diff-on-failure
 
       - name: Unit tests
         run: |
