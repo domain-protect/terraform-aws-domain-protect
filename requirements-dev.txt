@@ -1,4 +1,4 @@
-boto3==1.42.96
+boto3==1.43.2
 cloudflare==5.0.0
 dnspython==2.8.0
 requests==2.33.1
@@ -7,7 +7,7 @@ prospector==1.18.0
 pytest==9.0.3
 pytest-cov==7.1.0
 assertpy==1.1
-moto==5.1.22
+moto==5.2.0
 requests-mock==1.12.1
 pre-commit==4.6.0
 slack_sdk==3.41.0
