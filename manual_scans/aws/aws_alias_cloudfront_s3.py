@@ -34,7 +34,8 @@ def route53():
             ]
             for record in record_sets:
                 i = i + 1
-                result = vulnerable_cloudfront_s3_manual(record["Name"])
+                cloudfront_domain = record["AliasTarget"]["DNSName"].rstrip(".")
+                result = vulnerable_cloudfront_s3_manual(record["Name"], cloudfront_domain)
                 if result:
                     vulnerable_domains.append(record["Name"])
                     my_print(f"{str(i)}. {record['Name']}", "ERROR")
