@@ -55,7 +55,8 @@ def get_cloudfront_origin_url(cloudfront_domain):
     for page in pages:
         for distribution in page["DistributionList"].get("Items", []):
             if distribution["DomainName"] == cloudfront_domain:
-                return distribution["Origins"]["Items"][0]["DomainName"]
+                full_distribution = cloudfront.get_distribution(Id=distribution["Id"])
+                return full_distribution["Distribution"]["DistributionConfig"]["Origins"]["Items"][0]["DomainName"]
 
 
 def vulnerable_cloudfront_s3_manual(domain_name, cloudfront_domain):
