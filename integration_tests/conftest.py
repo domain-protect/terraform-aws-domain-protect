@@ -33,15 +33,17 @@ def aws_credentials():
     os.environ["AWS_SHARED_CREDENTIALS_FILE"] = str(moto_credentials_file_path)
 
 
-# pylint: disable=unused-argument
 @pytest.fixture(scope="function")
-def moto_route53(aws_credentials):
+def moto_aws(aws_credentials):  # pylint: disable=unused-argument
     with mock_aws():
-        yield boto3.client("route53", region_name="us-east-1")
+        yield
 
 
-# pylint: disable=unused-argument
 @pytest.fixture(scope="function")
-def moto_cloudfront(aws_credentials):
-    with mock_aws():
-        yield boto3.client("cloudfront", region_name="us-east-1")
+def moto_route53(moto_aws):  # pylint: disable=unused-argument
+    yield boto3.client("route53", region_name="us-east-1")
+
+
+@pytest.fixture(scope="function")
+def moto_cloudfront(moto_aws):  # pylint: disable=unused-argument
+    yield boto3.client("cloudfront", region_name="us-east-1")

@@ -54,12 +54,10 @@ def get_cloudfront_origin_url(domain_name):
     paginator = cloudfront.get_paginator("list_distributions")
     pages = paginator.paginate()
     for page in pages:
-        for distribution in page["DistributionList"]["Items"]:
-            if "Items" not in distribution["Aliases"]:
-                continue
-            for alias in distribution["Aliases"]["Items"]:
+        for distribution in page["DistributionList"].get("Items", []):
+            aliases = distribution.get("Aliases", {})
+            for alias in aliases.get("Items", []):
                 if alias + "." == domain_name:
-                    # We found the right distribution
                     return distribution["Origins"]["Items"][0]["DomainName"]
 
 
