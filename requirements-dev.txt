@@ -1,4 +1,4 @@
-boto3==1.43.14
+boto3==1.43.18
 cloudflare==5.2.0
 dnspython==2.8.0
 requests==2.34.2
