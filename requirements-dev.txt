@@ -1,5 +1,5 @@
-boto3==1.43.46
-cloudflare==5.4.0
+boto3==1.43.47
+cloudflare==5.5.0
 dnspython==2.8.0
 requests==2.34.2
 black==26.5.1
