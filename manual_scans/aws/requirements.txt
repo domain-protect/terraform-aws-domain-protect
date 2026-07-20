@@ -1,3 +1,3 @@
-boto3==1.43.41
+boto3==1.43.46
 dnspython==2.8.0
 requests==2.34.2
