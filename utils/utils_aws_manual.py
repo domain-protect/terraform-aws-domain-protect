@@ -45,30 +45,26 @@ def bucket_does_not_exist(bucket_url):
     return False
 
 
-# Extracts the origin URL from a CloudFront distribution
-def get_cloudfront_origin_url(domain_name):
+# Extracts the origin URL from a CloudFront distribution, looked up by its CloudFront domain name
+def get_cloudfront_origin_url(cloudfront_domain):
     boto3_session = boto3.Session()
     cloudfront = boto3_session.client("cloudfront")
 
-    # List CloudFront distributions, find the one with the matching domain name
     paginator = cloudfront.get_paginator("list_distributions")
     pages = paginator.paginate()
     for page in pages:
-        for distribution in page["DistributionList"]["Items"]:
-            if "Items" not in distribution["Aliases"]:
-                continue
-            for alias in distribution["Aliases"]["Items"]:
-                if alias + "." == domain_name:
-                    # We found the right distribution
-                    return distribution["Origins"]["Items"][0]["DomainName"]
+        for distribution in page["DistributionList"].get("Items", []):
+            if distribution["DomainName"] == cloudfront_domain:
+                full_distribution = cloudfront.get_distribution(Id=distribution["Id"])
+                return full_distribution["Distribution"]["DistributionConfig"]["Origins"]["Items"][0]["DomainName"]
 
 
-def vulnerable_cloudfront_s3_manual(domain_name):
+def vulnerable_cloudfront_s3_manual(domain_name, cloudfront_domain):
     try:
         response = requests.get(f"https://{domain_name}", timeout=1)
 
         if response.status_code == 404 and "<Code>NotFound</Code>" in response.text:
-            bucket_url = get_cloudfront_origin_url(domain_name)
+            bucket_url = get_cloudfront_origin_url(cloudfront_domain)
             if not is_s3_bucket_url(bucket_url) and not is_s3_website_endpoint_url(bucket_url):
                 return False
 

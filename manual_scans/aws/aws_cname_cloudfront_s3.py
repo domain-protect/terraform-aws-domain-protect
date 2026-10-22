@@ -42,7 +42,8 @@ def route53():
             for record in record_sets:
                 print(f"checking if {record['Name']} is vulnerable to takeover")
                 i = i + 1
-                result = vulnerable_cloudfront_s3_manual(record["Name"])
+                cloudfront_domain = record["ResourceRecords"][0]["Value"].rstrip(".")
+                result = vulnerable_cloudfront_s3_manual(record["Name"], cloudfront_domain)
                 if result:
                     vulnerable_domains.append(record["Name"])
                     my_print(f"{str(i)}. {record['Name']}", "ERROR")

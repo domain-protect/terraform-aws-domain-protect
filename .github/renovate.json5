@@ -11,6 +11,11 @@
     "customManagers:makefileVersions",
     "customManagers:tfvarsVersions",
     "security:openssf-scorecard",
+    "github>domain-protect/renovate-config",
+    "github>domain-protect/renovate-config:github-actions",
+    "github>domain-protect/renovate-config:python-packages",
+    "github>domain-protect/renovate-config:pre-commit",
+    "github>domain-protect/renovate-config:terraform-providers",
   ],
   labels: [
     "dependencies",
@@ -22,11 +27,4 @@
     assignees: [],
     labels: ["security"]
   },
-  packageRules: [
-    // For all public actions, renovate them once a week and group them together
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github-actions",
-    },
-  ]
 }

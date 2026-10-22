@@ -31,5 +31,7 @@ htmlcov
 
 #Testing
 .env
-
 *.swp
+
+#Renovate
+renovate_logs
