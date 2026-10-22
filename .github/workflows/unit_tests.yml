@@ -51,12 +51,6 @@ jobs:
           repo: terraform-docs/terraform-docs
           tag: ${{ env.TERRAFORM_DOCS_VERSION }}
 
-      - name: Cache pre-commit environments
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
-
       - name: Linting and formatting
         run: pre-commit run --all-files --show-diff-on-failure
 
