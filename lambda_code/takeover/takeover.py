@@ -25,7 +25,7 @@ def get_elastic_beanstalk_stack():
     elasticbeanstalk = session.client("elasticbeanstalk")
 
     solution_stacks = elasticbeanstalk.list_available_solution_stacks()["SolutionStacks"]
-    solution_stack = [s for s in solution_stacks if "Amazon Linux 2 " in s and "PHP" in s][0]
+    solution_stack = [s for s in solution_stacks if "Amazon Linux 2023" in s and "PHP" in s][0]
 
     return solution_stack
 
