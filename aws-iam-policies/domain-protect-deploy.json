@@ -230,6 +230,13 @@
     {
       "Effect": "Allow",
       "Action": [
+        "logs:DescribeLogGroups"
+      ],
+      "Resource": "arn:aws:logs:eu-west-1:SECURITY_AWS_ACCOUNT_ID:log-group:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "secretsmanager:CreateSecret",
         "secretsmanager:DeleteSecret",
         "secretsmanager:DescribeSecret",
