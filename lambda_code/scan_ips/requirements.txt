@@ -1,2 +1,2 @@
-dnspython==2.9.1
+dnspython==2.9.2
 requests==2.34.2
